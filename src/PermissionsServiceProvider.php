@@ -1,4 +1,4 @@
-<?php namespace Backpack\Permissions;
+<?php namespace Backpack\PermissionManager;
 
 use Illuminate\Routing\Router;
 use Illuminate\Support\ServiceProvider;
@@ -32,7 +32,7 @@ class PermissionsServiceProvider extends ServiceProvider
      */
     public function setupRoutes(Router $router)
     {
-        $router->group(['namespace' => 'Backpack\Permissions\app\Http\Controllers'], function($router)
+        $router->group(['namespace' => 'Backpack\PermissionManager\app\Http\Controllers'], function($router)
         {
             require __DIR__.'/app/Http/routes.php';
         });

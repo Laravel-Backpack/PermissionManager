@@ -1,4 +1,4 @@
-<?php namespace Backpack\Permissions\app\Models;
+<?php namespace Backpack\PermissionManager\app\Models;
 
 use Backpack\CRUD\CrudTrait;
 use Spatie\Permission\Traits\HasRoles;

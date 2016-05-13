@@ -1,4 +1,4 @@
-<?php namespace Backpack\Permissions\app\Http\Controllers;
+<?php namespace Backpack\PermissionManager\app\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests;
@@ -6,8 +6,8 @@ use App\Http\Controllers\Controller;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 
 // VALIDATION
-use Backpack\Permissions\app\Http\Requests\UserStoreCrudRequest as StoreRequest;
-use Backpack\Permissions\app\Http\Requests\UserUpdateCrudRequest as UpdateRequest;
+use Backpack\PermissionManager\app\Http\Requests\UserStoreCrudRequest as StoreRequest;
+use Backpack\PermissionManager\app\Http\Requests\UserUpdateCrudRequest as UpdateRequest;
 
 class UserCrudController extends CrudController {
 
@@ -65,7 +65,7 @@ class UserCrudController extends CrudController {
 										'entity' => 'roles', // the method that defines the relationship in your Model
 										'entity_secondary' => 'permissions', // the method that defines the relationship in your Model
 										'attribute' => 'name', // foreign key attribute that is shown to user
-										'model' => "Backpack\Permissions\app\Models\Role", // foreign key model
+										'model' => "Backpack\PermissionManager\app\Models\Role", // foreign key model
 										'pivot' => true, // on create&update, do you need to add/delete pivot table entries?]
 										'number_columns' => 3, //can be 1,2,3,4,6 
 									],
@@ -75,7 +75,7 @@ class UserCrudController extends CrudController {
 										'entity' => 'permissions', // the method that defines the relationship in your Model
 										'entity_primary' => 'roles', // the method that defines the relationship in your Model
 										'attribute' => 'name', // foreign key attribute that is shown to user
-										'model' => "Backpack\Permissions\app\Models\Permission", // foreign key model
+										'model' => "Backpack\PermissionManager\app\Models\Permission", // foreign key model
 										'pivot' => true, // on create&update, do you need to add/delete pivot table entries?]
 										'number_columns' => 3, //can be 1,2,3,4,6 
 									],
