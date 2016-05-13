@@ -1,5 +1,5 @@
 {
-    "name": "backpack/settings",
+    "name": "backpack/permissions",
     "description": "Application settings interface for Laravel 5 using Backpack CRUD.",
     "keywords": [
         "tabacitu",
