@@ -1,0 +1,58 @@
+{
+    "name": "backpack/settings",
+    "description": "Application settings interface for Laravel 5 using Backpack CRUD.",
+    "keywords": [
+        "tabacitu",
+        "laravel backpack",
+        "backpack permission",
+        "backpack roles",
+        "backpack user management",
+        "updivision",
+        "dick",
+        "dick permission",
+        "backpack",
+        "manage permission",
+        "manage roles",
+        "manage users",
+        "users roles admin"
+    ],
+    "homepage": "https://github.com/laravel-backpack/permissions",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Cristian Tabacitu",
+            "email": "hello@tabacitu.ro",
+            "homepage": "http://www.tabacitu.ro",
+            "role": "Chief Architect & Lead Developer"
+        }
+    ],
+    "require": {
+        "illuminate/support": "~5.1",
+        "php" : ">=5.3.0",
+        "backpack/crud": "0.*"
+        "spatie/laravel-permission": "^1.4",
+        "backpack/crud": "^0.9.10",
+    },
+    "require-dev": {
+        "phpunit/phpunit" : "4.*",
+        "scrutinizer/ocular": "~1.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "Backpack\\Settings\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Backpack\\Settings\\Test\\": "tests"
+        }
+    },
+    "scripts": {
+        "test": "phpunit"
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0-dev"
+        }
+    }
+}

@@ -1,0 +1,65 @@
+<?php namespace Backpack\Permissions\app\Http\Controllers;
+
+use Illuminate\Http\Request;
+use App\Http\Requests;
+use App\Http\Controllers\Controller;
+use Backpack\CRUD\app\Http\Controllers\CrudController;
+
+// VALIDATION
+use Backpack\Permissions\app\Http\Requests\RoleCrudRequest as StoreRequest;
+use Backpack\Permissions\app\Http\Requests\RoleCrudRequest as UpdateRequest;
+
+class RoleCrudController extends CrudController {
+
+	public function __construct() {
+		parent::__construct();
+
+        $this->crud->setModel("Backpack\Permissions\app\Models\Role");
+        $this->crud->setEntityNameStrings('role', 'roles');
+        $this->crud->setRoute('admin/role');
+        $this->crud->setColumns([
+	        	[
+					'name' => 'name',
+					'label' => 'Name',
+					'type' => 'text',
+				],
+	        	[
+					// n-n relationship (with pivot table)
+					'label' => "Permissions",
+					'type' => 'select_multiple',
+					'name' => 'permissions', // the method that defines the relationship in your Model
+					'entity' => 'permissions', // the method that defines the relationship in your Model
+					'attribute' => 'name', // foreign key attribute that is shown to user
+					'model' => "App\Models\Permission", // foreign key model
+					'pivot' => true, // on create&update, do you need to add/delete pivot table entries?
+				],
+        	]);
+
+		$this->crud->fields = [
+								[
+									'name' => 'name',
+									'label' => 'Name',
+									'type' => 'text',
+								],
+								[			
+									'label' => "Permissions",
+									'type' => 'checklist',
+									'name' => 'permissions',
+									'entity' => 'permissions', 
+									'attribute' => 'name', 
+									'model' => "Backpack\Permissions\app\Models\Permission", 
+									'pivot' => true,
+								],
+							];
+	}
+
+	public function store(StoreRequest $request)
+	{
+		return parent::storeCrud();
+	}
+
+	public function update(UpdateRequest $request)
+	{
+		return parent::updateCrud();
+	}
+}
