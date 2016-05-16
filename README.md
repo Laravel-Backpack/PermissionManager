@@ -9,65 +9,6 @@
 
 An interface for the administrator to easily change application settings. Uses Laravel Backpack. On Laravel 5.2.
 
-## Install
-
-1) In your terminal:
-
-``` bash
-$ composer require backpack/settings
-$ php artisan migrate --path=vendor/backpack/settings/src/database/migrations
-$ php artisan db:seed --class="Backpack\Settings\database\seeds\SettingsTableSeeder"
-```
-
-2) Add the service provider to your config/app.php file:
-```php
-Backpack\Settings\SettingsServiceProvider::class,
-```
-
-3) [Optional] Add a menu item for it in resources/views/vendor/backpack/base/inc/sidebar.blade.php or menu.blade.php:
-
-```html
-<li><a href="{{ url('admin/setting') }}"><i class="fa fa-cog"></i> <span>Settings</span></a></li>
-```
-
-
-## Usage
-
-### End user
-Add it to the menu or access it by its route: **application/admin/setting**
-
-### Programmer
-Use it like you would any config value in a virtual settings.php file. Except the values are stored in the database and fetched on boot, instead of being stored in a file.
-
-``` php
-Config::get('settings.contact_email')
-```
-
-### Add new settings
-
-Settings are stored in the database in the "settings" table. Its columns are:
-- id (ex: 1)
-- key (ex: contact_email)
-- name (ex: Contact form email address)
-- description (ex: The email address that all emails go to.)
-- value (ex: admin@laravelbackpack.com)
-- field (Backpack CRUD field configuration in JSON format. http://laravelbackpack.com/docs)
-- active (1 or 0)
-- created_at
-- updated_at
-
-There is no interface available to add new settings. They are added by the developer directly in the database, since the Dick CRUD field configuration is a bit complicated. See the field types and their configuration code on http://laravelbackpack.com/docs
-
-## Screenshots
-
-See http://laravelbackpack.com
-
-- List view:
-![List / table view in Backpack/Settings](https://dl.dropboxusercontent.com/u/2431352/backpack_settings_list.png)
-- Editing a setting with the email field type:
-![Editing an email setting in Backpack/Settings](https://dl.dropboxusercontent.com/u/2431352/backpack_settings_email.png)
-- Editing a setting with the textarea field type:
-![Editing a textarea setting in Backpack/Settings](https://dl.dropboxusercontent.com/u/2431352/backpack_settings_textarea.png)
 
 ## Change log
 
