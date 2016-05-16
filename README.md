@@ -1,5 +1,4 @@
-# Backpack\Settings
-
+# Backpack\PermissionManager
 [![Latest Version on Packagist][ico-version]][link-packagist]
 [![Software License][ico-license]](LICENSE.md)
 [![Build Status][ico-travis]][link-travis]
@@ -7,7 +6,7 @@
 [![Quality Score][ico-code-quality]][link-code-quality]
 [![Total Downloads][ico-downloads]][link-downloads]
 
-An interface for the administrator to easily change application settings. Uses Laravel Backpack. On Laravel 5.2.
+An interface for the administrator to easily change application users, roles adn permissions. Uses Laravel Backpack. On Laravel 5.2.
 
 
 ## Change log
