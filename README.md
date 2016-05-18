@@ -6,7 +6,7 @@
 [![Quality Score][ico-code-quality]][link-code-quality]
 [![Total Downloads][ico-downloads]][link-downloads]
 
-An interface for the administrator to easily change application users, roles adn permissions. Uses Laravel Backpack. On Laravel 5.2.
+An interface for the administrator to easily add/edit/remove users, roles and permissions. Uses [Laravel Backpack](laravelbackpack.com), on Laravel 5.2.
 
 ## Install
 
@@ -147,24 +147,26 @@ If you discover any security related issues, please email hello@tabacitu.ro inst
 
 ## Credits
 
-- [Cristian Tabacitu][link-author]
+- [Marius Constantin][link-author2] - Lead Developer
+- [Cristian Tabacitu][link-author] - Chief Architect
 - [All Contributors][link-contributors]
 
 ## License
 
 The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
 
-[ico-version]: https://img.shields.io/packagist/v/backpack/settings.svg?style=flat-square
+[ico-version]: https://img.shields.io/packagist/v/backpack/permissionmanager.svg?style=flat-square
 [ico-license]: https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square
-[ico-travis]: https://img.shields.io/travis/laravel-backpack/settings/master.svg?style=flat-square
-[ico-scrutinizer]: https://img.shields.io/scrutinizer/coverage/g/laravel-backpack/settings.svg?style=flat-square
-[ico-code-quality]: https://img.shields.io/scrutinizer/g/laravel-backpack/settings.svg?style=flat-square
-[ico-downloads]: https://img.shields.io/packagist/dt/backpack/settings.svg?style=flat-square
+[ico-travis]: https://img.shields.io/travis/laravel-backpack/permissionmanager/master.svg?style=flat-square
+[ico-scrutinizer]: https://img.shields.io/scrutinizer/coverage/g/laravel-backpack/permissionmanager.svg?style=flat-square
+[ico-code-quality]: https://img.shields.io/scrutinizer/g/laravel-backpack/permissionmanager.svg?style=flat-square
+[ico-downloads]: https://img.shields.io/packagist/dt/backpack/permissionmanager.svg?style=flat-square
 
-[link-packagist]: https://packagist.org/packages/backpack/settings
-[link-travis]: https://travis-ci.org/laravel-backpack/settings
-[link-scrutinizer]: https://scrutinizer-ci.com/g/laravel-backpack/settings/code-structure
-[link-code-quality]: https://scrutinizer-ci.com/g/laravel-backpack/settings
-[link-downloads]: https://packagist.org/packages/backpack/settings
+[link-packagist]: https://packagist.org/packages/backpack/permissionmanager
+[link-travis]: https://travis-ci.org/laravel-backpack/permissionmanager
+[link-scrutinizer]: https://scrutinizer-ci.com/g/laravel-backpack/permissionmanager/code-structure
+[link-code-quality]: https://scrutinizer-ci.com/g/laravel-backpack/permissionmanager
+[link-downloads]: https://packagist.org/packages/backpack/permissionmanager
 [link-author]: http://tabacitu.ro
+[link-author2]: http://updivision.com
 [link-contributors]: ../../contributors
