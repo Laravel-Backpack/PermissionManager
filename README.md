@@ -5,7 +5,7 @@
 [![Coverage Status][ico-scrutinizer]][link-scrutinizer]
 [![Quality Score][ico-code-quality]][link-code-quality]
 [![Total Downloads][ico-downloads]][link-downloads]
-.
+
 An interface for the administrator to easily add/edit/remove users, roles and permissions. Uses [Laravel Backpack](laravelbackpack.com), on Laravel 5.2.
 
 ## Install
@@ -13,8 +13,8 @@ An interface for the administrator to easily add/edit/remove users, roles and pe
 1) In your terminal:
 
 ``` bash
-$ composer require backpack/permissionManager
-$ php artisan migrate --path=vendor/backpack/permissions/src/database/migrations
+$ composer require backpack/permissionmanager
+$ php artisan migrate --path=vendor/backpack/permissionmanager/src/database/migrations
 ```
 
 2) Add the service provider to your config/app.php file:
