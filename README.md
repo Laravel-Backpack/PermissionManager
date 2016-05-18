@@ -33,6 +33,8 @@ Backpack\PermissionManager\PermissionsServiceProvider::class,
 
 ## Usage
 
+Because the package requires [spatie/laravel-permission](https://github.com/spatie/laravel-permission), the API will be the same: 
+
 ### Using permissions
 
 A permission can be given to a user:
