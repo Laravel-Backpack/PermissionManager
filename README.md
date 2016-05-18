@@ -14,8 +14,6 @@ An interface for the administrator to easily add/edit/remove users, roles and pe
 
 ``` bash
 $ composer require backpack/permissionmanager
-$ php artisan vendor:publish --provider="Backpack\PermissionManager\PermissionManagerServiceProvider" #publish config file
-$ php artisan migrate --path=vendor/backpack/permissionmanager/src/database/migrations
 ```
 
 2) Add the service provider to your config/app.php file:
@@ -23,7 +21,13 @@ $ php artisan migrate --path=vendor/backpack/permissionmanager/src/database/migr
 Backpack\PermissionManager\PermissionsServiceProvider::class,
 ```
 
-3) [Optional] Add a menu item for it in resources/views/vendor/backpack/base/inc/sidebar.blade.php or menu.blade.php:
+3) Publish the config file & run the migrations
+```bash
+$ php artisan vendor:publish --provider="Backpack\PermissionManager\PermissionManagerServiceProvider" #publish config file
+$ php artisan migrate --path=vendor/backpack/permissionmanager/src/database/migrations #create the role and permission tables
+```
+
+4) [Optional] Add a menu item for it in resources/views/vendor/backpack/base/inc/sidebar.blade.php or menu.blade.php:
 
 ```html
 <li><a href="{{ url('admin/permission') }}"><i class="fa fa-cog"></i> <span>Permissions</span></a></li>

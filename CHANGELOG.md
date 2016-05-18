@@ -20,31 +20,7 @@ All Notable changes to `Backpack Settings` will be documented in this file
 - Nothing
 
 
-## 1.2.3 - 2016-03-16
+## 1.0.4 - 2016-05-18
 
 ### Fixed
-- Added page titles.
-
-
-## 1.2.2 - 2016-03-11
-
-### Fixed
-- Changed folder structure to resemble a Laravel application - Http and Models are in an app folder.
-
-
-## 1.2.1 - 2016-03-11
-
-### Fixed
-- Removed some more Dick mentions and fixed readme badges.
-
-
-## 1.2.0 - 2016-03-11
-
-### Fixed
-- Changes namespaces to Backpack and removed every mention of Dick.
-
-
-## 1.1.3 - 2015-09-10
-
-### Fixed
-- Namespacing and classes in seedfile, to allow seeding without publishing the assets.
+- Installation process.
