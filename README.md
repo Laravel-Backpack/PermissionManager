@@ -5,7 +5,7 @@
 [![Coverage Status][ico-scrutinizer]][link-scrutinizer]
 [![Quality Score][ico-code-quality]][link-code-quality]
 [![Total Downloads][ico-downloads]][link-downloads]
-
+.
 An interface for the administrator to easily add/edit/remove users, roles and permissions. Uses [Laravel Backpack](laravelbackpack.com), on Laravel 5.2.
 
 ## Install
