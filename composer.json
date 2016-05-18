@@ -1,6 +1,6 @@
 {
-    "name": "backpack/permissionManager",
-    "description": "Application settings interface for Laravel 5 using Backpack CRUD.",
+    "name": "backpack/permissionmanager",
+    "description": "Users and permissions management interface for Laravel 5 using Backpack CRUD.",
     "keywords": [
         "tabacitu",
         "laravel backpack",
@@ -16,14 +16,20 @@
         "manage users",
         "users roles admin"
     ],
-    "homepage": "https://github.com/laravel-backpack/permissions",
+    "homepage": "https://github.com/laravel-backpack/permissionmanager",
     "license": "MIT",
     "authors": [
+        {
+            "name": "Marius Constantin",
+            "email": "marius@updivision.com",
+            "homepage": "http://www.updivision.com",
+            "role": "Lead Developer"
+        },
         {
             "name": "Cristian Tabacitu",
             "email": "hello@tabacitu.ro",
             "homepage": "http://www.tabacitu.ro",
-            "role": "Chief Architect & Lead Developer"
+            "role": "Chief Architect"
         }
     ],
     "require": {
