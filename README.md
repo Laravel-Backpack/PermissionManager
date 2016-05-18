@@ -14,6 +14,7 @@ An interface for the administrator to easily add/edit/remove users, roles and pe
 
 ``` bash
 $ composer require backpack/permissionmanager
+$ php artisan vendor:publish --provider="Backpack\PermissionManager\PermissionsServiceProvider" #publish config file
 $ php artisan migrate --path=vendor/backpack/permissionmanager/src/database/migrations
 ```
 

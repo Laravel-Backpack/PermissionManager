@@ -1,4 +1,5 @@
-<?php namespace Backpack\PermissionManager;
+<?php
+namespace Backpack\PermissionManager;
 
 use Illuminate\Routing\Router;
 use Illuminate\Support\ServiceProvider;
@@ -6,7 +7,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Model as Eloquent;
 use Config;
 
-class PermissionsServiceProvider extends ServiceProvider
+class PermissionManagerServiceProvider extends ServiceProvider
 {
     /**
      * Indicates if loading of the provider is deferred.
@@ -21,8 +22,15 @@ class PermissionsServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        // publish the migrations
-        $this->publishes([ __DIR__.'/database/migrations/' => database_path('migrations') ], 'migrations');
+        // use the vendor configuration file as fallback
+        echo '<pre>'; var_dump( __DIR__.'/config/laravel-permission.php'); echo '</pre>'; die();
+
+        $this->mergeConfigFrom(
+            __DIR__.'/config/laravel-permission.php', 'laravel-permission'
+        );
+
+        // publish config file
+        $this->publishes([ __DIR__.'/config/laravel-permission.php' => config_path('laravel-permission.php'), ], 'config');
     }
     /**
      * Define the routes for the application.
@@ -48,9 +56,9 @@ class PermissionsServiceProvider extends ServiceProvider
         $this->setupRoutes($this->app->router);
 
         // use this if your package has a config file
-         config([
-                 'config/laravel-permission.php',
-         ]);
+         // config([
+         //         'config/laravel-permission.php',
+         // ]);
     }
-    
+
 }

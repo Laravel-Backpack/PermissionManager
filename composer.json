@@ -45,12 +45,12 @@
     },
     "autoload": {
         "psr-4": {
-            "Backpack\\Settings\\": "src"
+            "Backpack\\PermissionManager\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Backpack\\Settings\\Test\\": "tests"
+            "Backpack\\PermissionManager\\Test\\": "tests"
         }
     },
     "scripts": {
