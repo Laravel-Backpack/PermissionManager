@@ -23,8 +23,6 @@ class PermissionManagerServiceProvider extends ServiceProvider
     public function boot()
     {
         // use the vendor configuration file as fallback
-        echo '<pre>'; var_dump( __DIR__.'/config/laravel-permission.php'); echo '</pre>'; die();
-
         $this->mergeConfigFrom(
             __DIR__.'/config/laravel-permission.php', 'laravel-permission'
         );
