@@ -50,11 +50,11 @@ You can test if a user has a permission:
 $user->hasPermissionTo('edit articles');
 ```
 
-### Saved permissions will be registered with the Illuminate\Auth\Access\Gate-class. So you can test if a user has a permission with Laravel's default can-function.
+Saved permissions will be registered with the Illuminate\Auth\Access\Gate-class. So you can test if a user has a permission with Laravel's default can-function.
 ``` bash
 $user->can('edit articles');
 ```
-Using roles and permissions
+### Using roles and permissions
 
 A role can be assigned to a user:
 ``` bash
