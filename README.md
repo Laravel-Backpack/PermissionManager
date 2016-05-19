@@ -6,7 +6,9 @@
 [![Quality Score][ico-code-quality]][link-code-quality]
 [![Total Downloads][ico-downloads]][link-downloads]
 
-An interface for the administrator to easily add/edit/remove users, roles and permissions. Uses [Laravel Backpack](laravelbackpack.com), on Laravel 5.2.
+An admin interface to easily add/edit/remove users, roles and permissions, using [Laravel Backpack](laravelbackpack.com). As opposed to some other packages:
+- a user can have multiple roles;
+- a user can have extra permissions, in addition to the permissions on the roles he has;
 
 ## Install
 
@@ -27,12 +29,36 @@ $ php artisan vendor:publish --provider="Backpack\PermissionManager\PermissionMa
 $ php artisan migrate --path=vendor/backpack/permissionmanager/src/database/migrations #create the role and permission tables
 ```
 
-4) [Optional] Add a menu item for it in resources/views/vendor/backpack/base/inc/sidebar.blade.php or menu.blade.php:
+4) Use the following traits on your User model:
+```php
+<?php namespace App;
+
+use Backpack\CRUD\CrudTrait; // <------------------------------- this one
+use Spatie\Permission\Traits\HasRoles;// <---------------------- and this one
+use Illuminate\Foundation\Auth\User as Authenticatable; 
+
+class User extends Authenticatable
+{
+    use CrudTrait; // <----- this
+    use HasRoles; // <------ and this
+
+    /**
+     * Your User Model content
+     */
+```
+
+5) [Optional] Add a menu item for it in resources/views/vendor/backpack/base/inc/sidebar.blade.php or menu.blade.php:
 
 ```html
-<li><a href="{{ url('admin/permission') }}"><i class="fa fa-cog"></i> <span>Permissions</span></a></li>
-<li><a href="{{ url('admin/role') }}"><i class="fa fa-cog"></i> <span>Roles</span></a></li>
-<li><a href="{{ url('admin/user') }}"><i class="fa fa-cog"></i> <span>Users</span></a></li>
+<!-- Users, Roles Permissions -->
+  <li class="treeview">
+    <a href="#"><i class="fa fa-group"></i> <span>Users, Roles, Permissions</span> <i class="fa fa-angle-left pull-right"></i></a>
+    <ul class="treeview-menu">
+      <li><a href="{{ url('admin/user') }}"><i class="fa fa-user"></i> <span>Users</span></a></li>
+      <li><a href="{{ url('admin/role') }}"><i class="fa fa-group"></i> <span>Roles</span></a></li>
+      <li><a href="{{ url('admin/permission') }}"><i class="fa fa-key"></i> <span>Permissions</span></a></li>
+    </ul>
+  </li>
 ```
 
 
