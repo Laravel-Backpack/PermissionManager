@@ -10,6 +10,8 @@ An admin interface to easily add/edit/remove users, roles and permissions, using
 - a user can have multiple roles;
 - a user can have extra permissions, in addition to the permissions on the roles he has;
 
+![Edit a user in Backpack/PermissionManager](https://dl.dropboxusercontent.com/u/2431352/backpack_permissionmanager_user.png)
+
 ## Install
 
 1) In your terminal:
@@ -165,6 +167,11 @@ You can use Laravel's native @can directive to check if a user has a certain per
 ## Change log
 
 Please see [CHANGELOG](CHANGELOG.md) for more information what has changed recently.
+
+
+## Screenshots
+
+![Roles table view in Backpack/PermissionManager](https://dl.dropboxusercontent.com/u/2431352/backpack_permissionmanager_roles.png)
 
 ## Testing
 
