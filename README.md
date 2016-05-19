@@ -136,15 +136,15 @@ $user->can('edit articles');
 This package also adds Blade directives to verify whether the currently logged in user has all or any of a given list of roles.
 ``` bash
 @role('writer')
-    I'm a writer!
+    I\'m a writer!
 @else
-    I'm not a writer...
+    I\'m not a writer...
 @endrole
 
 @hasrole('writer')
-    I'm a writer!
+    I\'m a writer!
 @else
-    I'm not a writer...
+    I\'m not a writer...
 @endhasrole
 
 @hasanyrole(Role::all())
@@ -156,11 +156,11 @@ This package also adds Blade directives to verify whether the currently logged i
 @hasallroles(Role::all())
     I have all of these roles!
 @else
-    I don't have all of these roles...
+    I don\'t have all of these roles
 @endhasallroles
 ```
 
-You can use Laravel's native @can directive to check if a user has a certain permission.
+You can use Laravels native @can directive to check if a user has a certain permission.
 
 
 
