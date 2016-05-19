@@ -77,7 +77,7 @@ A permission can be revoked from a user:
 ``` bash
 $user->revokePermissionTo('edit articles');
 ```
-``` bash
+```
 You can test if a user has a permission:
 ``` bash
 $user->hasPermissionTo('edit articles');
@@ -114,7 +114,7 @@ The assignRole, hasRole, hasAnyRole, hasAllRoles and removeRole-functions can ac
 A permission can be given to a role:
 ``` bash
 $role->givePermissionTo('edit articles');
-``
+```
 You can determine if a role has a certain permission:
 ``` bash
 $role->hasPermissionTo('edit articles');
@@ -134,27 +134,31 @@ $user->can('edit articles');
 This package also adds Blade directives to verify whether the currently logged in user has all or any of a given list of roles.
 ``` bash
 @role('writer')
-I'm a writer!
+    I'm a writer!
 @else
-I'm not a writer...
+    I'm not a writer...
 @endrole
+
 @hasrole('writer')
-I'm a writer!
+    I'm a writer!
 @else
-I'm not a writer...
+    I'm not a writer...
 @endhasrole
+
 @hasanyrole(Role::all())
-I have one or more of these roles!
+    I have one or more of these roles!
 @else
-I have none of these roles...
+    I have none of these roles...
 @endhasanyrole
+
 @hasallroles(Role::all())
-I have all of these roles!
+    I have all of these roles!
 @else
-I don't have all of these roles...
+    I don't have all of these roles...
 @endhasallroles
-You can use Laravel's native @can directive to check if a user has a certain permission.
 ```
+
+You can use Laravel's native @can directive to check if a user has a certain permission.
 
 
 
