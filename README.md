@@ -1,5 +1,6 @@
 # Backpack\PermissionManager
-[![Latest Version on Packagist][ico-version]][link-packagist]
+
+[![Latest Version on Packagist][ico-version]](link-packagist)
 [![Software License][ico-license]](LICENSE.md)
 [![Build Status][ico-travis]][link-travis]
 [![Coverage Status][ico-scrutinizer]][link-scrutinizer]
@@ -64,7 +65,7 @@ class User extends Authenticatable
 ```
 
 
-## Usage
+## API Usage
 
 Because the package requires [spatie/laravel-permission](https://github.com/spatie/laravel-permission), the API will be the same: 
 
@@ -78,7 +79,6 @@ $user->givePermissionTo('edit articles');
 A permission can be revoked from a user:
 ``` bash
 $user->revokePermissionTo('edit articles');
-```
 ```
 You can test if a user has a permission:
 ``` bash
@@ -128,6 +128,7 @@ $role->revokePermissionTo('edit articles');
 The givePermissionTo and revokePermissionTo-functions can accept a string or a Permission-object.
 
 Saved permission and roles are also registered with the Illuminate\Auth\Access\Gate-class.
+
 ``` bash
 $user->can('edit articles');
 ```
@@ -140,19 +141,16 @@ This package also adds Blade directives to verify whether the currently logged i
 @else
     I\'m not a writer...
 @endrole
-
 @hasrole('writer')
     I\'m a writer!
 @else
     I\'m not a writer...
 @endhasrole
-
 @hasanyrole(Role::all())
     I have one or more of these roles!
 @else
     I have none of these roles...
 @endhasanyrole
-
 @hasallroles(Role::all())
     I have all of these roles!
 @else
