@@ -30,7 +30,7 @@ class UserCrudController extends CrudController {
 				],
         	]);
 
-		$this->crud->fields = [
+		$this->crud->addFields([
 								[
 									'name' => 'name',
 									'label' => 'Name',
@@ -52,36 +52,36 @@ class UserCrudController extends CrudController {
 									'type' => 'password',
 								],
 								[
-								// n-n relationship (with pivot table)
+								// two interconnected entities
 								'label' => "User Role Permissions",
 								'field_unique_name'=>'user_role_permission',
 								'type' => 'checklist_dependency',
-								'name' => ['roles', 'permissions'], // the methods that defines the relationship in your Model
-								'dependencies' =>
-								[
-									'primary' =>[
-										'label' => 'Roles',
-										'name' => 'roles', // the method that defines the relationship in your Model
-										'entity' => 'roles', // the method that defines the relationship in your Model
-										'entity_secondary' => 'permissions', // the method that defines the relationship in your Model
-										'attribute' => 'name', // foreign key attribute that is shown to user
-										'model' => "Backpack\PermissionManager\app\Models\Role", // foreign key model
-										'pivot' => true, // on create&update, do you need to add/delete pivot table entries?]
-										'number_columns' => 3, //can be 1,2,3,4,6 
-									],
-									'secondary'=>[
-										'label' => 'Permission',
-										'name' => 'permissions', // the method that defines the relationship in your Model
-										'entity' => 'permissions', // the method that defines the relationship in your Model
-										'entity_primary' => 'roles', // the method that defines the relationship in your Model
-										'attribute' => 'name', // foreign key attribute that is shown to user
-										'model' => "Backpack\PermissionManager\app\Models\Permission", // foreign key model
-										'pivot' => true, // on create&update, do you need to add/delete pivot table entries?]
-										'number_columns' => 3, //can be 1,2,3,4,6 
+								'name' => 'roles_and_permissions', // the methods that defines the relationship in your Model
+								'subfields' =>
+									[
+										'primary' =>[
+											'label' => 'Roles',
+											'name' => 'roles', // the method that defines the relationship in your Model
+											'entity' => 'roles', // the method that defines the relationship in your Model
+											'entity_secondary' => 'permissions', // the method that defines the relationship in your Model
+											'attribute' => 'name', // foreign key attribute that is shown to user
+											'model' => "Backpack\PermissionManager\app\Models\Role", // foreign key model
+											'pivot' => true, // on create&update, do you need to add/delete pivot table entries?]
+											'number_columns' => 3, //can be 1,2,3,4,6
+										],
+										'secondary'=>[
+											'label' => 'Permission',
+											'name' => 'permissions', // the method that defines the relationship in your Model
+											'entity' => 'permissions', // the method that defines the relationship in your Model
+											'entity_primary' => 'roles', // the method that defines the relationship in your Model
+											'attribute' => 'name', // foreign key attribute that is shown to user
+											'model' => "Backpack\PermissionManager\app\Models\Permission", // foreign key model
+											'pivot' => true, // on create&update, do you need to add/delete pivot table entries?]
+											'number_columns' => 3, //can be 1,2,3,4,6
+										],
 									],
 								],
-							],
-						];
+							]);
 	}
 
 	/**
@@ -93,11 +93,11 @@ class UserCrudController extends CrudController {
 	public function store(StoreRequest $request)
 	{
 		$this->crud->hasAccessOrFail('create');
-		
+
 		// insert item in the db
 		$item = $this->crud->create(\Request::except(['redirect_after_save', 'password']));
 
-		//encrypt password 
+		//encrypt password
 		if($request->input('password')){
 			$item->password = bcrypt($request->input('password'));
 		}
@@ -119,10 +119,10 @@ class UserCrudController extends CrudController {
 	{
 		//encrypt password and set it to request
 		$this->crud->hasAccessOrFail('update');
-		
+
 		$dataToUpdate = \Request::except(['redirect_after_save', 'password']);
-		
-		//encrypt password 
+
+		//encrypt password
 		if( $request->input('password') ){
 			$dataToUpdate["password"] = bcrypt($request->input('password'));
 		}

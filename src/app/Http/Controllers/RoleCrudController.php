@@ -35,22 +35,20 @@ class RoleCrudController extends CrudController {
 				],
         	]);
 
-		$this->crud->fields = [
-								[
-									'name' => 'name',
-									'label' => 'Name',
-									'type' => 'text',
-								],
-								[			
-									'label' => "Permissions",
-									'type' => 'checklist',
-									'name' => 'permissions',
-									'entity' => 'permissions', 
-									'attribute' => 'name', 
-									'model' => "Backpack\PermissionManager\app\Models\Permission", 
-									'pivot' => true,
-								],
-							];
+        $this->crud->addField([
+								'name' => 'name',
+								'label' => 'Name',
+								'type' => 'text',
+							]);
+        $this->crud->addField([
+								'label' => "Permissions",
+								'type' => 'checklist',
+								'name' => 'permissions',
+								'entity' => 'permissions',
+								'attribute' => 'name',
+								'model' => "Backpack\PermissionManager\app\Models\Permission",
+								'pivot' => true,
+							]);
 	}
 
 	public function store(StoreRequest $request)
