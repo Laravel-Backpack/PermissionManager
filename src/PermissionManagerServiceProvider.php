@@ -1,11 +1,10 @@
 <?php
+
 namespace Backpack\PermissionManager;
 
+use Config;
 use Illuminate\Routing\Router;
 use Illuminate\Support\ServiceProvider;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Database\Eloquent\Model as Eloquent;
-use Config;
 
 class PermissionManagerServiceProvider extends ServiceProvider
 {
@@ -15,6 +14,7 @@ class PermissionManagerServiceProvider extends ServiceProvider
      * @var bool
      */
     protected $defer = false;
+
     /**
      * Perform post-registration booting of services.
      *
@@ -28,21 +28,23 @@ class PermissionManagerServiceProvider extends ServiceProvider
         );
 
         // publish config file
-        $this->publishes([ __DIR__.'/config/laravel-permission.php' => config_path('laravel-permission.php'), ], 'config');
+        $this->publishes([__DIR__.'/config/laravel-permission.php' => config_path('laravel-permission.php')], 'config');
     }
+
     /**
      * Define the routes for the application.
      *
-     * @param  \Illuminate\Routing\Router  $router
+     * @param \Illuminate\Routing\Router $router
+     *
      * @return void
      */
     public function setupRoutes(Router $router)
     {
-        $router->group(['namespace' => 'Backpack\PermissionManager\app\Http\Controllers'], function($router)
-        {
+        $router->group(['namespace' => 'Backpack\PermissionManager\app\Http\Controllers'], function ($router) {
             require __DIR__.'/app/Http/routes.php';
         });
     }
+
     /**
      * Register any package services.
      *
@@ -58,5 +60,4 @@ class PermissionManagerServiceProvider extends ServiceProvider
          //         'config/laravel-permission.php',
          // ]);
     }
-
 }
