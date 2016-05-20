@@ -5,6 +5,7 @@
 [![Build Status][ico-travis]][link-travis]
 [![Coverage Status][ico-scrutinizer]][link-scrutinizer]
 [![Quality Score][ico-code-quality]][link-code-quality]
+[![Style CI](https://styleci.io/repos/58740020/shield)](https://styleci.io/repos/58740020)
 [![Total Downloads][ico-downloads]][link-downloads]
 
 An admin interface to easily add/edit/remove users, roles and permissions, using [Laravel Backpack](laravelbackpack.com). As opposed to some other packages:
