@@ -24,7 +24,7 @@ $ composer require backpack/permissionmanager
 
 2) Add the service provider to your config/app.php file:
 ```php
-Backpack\PermissionManager\PermissionsServiceProvider::class,
+Backpack\PermissionManager\PermissionManagerServiceProvider::class,
 ```
 
 3) Publish the config file & run the migrations
