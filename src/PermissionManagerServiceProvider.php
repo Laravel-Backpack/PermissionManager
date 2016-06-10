@@ -5,6 +5,7 @@ namespace Backpack\PermissionManager;
 use Config;
 use Illuminate\Routing\Router;
 use Illuminate\Support\ServiceProvider;
+use Spatie\Permission\PermissionServiceProvider;
 
 class PermissionManagerServiceProvider extends ServiceProvider
 {
@@ -54,7 +55,7 @@ class PermissionManagerServiceProvider extends ServiceProvider
     {
         //$this->registerPermissions();
         $this->setupRoutes($this->app->router);
-
+        $this->app->register(PermissionServiceProvider::class);
         // use this if your package has a config file
          // config([
          //         'config/laravel-permission.php',
