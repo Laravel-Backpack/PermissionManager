@@ -20,6 +20,11 @@ All Notable changes to `Backpack Settings` will be documented in this file
 - Nothing
 
 
+## 2.1.1 - 2016-06-16
+
+### Fixed
+- When adding users, the password was not saved.
+
 
 ## 2.1.0 - 2016-06-16
 

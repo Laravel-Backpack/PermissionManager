@@ -101,6 +101,7 @@ class UserCrudController extends CrudController
         //encrypt password
         if ($request->input('password')) {
             $item->password = bcrypt($request->input('password'));
+            $item->save();
         }
 
         // show a success message
