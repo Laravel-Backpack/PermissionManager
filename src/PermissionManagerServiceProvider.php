@@ -27,9 +27,15 @@ class PermissionManagerServiceProvider extends ServiceProvider
         $this->mergeConfigFrom(
             __DIR__.'/config/laravel-permission.php', 'laravel-permission'
         );
+        $this->mergeConfigFrom(
+            __DIR__.'/config/backpack/permissionmanager.php', 'backpack.permissionmanager'
+        );
 
         // publish config file
-        $this->publishes([__DIR__.'/config/laravel-permission.php' => config_path('laravel-permission.php')], 'config');
+        $this->publishes([__DIR__.'/config' => config_path()], 'config');
+
+        // publish migrations
+        $this->publishes([__DIR__.'/database/migrations' => database_path('migrations')], 'migrations');
     }
 
     /**
@@ -42,7 +48,11 @@ class PermissionManagerServiceProvider extends ServiceProvider
     public function setupRoutes(Router $router)
     {
         $router->group(['namespace' => 'Backpack\PermissionManager\app\Http\Controllers'], function ($router) {
-            require __DIR__.'/app/Http/routes.php';
+            \Route::group(['prefix' => 'admin', 'middleware' => ['web', 'admin']], function () {
+                \CRUD::resource('permission', 'PermissionCrudController');
+                \CRUD::resource('role', 'RoleCrudController');
+                \CRUD::resource('user', 'UserCrudController');
+            });
         });
     }
 
@@ -53,12 +63,8 @@ class PermissionManagerServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //$this->registerPermissions();
         $this->setupRoutes($this->app->router);
+
         $this->app->register(PermissionServiceProvider::class);
-        // use this if your package has a config file
-         // config([
-         //         'config/laravel-permission.php',
-         // ]);
     }
 }

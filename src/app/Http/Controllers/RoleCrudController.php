@@ -48,6 +48,13 @@ class RoleCrudController extends CrudController
                                 'model'     => "Backpack\PermissionManager\app\Models\Permission",
                                 'pivot'     => true,
                             ]);
+
+        if (config('backpack.permissionmanager.allow_role_create') == false) {
+            $this->crud->denyAccess('create');
+        }
+        if (config('backpack.permissionmanager.allow_role_update') == false) {
+            $this->crud->denyAccess('update');
+        }
     }
 
     public function store(StoreRequest $request)

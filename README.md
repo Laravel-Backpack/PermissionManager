@@ -24,14 +24,13 @@ $ composer require backpack/permissionmanager
 
 2) Add the service provider to your config/app.php file:
 ```php
-Spatie\Permission\PermissionServiceProvider::class,
 Backpack\PermissionManager\PermissionManagerServiceProvider::class,
 ```
 
 3) Publish the config file & run the migrations
 ```bash
-$ php artisan vendor:publish --provider="Backpack\PermissionManager\PermissionManagerServiceProvider" #publish config file
-$ php artisan migrate --path=vendor/backpack/permissionmanager/src/database/migrations #create the role and permission tables
+$ php artisan vendor:publish --provider="Backpack\PermissionManager\PermissionManagerServiceProvider" #publish config files and migrations
+$ php artisan migrate #create the role and permission tables
 ```
 
 4) Use the following traits on your User model:
@@ -65,6 +64,8 @@ class User extends Authenticatable
     </ul>
   </li>
 ```
+
+6) [Optional] Disallow create/update on your roles or permissions after you define them, using the config file in **config/backpack/permissionmanager.php**. Please note permissions and roles are referenced in code using their name. If you let your admins edit these strings and they do, your permission and role checks will stop working.
 
 
 ## API Usage

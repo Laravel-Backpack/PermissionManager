@@ -16,23 +16,22 @@ class PermissionCrudController extends CrudController
         $this->crud->setModel("Backpack\PermissionManager\app\Models\Permission");
         $this->crud->setEntityNameStrings('permission', 'permissions');
         $this->crud->setRoute('admin/permission');
-        $this->crud->setColumns([
-                [
+
+
+        $this->crud->addColumn([
                     'name'  => 'name',
                     'label' => 'Name',
                     'type'  => 'text',
-                ],
-                [
-                    // n-n relationship (with pivot table)
+                ]);
+        $this->crud->addColumn([ // n-n relationship (with pivot table)
                     'label'     => 'Roles that have this permission',
                     'type'      => 'select_multiple',
-                    'name'      => 'roles', // the method that defines the relationship in your Model
-                    'entity'    => 'roles', // the method that defines the relationship in your Model
-                    'attribute' => 'name', // foreign key attribute that is shown to user
-                    'model'     => "Backpack\PermissionManager\app\Models\Role", // foreign key model
-                    'pivot'     => true, // on create&update, do you need to add/delete pivot table entries?
-                ],
-            ]);
+                    'name'      => 'roles',
+                    'entity'    => 'roles',
+                    'attribute' => 'name',
+                    'model'     => "Backpack\PermissionManager\app\Models\Role",
+                    'pivot'     => true,
+                ]);
 
         $this->crud->addField([
                                 'name'  => 'name',
@@ -48,6 +47,13 @@ class PermissionCrudController extends CrudController
                                 'model'     => "Backpack\PermissionManager\app\Models\Role",
                                 'pivot'     => true,
                             ]);
+
+        if (!config('backpack.permissionmanager.allow_permission_create')) {
+            $this->crud->denyAccess('create');
+        }
+        if (!config('backpack.permissionmanager.allow_permission_update')) {
+            $this->crud->denyAccess('update');
+        }
     }
 
     public function store(StoreRequest $request)

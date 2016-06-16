@@ -21,6 +21,17 @@ All Notable changes to `Backpack Settings` will be documented in this file
 
 
 
+## 2.1.0 - 2016-06-16
+
+### Added
+- Database migration is now published, for deployment systems like Laravel Forge;
+- Config file to disallow create and update for permissions and roles, after you add them;
+
+### Fixed
+- Moved routes declaration in the ServiceProvider;
+- Spatie\Permission\PermissionServiceProvider::class is now registered in the ServiceProvider;
+
+
 ## 2.0.0 - 2016-05-20
 
 ### Fixed
