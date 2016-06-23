@@ -20,6 +20,12 @@ All Notable changes to `Backpack Settings` will be documented in this file
 - Nothing
 
 
+## 2.1.2 - 2016-06-23
+
+### Added
+- Roles and Permissions columns on UserCrudController list view.
+
+
 ## 2.1.1 - 2016-06-16
 
 ### Fixed
