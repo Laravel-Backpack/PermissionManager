@@ -6,6 +6,7 @@ return [
     | Backpack/PermissionManager configs.
     */
     
+    
     /*
     | User Fully-Qualified Class Name
     */
