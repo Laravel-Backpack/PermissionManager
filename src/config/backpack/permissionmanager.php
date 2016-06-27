@@ -5,7 +5,11 @@ return [
     /*
     | Backpack/PermissionManager configs.
     */
-
+    
+    /*
+    | User Fully-Qualified Class Name
+    */
+    'user_fqcn' => 'App\User',
 
     /*
     |--------------------------------------------------------------------------
