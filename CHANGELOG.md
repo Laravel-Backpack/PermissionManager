@@ -23,7 +23,7 @@ All Notable changes to `Backpack Settings` will be documented in this file
 ## 2.1.3 - 2016-06-30
 
 ### Added
-- Roles and Permissions columns on UserCrudController list view.
+- Ability to change user model fqcn in config file.
 
 
 ## 2.1.2 - 2016-06-23
