@@ -15,7 +15,7 @@ class UserCrudController extends CrudController
     {
         parent::__construct();
 
-        $this->crud->setModel("App\User");
+        $this->crud->setModel(config('backpack.permissionmanager.user_fqcn'));
         $this->crud->setEntityNameStrings('user', 'users');
         $this->crud->setRoute('admin/user');
         $this->crud->setColumns([
