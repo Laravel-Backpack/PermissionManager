@@ -20,6 +20,12 @@ All Notable changes to `Backpack Settings` will be documented in this file
 - Nothing
 
 
+## 2.1.5 - 2016-07-31
+
+### Added
+- Working bogus unit tests.
+
+
 ## 2.1.3 - 2016-06-30
 
 ### Added
