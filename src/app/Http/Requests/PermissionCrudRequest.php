@@ -2,9 +2,9 @@
 
 namespace Backpack\PermissionManager\app\Http\Requests;
 
-use App\Http\Requests\Request;
+use Illuminate\Foundation\Http\FormRequest;
 
-class PermissionCrudRequest extends Request
+class PermissionCrudRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.

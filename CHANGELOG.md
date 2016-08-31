@@ -20,6 +20,12 @@ All Notable changes to `Backpack Settings` will be documented in this file
 - Nothing
 
 
+## 2.1.6 - 2016-08-31
+
+### Added
+- Laravel 5.3 support;
+
+
 ## 2.1.5 - 2016-07-31
 
 ### Added
