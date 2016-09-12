@@ -20,6 +20,12 @@ All Notable changes to `Backpack Settings` will be documented in this file
 - Nothing
 
 
+## 2.1.7 - 2016-09-12
+
+### Fixed
+- MySQL strict support;
+
+
 ## 2.1.6 - 2016-08-31
 
 ### Added
