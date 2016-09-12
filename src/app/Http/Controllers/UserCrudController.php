@@ -114,16 +114,13 @@ class UserCrudController extends CrudController
         $this->crud->hasAccessOrFail('create');
 
         // insert item in the db
-        if ($request->input('password'))
-        {
+        if ($request->input('password')) {
             $item = $this->crud->create(\Request::except(['redirect_after_save']));
 
             // now bcrypt the password
             $item->password = bcrypt($request->input('password'));
             $item->save();
-        }
-        else
-        {
+        } else {
             $item = $this->crud->create(\Request::except(['redirect_after_save', 'password']));
         }
 
