@@ -1,0 +1,13 @@
+<?php
+
+namespace DummyNamespace;
+
+use Backpack\PermissionManager\app\Models\DummyClass;
+use Backpack\CRUD\CrudTrait;
+
+class ExtendDummyClass extends DummyClass
+{
+    use CrudTrait;
+
+    // protected $fillable = ['name', 'updated_at', 'created_at'];
+}

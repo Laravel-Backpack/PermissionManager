@@ -17,6 +17,18 @@ class PermissionManagerServiceProvider extends ServiceProvider
     protected $defer = false;
 
     /**
+     * Add Console to auto-register stubs
+     *
+     * @var array
+     */
+    protected $commands = [
+        'Backpack\PermissionManager\Console\Commands\ExtendPermissionCrudController',
+        'Backpack\PermissionManager\Console\Commands\ExtendPermissionCrudRequest',
+        'Backpack\PermissionManager\Console\Commands\ExtendPermissionCrudModel',
+        'Backpack\PermissionManager\Console\Commands\ExtendPermissionManagerCommand',
+    ];
+
+    /**
      * Perform post-registration booting of services.
      *
      * @return void
@@ -64,7 +76,7 @@ class PermissionManagerServiceProvider extends ServiceProvider
     public function register()
     {
         $this->setupRoutes($this->app->router);
-
+        $this->commands($this->commands);
         $this->app->register(PermissionServiceProvider::class);
     }
 }
