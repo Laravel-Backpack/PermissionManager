@@ -14,17 +14,17 @@ class RoleCrudController extends CrudController
         parent::__construct();
 
         $this->crud->setModel("Backpack\PermissionManager\app\Models\Role");
-        $this->crud->setEntityNameStrings('role', 'roles');
+        $this->crud->setEntityNameStrings(trans('permissionmanager.role'), trans('permissionmanager.roles'));
         $this->crud->setRoute('admin/role');
         $this->crud->setColumns([
                 [
                     'name'  => 'name',
-                    'label' => 'Name',
+                    'label' => trans('permissionmanager.name'),
                     'type'  => 'text',
                 ],
                 [
                     // n-n relationship (with pivot table)
-                    'label'     => 'Permissions',
+                    'label'     =>  ucfirst(trans('permissionmanager.permission_plural')),
                     'type'      => 'select_multiple',
                     'name'      => 'permissions', // the method that defines the relationship in your Model
                     'entity'    => 'permissions', // the method that defines the relationship in your Model
@@ -36,11 +36,11 @@ class RoleCrudController extends CrudController
 
         $this->crud->addField([
                                 'name'  => 'name',
-                                'label' => 'Name',
+                                'label' => trans('permissionmanager.name'),
                                 'type'  => 'text',
                             ]);
         $this->crud->addField([
-                                'label'     => 'Permissions',
+                                'label'     => ucfirst(trans('permissionmanager.permission_plural')),
                                 'type'      => 'checklist',
                                 'name'      => 'permissions',
                                 'entity'    => 'permissions',

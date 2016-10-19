@@ -21,18 +21,18 @@ class UserCrudController extends CrudController
         $this->crud->setColumns([
                 [
                     'name'  => 'name',
-                    'label' => 'Name',
+                    'label' => trans('permissionmanager.name'),
                     'type'  => 'text',
                 ],
                 [
                     'name'  => 'email',
-                    'label' => 'Email',
+                    'label' => trans('permissionmanager.email'),
                     'type'  => 'email',
                 ],
             ]);
 
         $this->crud->addColumn([ // n-n relationship (with pivot table)
-           'label'     => 'Roles', // Table column heading
+           'label'     =>  trans('permissionmanager.roles'), // Table column heading
            'type'      => 'select_multiple',
            'name'      => 'roles', // the method that defines the relationship in your Model
            'entity'    => 'roles', // the method that defines the relationship in your Model
@@ -41,7 +41,7 @@ class UserCrudController extends CrudController
         ]);
 
         $this->crud->addColumn([ // n-n relationship (with pivot table)
-           'label'     => 'Extra Permissions', // Table column heading
+           'label'     => trans('permissionmanager.extra_permissions'), // Table column heading
            'type'      => 'select_multiple',
            'name'      => 'permissions', // the method that defines the relationship in your Model
            'entity'    => 'permissions', // the method that defines the relationship in your Model
@@ -52,33 +52,33 @@ class UserCrudController extends CrudController
         $this->crud->addFields([
                                 [
                                     'name'  => 'name',
-                                    'label' => 'Name',
+                                    'label' => trans('permissionmanager.name'),
                                     'type'  => 'text',
                                 ],
                                 [
                                     'name'  => 'email',
-                                    'label' => 'Email',
+                                    'label' => trans('permissionmanager.email'),
                                     'type'  => 'email',
                                 ],
                                 [
                                     'name'  => 'password',
-                                    'label' => 'Password',
+                                    'label' => trans('permissionmanager.password'),
                                     'type'  => 'password',
                                 ],
                                 [
                                     'name'  => 'password_confirmation',
-                                    'label' => 'Password Confirmation',
+                                    'label' =>  trans('permissionmanager.password_confirmation'),
                                     'type'  => 'password',
                                 ],
                                 [
                                 // two interconnected entities
-                                'label'             => 'User Role Permissions',
+                                'label'             => trans('permissionmanager.user_role_permission'),
                                 'field_unique_name' => 'user_role_permission',
                                 'type'              => 'checklist_dependency',
                                 'name'              => 'roles_and_permissions', // the methods that defines the relationship in your Model
                                 'subfields'         => [
                                         'primary' => [
-                                            'label'            => 'Roles',
+                                            'label'            => trans('permissionmanager.roles'),
                                             'name'             => 'roles', // the method that defines the relationship in your Model
                                             'entity'           => 'roles', // the method that defines the relationship in your Model
                                             'entity_secondary' => 'permissions', // the method that defines the relationship in your Model
@@ -88,7 +88,7 @@ class UserCrudController extends CrudController
                                             'number_columns'   => 3, //can be 1,2,3,4,6
                                         ],
                                         'secondary' => [
-                                            'label'          => 'Permission',
+                                            'label'          => ucfirst(trans('permissionmanager.permission_singular')),
                                             'name'           => 'permissions', // the method that defines the relationship in your Model
                                             'entity'         => 'permissions', // the method that defines the relationship in your Model
                                             'entity_primary' => 'roles', // the method that defines the relationship in your Model
