@@ -36,7 +36,9 @@ return [
     
     'user_role_permission' => 'Permissões do Grupo de Usuário',
 
+    'user' => 'Usuário',
 
+    'users' => 'Usuários'
 
 
 ];
