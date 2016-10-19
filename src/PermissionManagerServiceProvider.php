@@ -40,7 +40,7 @@ class PermissionManagerServiceProvider extends ServiceProvider
         $this->publishes([__DIR__.'/database/migrations' => database_path('migrations')], 'migrations');
         
         // publish translate.
-        $this->publishes([__DIR__.'/resources/lang' => pase_path('resources/lang')], 'lang');
+        $this->publishes([__DIR__.'/resources/lang' => resource_path('lang/vendor/backpack')], 'lang');
         
     }
 
