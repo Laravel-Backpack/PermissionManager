@@ -30,7 +30,7 @@ class PermissionManagerServiceProvider extends ServiceProvider
         $this->mergeConfigFrom(
             __DIR__.'/config/backpack/permissionmanager.php', 'backpack.permissionmanager'
         );
-    
+
         $this->loadTranslationsFrom(realpath(__DIR__.'/resources/lang'), 'backpack');
 
         // publish config file
@@ -38,10 +38,9 @@ class PermissionManagerServiceProvider extends ServiceProvider
 
         // publish migrations
         $this->publishes([__DIR__.'/database/migrations' => database_path('migrations')], 'migrations');
-        
-        // publish translate.
+
+        // publish translation files
         $this->publishes([__DIR__.'/resources/lang' => resource_path('lang/vendor/backpack')], 'lang');
-        
     }
 
     /**
