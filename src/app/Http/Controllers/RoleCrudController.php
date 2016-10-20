@@ -25,7 +25,7 @@ class RoleCrudController extends CrudController
                 ],
                 [
                     // n-n relationship (with pivot table)
-                    'label'     =>  ucfirst(trans('backpack::permissionmanager.permission_plural')),
+                    'label'     => ucfirst(trans('backpack::permissionmanager.permission_plural')),
                     'type'      => 'select_multiple',
                     'name'      => 'permissions', // the method that defines the relationship in your Model
                     'entity'    => 'permissions', // the method that defines the relationship in your Model
