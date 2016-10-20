@@ -15,7 +15,8 @@ class RoleCrudController extends CrudController
 
         $this->crud->setModel("Backpack\PermissionManager\app\Models\Role");
         $this->crud->setEntityNameStrings(trans('backpack::permissionmanager.role'), trans('backpack::permissionmanager.roles'));
-        $this->crud->setRoute('admin/role');
+        $this->crud->setRoute(config('backpack.base.route_prefix').'/role');
+
         $this->crud->setColumns([
                 [
                     'name'  => 'name',
