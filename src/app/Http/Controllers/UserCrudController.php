@@ -32,7 +32,7 @@ class UserCrudController extends CrudController
             ]);
 
         $this->crud->addColumn([ // n-n relationship (with pivot table)
-           'label'     =>  trans('backpack::permissionmanager.roles'), // Table column heading
+           'label'     => trans('backpack::permissionmanager.roles'), // Table column heading
            'type'      => 'select_multiple',
            'name'      => 'roles', // the method that defines the relationship in your Model
            'entity'    => 'roles', // the method that defines the relationship in your Model
@@ -67,7 +67,7 @@ class UserCrudController extends CrudController
                                 ],
                                 [
                                     'name'  => 'password_confirmation',
-                                    'label' =>  trans('backpack::permissionmanager.password_confirmation'),
+                                    'label' => trans('backpack::permissionmanager.password_confirmation'),
                                     'type'  => 'password',
                                 ],
                                 [
