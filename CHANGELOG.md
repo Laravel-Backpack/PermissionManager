@@ -20,6 +20,13 @@ All Notable changes to `Backpack Settings` will be documented in this file
 - Nothing
 
 
+
+## 2.1.9 - 2016-10-23
+
+### Fixed
+- route_prefix support for routes;
+
+
 ## 2.1.8 - 2016-10-20
 
 ### Fixed
