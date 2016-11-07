@@ -14,6 +14,12 @@ An admin interface to easily add/edit/remove users, roles and permissions, using
 
 ![Edit a user in Backpack/PermissionManager](https://dl.dropboxusercontent.com/u/2431352/backpack_permissionmanager_user.png)
 
+
+
+> ### Security updates and breaking changes
+> Please **[subscribe to the Backpack Newsletter](http://eepurl.com/bUEGjf)** so you can find out about any security updates, breaking changes or major features. We send an email every 1-2 months.
+
+
 ## Install
 
 1) In your terminal:
@@ -187,6 +193,8 @@ Please see [CONTRIBUTING](CONTRIBUTING.md) for details.
 ## Security
 
 If you discover any security related issues, please email hello@tabacitu.ro instead of using the issue tracker.
+
+Please **[subscribe to the Backpack Newsletter](http://eepurl.com/bUEGjf)** so you can find out about any security updates, breaking changes or major features. We send an email every 1-2 months.
 
 ## Credits
 
