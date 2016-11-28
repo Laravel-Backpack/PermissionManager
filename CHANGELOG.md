@@ -21,6 +21,12 @@ All Notable changes to `Backpack Settings` will be documented in this file
 
 
 
+## 2.1.10 - 2016-11-28
+
+### Added
+- you can use a different permission or role model by changing a config value inside the laravel-permission config file;
+
+
 ## 2.1.9 - 2016-10-23
 
 ### Fixed
