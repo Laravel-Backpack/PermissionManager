@@ -13,7 +13,7 @@ class PermissionCrudController extends CrudController
     {
         parent::__construct();
 
-        $this->crud->setModel("Backpack\PermissionManager\app\Models\Permission");
+        $this->crud->setModel(config('laravel-permission.models.permission'));
         $this->crud->setEntityNameStrings(trans('backpack::permissionmanager.permission_singular'), trans('backpack::permissionmanager.permission_plural'));
         $this->crud->setRoute(config('backpack.base.route_prefix').'/permission');
 
