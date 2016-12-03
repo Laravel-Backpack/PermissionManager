@@ -17,7 +17,7 @@ class PermissionManagerServiceProvider extends ServiceProvider
     protected $defer = false;
 
     /**
-     * Add Console to auto-register stubs
+     * Add Console to auto-register stubs.
      *
      * @var array
      */

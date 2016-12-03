@@ -70,6 +70,7 @@ class ExtendPermissionCrudController extends GeneratorCommand
         if ($this->option('user')) {
             return __DIR__.'/../stubs/crud-controller-user.stub';
         }
+
         return __DIR__.'/../stubs/crud-controller-permission.stub';
     }
 
