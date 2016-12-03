@@ -43,11 +43,16 @@ class PermissionManagerServiceProvider extends ServiceProvider
             __DIR__.'/config/backpack/permissionmanager.php', 'backpack.permissionmanager'
         );
 
+        $this->loadTranslationsFrom(realpath(__DIR__.'/resources/lang'), 'backpack');
+
         // publish config file
         $this->publishes([__DIR__.'/config' => config_path()], 'config');
 
         // publish migrations
         $this->publishes([__DIR__.'/database/migrations' => database_path('migrations')], 'migrations');
+
+        // publish translation files
+        $this->publishes([__DIR__.'/resources/lang' => resource_path('lang/vendor/backpack')], 'lang');
     }
 
     /**
@@ -60,7 +65,7 @@ class PermissionManagerServiceProvider extends ServiceProvider
     public function setupRoutes(Router $router)
     {
         $router->group(['namespace' => 'Backpack\PermissionManager\app\Http\Controllers'], function ($router) {
-            \Route::group(['prefix' => 'admin', 'middleware' => ['web', 'admin']], function () {
+            \Route::group(['prefix' => config('backpack.base.route_prefix', 'admin'), 'middleware' => ['web', 'admin']], function () {
                 \CRUD::resource('permission', 'PermissionCrudController');
                 \CRUD::resource('role', 'RoleCrudController');
                 \CRUD::resource('user', 'UserCrudController');

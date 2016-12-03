@@ -20,6 +20,26 @@ All Notable changes to `Backpack Settings` will be documented in this file
 - Nothing
 
 
+
+## 2.1.10 - 2016-11-28
+
+### Added
+- you can use a different permission or role model by changing a config value inside the laravel-permission config file;
+
+
+## 2.1.9 - 2016-10-23
+
+### Fixed
+- route_prefix support for routes;
+
+
+## 2.1.8 - 2016-10-20
+
+### Fixed
+- added translation files, thanks to [Ludio Oliveira](https://github.com/ludioao);
+- added route_prefix support, thanks to [reeslo](https://github.com/reeslo);
+
+
 ## 2.1.7 - 2016-09-12
 
 ### Fixed
