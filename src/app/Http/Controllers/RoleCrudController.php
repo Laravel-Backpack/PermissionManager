@@ -9,46 +9,44 @@ use Backpack\PermissionManager\app\Http\Requests\RoleCrudRequest as UpdateReques
 
 class RoleCrudController extends CrudController
 {
-    public function __construct()
+    public function setup()
     {
-        parent::__construct();
-
         $this->crud->setModel(config('laravel-permission.models.role'));
         $this->crud->setEntityNameStrings(trans('backpack::permissionmanager.role'), trans('backpack::permissionmanager.roles'));
         $this->crud->setRoute(config('backpack.base.route_prefix').'/role');
 
         $this->crud->setColumns([
-                [
-                    'name'  => 'name',
-                    'label' => trans('backpack::permissionmanager.name'),
-                    'type'  => 'text',
-                ],
-                [
-                    // n-n relationship (with pivot table)
-                    'label'     => ucfirst(trans('backpack::permissionmanager.permission_plural')),
-                    'type'      => 'select_multiple',
-                    'name'      => 'permissions', // the method that defines the relationship in your Model
-                    'entity'    => 'permissions', // the method that defines the relationship in your Model
-                    'attribute' => 'name', // foreign key attribute that is shown to user
-                    'model'     => "Backpack\PermissionManager\app\Models\Permission", // foreign key model
-                    'pivot'     => true, // on create&update, do you need to add/delete pivot table entries?
-                ],
-            ]);
+            [
+                'name'  => 'name',
+                'label' => trans('backpack::permissionmanager.name'),
+                'type'  => 'text',
+            ],
+            [
+                // n-n relationship (with pivot table)
+                'label'     => ucfirst(trans('backpack::permissionmanager.permission_plural')),
+                'type'      => 'select_multiple',
+                'name'      => 'permissions', // the method that defines the relationship in your Model
+                'entity'    => 'permissions', // the method that defines the relationship in your Model
+                'attribute' => 'name', // foreign key attribute that is shown to user
+                'model'     => "Backpack\PermissionManager\app\Models\Permission", // foreign key model
+                'pivot'     => true, // on create&update, do you need to add/delete pivot table entries?
+            ],
+        ]);
 
         $this->crud->addField([
-                                'name'  => 'name',
-                                'label' => trans('backpack::permissionmanager.name'),
-                                'type'  => 'text',
-                            ]);
+            'name'  => 'name',
+            'label' => trans('backpack::permissionmanager.name'),
+            'type'  => 'text',
+        ]);
         $this->crud->addField([
-                                'label'     => ucfirst(trans('backpack::permissionmanager.permission_plural')),
-                                'type'      => 'checklist',
-                                'name'      => 'permissions',
-                                'entity'    => 'permissions',
-                                'attribute' => 'name',
-                                'model'     => "Backpack\PermissionManager\app\Models\Permission",
-                                'pivot'     => true,
-                            ]);
+            'label'     => ucfirst(trans('backpack::permissionmanager.permission_plural')),
+            'type'      => 'checklist',
+            'name'      => 'permissions',
+            'entity'    => 'permissions',
+            'attribute' => 'name',
+            'model'     => "Backpack\PermissionManager\app\Models\Permission",
+            'pivot'     => true,
+        ]);
 
         if (config('backpack.permissionmanager.allow_role_create') == false) {
             $this->crud->denyAccess('create');
