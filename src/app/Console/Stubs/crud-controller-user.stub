@@ -2,11 +2,10 @@
 namespace DummyNamespace;
 
 use Backpack\PermissionManager\app\Http\Controllers\DummyClassCrudController;
-use Backpack\PermissionManager\app\Http\Requests\DummyClassUpdateCrudRequest as UpdateRequest;
-use Backpack\PermissionManager\app\Http\Requests\DummyClassStoreCrudRequest as StoreRequest;
+use App\Http\Requests\DummyClassUpdateCrudRequest as UpdateRequest;
+use App\Http\Requests\DummyClassStoreCrudRequest as StoreRequest;
 
 class ExtendDummyClassCrudController extends DummyClassCrudController
-
 {
     public function store(StoreRequest $request)
     {

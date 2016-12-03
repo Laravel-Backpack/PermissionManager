@@ -84,6 +84,7 @@ CRUD::resource('permission', 'Permissions/ExtendPermissionCrudController');
 CRUD::resource('role', 'Permissions/ExtendRoleCrudController');
 CRUD::resource('user', 'Permissions/ExtendUserCrudController');
 ```
+And make sure you're using the new extended models in your ```config/laravel-permission.php```, not the Backpack ones: ```App\Models\Permission::class``` and ```App\Models\Role::class```.
 
 
 ## API Usage
