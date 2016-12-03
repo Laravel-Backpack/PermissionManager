@@ -22,10 +22,10 @@ class PermissionManagerServiceProvider extends ServiceProvider
      * @var array
      */
     protected $commands = [
-        'Backpack\PermissionManager\Console\Commands\ExtendPermissionCrudController',
-        'Backpack\PermissionManager\Console\Commands\ExtendPermissionCrudRequest',
-        'Backpack\PermissionManager\Console\Commands\ExtendPermissionCrudModel',
-        'Backpack\PermissionManager\Console\Commands\ExtendPermissionManagerCommand',
+        'Backpack\PermissionManager\app\Console\Commands\ExtendPermissionCrudController',
+        'Backpack\PermissionManager\app\Console\Commands\ExtendPermissionCrudRequest',
+        'Backpack\PermissionManager\app\Console\Commands\ExtendPermissionCrudModel',
+        'Backpack\PermissionManager\app\Console\Commands\ExtendPermissionManagerCommand',
     ];
 
     /**

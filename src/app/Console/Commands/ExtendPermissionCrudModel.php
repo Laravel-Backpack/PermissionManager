@@ -1,38 +1,38 @@
 <?php
 
-namespace Backpack\PermissionManager\Console\Commands;
+namespace Backpack\PermissionManager\app\Console\Commands;
 
 use Illuminate\Console\GeneratorCommand;
 
-class ExtendPermissionCrudRequest extends GeneratorCommand
+class ExtendPermissionCrudModel extends GeneratorCommand
 {
     /**
      * The console command name.
      *
      * @var string
      */
-    protected $name = 'backpack:crud-permission-request';
+    protected $name = 'backpack:extend:permission-crud-model';
 
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'backpack:crud-permission-request {name}';
+    protected $signature = 'backpack:extend:permission-crud-model {name}';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Generate a Backpack CRUD Permission request';
+    protected $description = 'Generate a Backpack CRUD Permission model';
 
     /**
      * The type of class being generated.
      *
      * @var string
      */
-    protected $type = 'Request';
+    protected $type = 'Model';
 
     /**
      * Get the stub file for the generator.
@@ -41,7 +41,7 @@ class ExtendPermissionCrudRequest extends GeneratorCommand
      */
     protected function getStub()
     {
-        return __DIR__.'/../stubs/crud-request-permission.stub';
+        return __DIR__.'/../stubs/crud-model-permission.stub';
     }
 
     /**
@@ -61,13 +61,13 @@ class ExtendPermissionCrudRequest extends GeneratorCommand
         $name_array = explode('/', $name);
         $file = array_pop($name_array);
         // Replace with Extended version
-        $name_array[] = 'Extend'.$file;
+        $name_array[] = /*'Extended'.*/$file;
 
         // Implode array to string
         $name = implode('/', $name_array);
 
         // Return new path
-        return $this->laravel['path'].'/'.$name.'CrudRequest.php';
+        return $this->laravel['path'].'/'.$name.'.php';
     }
 
     /**
@@ -79,7 +79,38 @@ class ExtendPermissionCrudRequest extends GeneratorCommand
      */
     protected function getDefaultNamespace($rootNamespace)
     {
-        return $rootNamespace.'\Http\Requests\Permissions';
+        return $rootNamespace.'\Models';
+    }
+
+    /**
+     * Replace the table name for the given stub.
+     *
+     * @param string $stub
+     * @param string $name
+     *
+     * @return string
+     */
+    protected function replaceTable(&$stub, $name)
+    {
+        $table = ltrim(strtolower(preg_replace('/[A-Z]/', '_$0', str_replace($this->getNamespace($name).'\\', '', $name))), '_').'s';
+
+        $stub = str_replace('DummyTable', $table, $stub);
+
+        return $this;
+    }
+
+    /**
+     * Build the class with the given name.
+     *
+     * @param string $name
+     *
+     * @return string
+     */
+    protected function buildClass($name)
+    {
+        $stub = $this->files->get($this->getStub());
+
+        return $this->replaceNamespace($stub, $name)->replaceTable($stub, $name)->replaceClass($stub, $name);
     }
 
     /**

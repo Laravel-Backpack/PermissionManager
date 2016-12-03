@@ -1,6 +1,6 @@
 <?php
 
-namespace Backpack\PermissionManager\Console\Commands;
+namespace Backpack\PermissionManager\app\Console\Commands;
 
 use Illuminate\Console\GeneratorCommand;
 
@@ -11,14 +11,14 @@ class ExtendPermissionCrudController extends GeneratorCommand
      *
      * @var string
      */
-    protected $name = 'backpack:crud-permission-controller';
+    protected $name = 'backpack:extend:permission-crud-controller';
 
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'backpack:crud-permission-controller {name} {--user}';
+    protected $signature = 'backpack:extend:permission-crud-controller {name} {--user}';
 
     /**
      * The console command description.
@@ -51,7 +51,7 @@ class ExtendPermissionCrudController extends GeneratorCommand
         $name_array = explode('/', $name);
         $file = array_pop($name_array);
         // Replace with Extended version
-        $name_array[] = 'Extend'.$file;
+        $name_array[] = /*'Extended'.*/$file;
 
         // Implode array to string
         $name = implode('/', $name_array);
@@ -70,7 +70,7 @@ class ExtendPermissionCrudController extends GeneratorCommand
         if ($this->option('user')) {
             return __DIR__.'/../stubs/crud-controller-user.stub';
         }
-        return __DIR__.'/../stubs/crud-contoller-permission.stub';
+        return __DIR__.'/../stubs/crud-controller-permission.stub';
     }
 
     /**
@@ -82,7 +82,7 @@ class ExtendPermissionCrudController extends GeneratorCommand
      */
     protected function getDefaultNamespace($rootNamespace)
     {
-        return $rootNamespace.'\Http\Controllers\Permissions';
+        return $rootNamespace.'\Http\Controllers\Admin';
     }
 
     /**
@@ -114,7 +114,7 @@ class ExtendPermissionCrudController extends GeneratorCommand
     {
         $stub = $this->files->get($this->getStub());
 
-        return $this->replaceNamespace($stub, $name)->replaceNameStrings($stub, $name)->replaceClass($stub, 'Extend'.$name);
+        return $this->replaceNamespace($stub, $name)->replaceNameStrings($stub, $name)->replaceClass($stub, /*'Extended'.*/$name);
     }
 
     /**

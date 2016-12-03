@@ -8,11 +8,6 @@ use Backpack\PermissionManager\app\Http\Requests\DummyClassStoreCrudRequest as S
 class ExtendDummyClassCrudController extends DummyClassCrudController
 
 {
-    public function __construct()
-    {
-        parent::__construct();
-    }
-
     public function store(StoreRequest $request)
     {
         return parent::store();

@@ -39,18 +39,7 @@ $ php artisan vendor:publish --provider="Backpack\PermissionManager\PermissionMa
 $ php artisan migrate #create the role and permission tables
 ```
 
-4) [Optional] Publish controller, request and model extensions to allow customisation
-```php
-$ php artisan backpack:crud-permissions
-````
-Then ensure to provide routes for controller extensions
-```php
-CRUD::resource('permission', 'Permissions/ExtendPermissionCrudController');
-CRUD::resource('role', 'Permissions/ExtendRoleCrudController');
-CRUD::resource('user', 'Permissions/ExtendUserCrudController');
-```
-
-5) Use the following traits on your User model:
+4) Use the following traits on your User model:
 ```php
 <?php namespace App;
 
@@ -68,7 +57,7 @@ class User extends Authenticatable
      */
 ```
 
-6) [Optional] Add a menu item for it in resources/views/vendor/backpack/base/inc/sidebar.blade.php or menu.blade.php:
+5) [Optional] Add a menu item for it in resources/views/vendor/backpack/base/inc/sidebar.blade.php or menu.blade.php:
 
 ```html
 <!-- Users, Roles Permissions -->
@@ -82,7 +71,19 @@ class User extends Authenticatable
   </li>
 ```
 
-7) [Optional] Disallow create/update on your roles or permissions after you define them, using the config file in **config/backpack/permissionmanager.php**. Please note permissions and roles are referenced in code using their name. If you let your admins edit these strings and they do, your permission and role checks will stop working.
+6) [Optional] Disallow create/update on your roles or permissions after you define them, using the config file in **config/backpack/permissionmanager.php**. Please note permissions and roles are referenced in code using their name. If you let your admins edit these strings and they do, your permission and role checks will stop working.
+
+
+7) [Optional] Extend the default controller, request and model, in order make customizations:
+```php
+$ php artisan backpack:extend:permission-manager
+````
+This will publish the files in your app folder. In order for Laravel to actually use them, please register the routes in your routes file:
+```php
+CRUD::resource('permission', 'Permissions/ExtendPermissionCrudController');
+CRUD::resource('role', 'Permissions/ExtendRoleCrudController');
+CRUD::resource('user', 'Permissions/ExtendUserCrudController');
+```
 
 
 ## API Usage
