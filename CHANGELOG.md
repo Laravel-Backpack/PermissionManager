@@ -20,6 +20,12 @@ All Notable changes to `Backpack Settings` will be documented in this file
 - Nothing
 
 
+## 2.1.11 - 2017-01-18
+
+### Added
+- config options to disable the delete functionality on Permissions and Roles;
+
+
 
 ## 2.1.10 - 2016-11-28
 
