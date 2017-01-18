@@ -54,6 +54,9 @@ class RoleCrudController extends CrudController
         if (config('backpack.permissionmanager.allow_role_update') == false) {
             $this->crud->denyAccess('update');
         }
+        if (config('backpack.permissionmanager.allow_role_delete') == false) {
+            $this->crud->denyAccess('delete');
+        }
     }
 
     public function store(StoreRequest $request)

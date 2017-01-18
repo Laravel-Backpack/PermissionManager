@@ -52,6 +52,9 @@ class PermissionCrudController extends CrudController
         if (!config('backpack.permissionmanager.allow_permission_update')) {
             $this->crud->denyAccess('update');
         }
+        if (!config('backpack.permissionmanager.allow_permission_delete')) {
+            $this->crud->denyAccess('delete');
+        }
     }
 
     public function store(StoreRequest $request)
