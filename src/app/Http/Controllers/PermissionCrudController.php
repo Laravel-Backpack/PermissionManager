@@ -15,7 +15,6 @@ class PermissionCrudController extends CrudController
         $this->crud->setEntityNameStrings(trans('backpack::permissionmanager.permission_singular'), trans('backpack::permissionmanager.permission_plural'));
         $this->crud->setRoute(config('backpack.base.route_prefix').'/permission');
 
-
         $this->crud->addColumn([
             'name'  => 'name',
             'label' => trans('backpack::permissionmanager.name'),
