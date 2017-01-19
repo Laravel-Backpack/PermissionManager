@@ -17,7 +17,7 @@ class UserCrudController extends CrudController
         $this->crud->setEntityNameStrings(trans('backpack::permissionmanager.user'), trans('backpack::permissionmanager.users'));
         $this->crud->setRoute(config('backpack.base.route_prefix').'/user');
 
-        $this->crud->setColumns([
+        $this->crud->addColumns([
             [
                 'name'  => 'name',
                 'label' => trans('backpack::permissionmanager.name'),
@@ -26,26 +26,24 @@ class UserCrudController extends CrudController
             [
                 'name'  => 'email',
                 'label' => trans('backpack::permissionmanager.email'),
-                'type'  => 'email',
+                'type'  => 'text',
             ],
-        ]);
-
-        $this->crud->addColumn([ // n-n relationship (with pivot table)
-           'label'     => trans('backpack::permissionmanager.roles'), // Table column heading
-           'type'      => 'select_multiple',
-           'name'      => 'roles', // the method that defines the relationship in your Model
-           'entity'    => 'roles', // the method that defines the relationship in your Model
-           'attribute' => 'name', // foreign key attribute that is shown to user
-           'model'     => "Backpack\PermissionManager\app\Models\Roles", // foreign key model
-        ]);
-
-        $this->crud->addColumn([ // n-n relationship (with pivot table)
-           'label'     => trans('backpack::permissionmanager.extra_permissions'), // Table column heading
-           'type'      => 'select_multiple',
-           'name'      => 'permissions', // the method that defines the relationship in your Model
-           'entity'    => 'permissions', // the method that defines the relationship in your Model
-           'attribute' => 'name', // foreign key attribute that is shown to user
-           'model'     => "Backpack\PermissionManager\app\Models\Permission", // foreign key model
+            [ // n-n relationship (with pivot table)
+                'label'     => trans('backpack::permissionmanager.roles'), // Table column heading
+                'type'      => 'select_multiple',
+                'name'      => 'roles', // the method that defines the relationship in your Model
+                'entity'    => 'roles', // the method that defines the relationship in your Model
+                'attribute' => 'name', // foreign key attribute that is shown to user
+                'model'     => "Backpack\PermissionManager\app\Models\Roles", // foreign key model
+            ],
+            [ // n-n relationship (with pivot table)
+                'label'     => trans('backpack::permissionmanager.extra_permissions'), // Table column heading
+                'type'      => 'select_multiple',
+                'name'      => 'permissions', // the method that defines the relationship in your Model
+                'entity'    => 'permissions', // the method that defines the relationship in your Model
+                'attribute' => 'name', // foreign key attribute that is shown to user
+                'model'     => "Backpack\PermissionManager\app\Models\Permission", // foreign key model
+            ]
         ]);
 
         $this->crud->addFields([
@@ -70,12 +68,12 @@ class UserCrudController extends CrudController
                 'type'  => 'password',
             ],
             [
-            // two interconnected entities
-            'label'             => trans('backpack::permissionmanager.user_role_permission'),
-            'field_unique_name' => 'user_role_permission',
-            'type'              => 'checklist_dependency',
-            'name'              => 'roles_and_permissions', // the methods that defines the relationship in your Model
-            'subfields'         => [
+                // two interconnected entities
+                'label'             => trans('backpack::permissionmanager.user_role_permission'),
+                'field_unique_name' => 'user_role_permission',
+                'type'              => 'checklist_dependency',
+                'name'              => 'roles_and_permissions', // the methods that defines the relationship in your Model
+                'subfields'         => [
                     'primary' => [
                         'label'            => trans('backpack::permissionmanager.roles'),
                         'name'             => 'roles', // the method that defines the relationship in your Model
