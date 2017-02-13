@@ -150,7 +150,7 @@ class UserCrudController extends CrudController
         }
 
         // update the row in the db
-        $this->crud->update(\Request::get('id'), $dataToUpdate);
+        $this->crud->update(\Request::get($this->crud->model->getKeyName()), $dataToUpdate);
 
         // show a success message
         \Alert::success(trans('backpack::crud.update_success'))->flash();
