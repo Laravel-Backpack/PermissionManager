@@ -25,6 +25,8 @@ All Notable changes to `Backpack Settings` will be documented in this file
 ### Added
 - greek translation - thanks to [automat64](https://github.com/automat64);
 
+### Fixed
+- allowed for primary keys other than id;
 
 ## 2.1.12 - 2017-02-13
 
