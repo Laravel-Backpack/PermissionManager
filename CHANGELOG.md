@@ -20,6 +20,12 @@ All Notable changes to `Backpack Settings` will be documented in this file
 - Nothing
 
 
+## 2.1.13 - 2017-02-13
+
+### Added
+- greek translation - thanks to [automat64](https://github.com/automat64);
+
+
 ## 2.1.12 - 2017-02-13
 
 ### Added
