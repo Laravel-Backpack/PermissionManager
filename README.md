@@ -14,6 +14,12 @@ An admin interface to easily add/edit/remove users, roles and permissions, using
 
 ![Edit a user in Backpack/PermissionManager](https://dl.dropboxusercontent.com/u/2431352/backpack_permissionmanager_user.png)
 
+
+
+> ### Security updates and breaking changes
+> Please **[subscribe to the Backpack Newsletter](http://eepurl.com/bUEGjf)** so you can find out about any security updates, breaking changes or major features. We send an email every 1-2 months.
+
+
 ## Install
 
 1) In your terminal:
@@ -58,9 +64,9 @@ class User extends Authenticatable
   <li class="treeview">
     <a href="#"><i class="fa fa-group"></i> <span>Users, Roles, Permissions</span> <i class="fa fa-angle-left pull-right"></i></a>
     <ul class="treeview-menu">
-      <li><a href="{{ url('admin/user') }}"><i class="fa fa-user"></i> <span>Users</span></a></li>
-      <li><a href="{{ url('admin/role') }}"><i class="fa fa-group"></i> <span>Roles</span></a></li>
-      <li><a href="{{ url('admin/permission') }}"><i class="fa fa-key"></i> <span>Permissions</span></a></li>
+      <li><a href="{{ url(config('backpack.base.route_prefix', 'admin') . '/user') }}"><i class="fa fa-user"></i> <span>Users</span></a></li>
+      <li><a href="{{ url(config('backpack.base.route_prefix', 'admin') . '/role') }}"><i class="fa fa-group"></i> <span>Roles</span></a></li>
+      <li><a href="{{ url(config('backpack.base.route_prefix', 'admin') . '/permission') }}"><i class="fa fa-key"></i> <span>Permissions</span></a></li>
     </ul>
   </li>
 ```
@@ -188,6 +194,8 @@ Please see [CONTRIBUTING](CONTRIBUTING.md) for details.
 
 If you discover any security related issues, please email hello@tabacitu.ro instead of using the issue tracker.
 
+Please **[subscribe to the Backpack Newsletter](http://eepurl.com/bUEGjf)** so you can find out about any security updates, breaking changes or major features. We send an email every 1-2 months.
+
 ## Credits
 
 - [Marius Constantin][link-author2] - Lead Developer
@@ -196,7 +204,7 @@ If you discover any security related issues, please email hello@tabacitu.ro inst
 
 ## License
 
-The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
+Backpack is free for non-commercial use and $19/project for commercial use. Please see [License File](LICENSE.md) and [backpackforlaravel.com](https://backpackforlaravel.com/#pricing) for more information.
 
 [ico-version]: https://img.shields.io/packagist/v/backpack/permissionmanager.svg?style=flat-square
 [ico-license]: https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square
