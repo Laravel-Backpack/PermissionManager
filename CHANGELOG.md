@@ -20,6 +20,12 @@ All Notable changes to `Backpack Settings` will be documented in this file
 - Nothing
 
 
+## 2.1.8 - 2017-02-17
+
+### Added
+- CRUD 3.2 compatibilty;
+- updated CONTRIBUTING.md;
+
 ## 2.1.7 - 2016-09-12
 
 ### Fixed

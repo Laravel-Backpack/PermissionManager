@@ -127,14 +127,10 @@ class UserCrudController extends CrudController
         // show a success message
         \Alert::success(trans('backpack::crud.insert_success'))->flash();
 
-        // redirect the user where he chose to be redirected
-        switch (\Request::input('redirect_after_save')) {
-            case 'current_item_edit':
-                return \Redirect::to($this->crud->route.'/'.$item->id.'/edit');
+        // save the redirect choice for next time
+        $this->setSaveAction();
 
-            default:
-                return \Redirect::to(\Request::input('redirect_after_save'));
-        }
+        return $this->performSaveAction($item->getKey());
     }
 
     public function update(UpdateRequest $request)
@@ -155,6 +151,9 @@ class UserCrudController extends CrudController
         // show a success message
         \Alert::success(trans('backpack::crud.update_success'))->flash();
 
-        return \Redirect::to($this->crud->route);
+        // save the redirect choice for next time
+        $this->setSaveAction();
+
+        return $this->performSaveAction();
     }
 }
