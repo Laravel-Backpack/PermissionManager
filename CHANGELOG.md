@@ -20,6 +20,11 @@ All Notable changes to `Backpack Settings` will be documented in this file
 - Nothing
 
 
+## 2.1.15 - 2017-02-17
+
+### Removed
+- PHP 5.5 compatibility, as Laravel no longer supports it;
+
 
 ## 2.1.14 - 2017-02-17
 
