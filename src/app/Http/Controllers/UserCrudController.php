@@ -115,13 +115,13 @@ class UserCrudController extends CrudController
 
         // insert item in the db
         if ($request->input('password')) {
-            $item = $this->crud->create(\Request::except(['redirect_after_save']));
+            $item = $this->crud->create($request->except(['redirect_after_save']));
 
             // now bcrypt the password
             $item->password = bcrypt($request->input('password'));
             $item->save();
         } else {
-            $item = $this->crud->create(\Request::except(['redirect_after_save', 'password']));
+            $item = $this->crud->create($request->except(['redirect_after_save', 'password']));
         }
 
         // show a success message
@@ -138,7 +138,7 @@ class UserCrudController extends CrudController
         //encrypt password and set it to request
         $this->crud->hasAccessOrFail('update');
 
-        $dataToUpdate = \Request::except(['redirect_after_save', 'password']);
+        $dataToUpdate = $request->except(['redirect_after_save', 'password']);
 
         //encrypt password
         if ($request->input('password')) {
@@ -146,7 +146,7 @@ class UserCrudController extends CrudController
         }
 
         // update the row in the db
-        $this->crud->update(\Request::get($this->crud->model->getKeyName()), $dataToUpdate);
+        $this->crud->update($request->get($this->crud->model->getKeyName()), $dataToUpdate);
 
         // show a success message
         \Alert::success(trans('backpack::crud.update_success'))->flash();
