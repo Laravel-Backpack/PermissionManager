@@ -16,6 +16,13 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Set this to false if you would like to use your own AuthController and PasswordController
+    | (you then need to setup your auth routes manually in your routes.php file)
+     */
+    'setup_role_routes' => false,
+
+    /*
+    |--------------------------------------------------------------------------
     | Disallow the user interface for creating/updating permissions or roles.
     |--------------------------------------------------------------------------
     | Roles and permissions are used in code by their name

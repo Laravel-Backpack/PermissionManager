@@ -68,7 +68,9 @@ class PermissionManagerServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->setupRoutes($this->app->router);
+        if (config('backpack.permissionmanager.setup_role_routes', true)) {
+            $this->setupRoutes($this->app->router);
+        }
 
         $this->app->register(PermissionServiceProvider::class);
     }
