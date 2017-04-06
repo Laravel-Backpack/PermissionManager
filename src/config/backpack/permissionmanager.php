@@ -16,9 +16,13 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Set this to false if you would like to use your own AuthController and PasswordController
-    | (you then need to setup your auth routes manually in your routes.php file)
-     */
+    | Set this to false if you would like to stop the permission manager from
+    | registering any default routes such as 'admin/role', 'admin/permission',
+    | and 'admin/user'.
+    |
+    | You will have to setup your own if you wish to expose the CRUD
+    | functionality in your web app.
+    */
     'setup_role_routes' => false,
 
     /*
