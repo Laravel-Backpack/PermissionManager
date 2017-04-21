@@ -20,6 +20,12 @@ All Notable changes to `Backpack Settings` will be documented in this file
 - Nothing
 
 
+## 2.1.16 - 2017-04-21
+
+### Removed
+- Backpack\PermissionManager no longer loads translations, as Backpack\Base does it for him.
+
+
 ## 2.1.15 - 2017-02-17
 
 ### Removed
