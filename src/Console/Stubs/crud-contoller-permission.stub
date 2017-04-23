@@ -1,0 +1,25 @@
+<?php
+namespace DummyNamespace;
+
+use Backpack\PermissionManager\app\Http\Controllers\DummyClassCrudController;
+use Backpack\PermissionManager\app\Http\Requests\DummyClassCrudRequest as UpdateRequest;
+use Backpack\PermissionManager\app\Http\Requests\DummyClassCrudRequest as StoreRequest;
+
+class ExtendDummyClassCrudController extends DummyClassCrudController
+
+{
+    public function __construct()
+    {
+        parent::__construct();
+    }
+
+    public function store(StoreRequest $request)
+    {
+        return parent::store();
+    }
+
+    public function update(UpdateRequest $request)
+    {
+        return parent::update();
+    }
+}
