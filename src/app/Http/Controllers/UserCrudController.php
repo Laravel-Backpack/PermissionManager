@@ -2,22 +2,26 @@
 
 namespace Backpack\PermissionManager\app\Http\Controllers;
 
-use App\Http\Requests;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
+use Backpack\CRUD\app\Http\Requests\CrudRequest;
 use Backpack\PermissionManager\app\Http\Requests\UserStoreCrudRequest as StoreRequest;
-// VALIDATION
 use Backpack\PermissionManager\app\Http\Requests\UserUpdateCrudRequest as UpdateRequest;
-use Illuminate\Http\Request;
 
 class UserCrudController extends CrudController
 {
     public function setup()
     {
+        /*
+        |--------------------------------------------------------------------------
+        | BASIC CRUD INFORMATION
+        |--------------------------------------------------------------------------
+        */
         $this->crud->setModel(config('backpack.permissionmanager.user_model'));
         $this->crud->setEntityNameStrings(trans('backpack::permissionmanager.user'), trans('backpack::permissionmanager.users'));
         $this->crud->setRoute(config('backpack.base.route_prefix').'/user');
         $this->crud->enableAjaxTable();
 
+        // Columns.
         $this->crud->setColumns([
             [
                 'name'  => 'name',
@@ -31,24 +35,26 @@ class UserCrudController extends CrudController
             ],
         ]);
 
-        $this->crud->addColumn([ // n-n relationship (with pivot table)
-           'label'     => trans('backpack::permissionmanager.roles'), // Table column heading
-           'type'      => 'select_multiple',
-           'name'      => 'roles', // the method that defines the relationship in your Model
-           'entity'    => 'roles', // the method that defines the relationship in your Model
-           'attribute' => 'name', // foreign key attribute that is shown to user
-           'model'     => "Backpack\PermissionManager\app\Models\Roles", // foreign key model
+        $this->crud->addColumns([
+            [ // n-n relationship (with pivot table)
+               'label'     => trans('backpack::permissionmanager.roles'), // Table column heading
+               'type'      => 'select_multiple',
+               'name'      => 'roles', // the method that defines the relationship in your Model
+               'entity'    => 'roles', // the method that defines the relationship in your Model
+               'attribute' => 'name', // foreign key attribute that is shown to user
+               'model'     => config('laravel-permission.models.role'), // foreign key model
+            ],
+            [ // n-n relationship (with pivot table)
+               'label'     => trans('backpack::permissionmanager.extra_permissions'), // Table column heading
+               'type'      => 'select_multiple',
+               'name'      => 'permissions', // the method that defines the relationship in your Model
+               'entity'    => 'permissions', // the method that defines the relationship in your Model
+               'attribute' => 'name', // foreign key attribute that is shown to user
+               'model'     => config('laravel-permission.models.permission'), // foreign key model
+            ],
         ]);
 
-        $this->crud->addColumn([ // n-n relationship (with pivot table)
-           'label'     => trans('backpack::permissionmanager.extra_permissions'), // Table column heading
-           'type'      => 'select_multiple',
-           'name'      => 'permissions', // the method that defines the relationship in your Model
-           'entity'    => 'permissions', // the method that defines the relationship in your Model
-           'attribute' => 'name', // foreign key attribute that is shown to user
-           'model'     => "Backpack\PermissionManager\app\Models\Permission", // foreign key model
-        ]);
-
+        // Fields.
         $this->crud->addFields([
             [
                 'name'  => 'name',
@@ -83,7 +89,7 @@ class UserCrudController extends CrudController
                         'entity'           => 'roles', // the method that defines the relationship in your Model
                         'entity_secondary' => 'permissions', // the method that defines the relationship in your Model
                         'attribute'        => 'name', // foreign key attribute that is shown to user
-                        'model'            => "Backpack\PermissionManager\app\Models\Role", // foreign key model
+                        'model'            => config('laravel-permission.models.role'), // foreign key model
                         'pivot'            => true, // on create&update, do you need to add/delete pivot table entries?]
                         'number_columns'   => 3, //can be 1,2,3,4,6
                     ],
@@ -93,7 +99,7 @@ class UserCrudController extends CrudController
                         'entity'         => 'permissions', // the method that defines the relationship in your Model
                         'entity_primary' => 'roles', // the method that defines the relationship in your Model
                         'attribute'      => 'name', // foreign key attribute that is shown to user
-                        'model'          => "Backpack\PermissionManager\app\Models\Permission", // foreign key model
+                        'model'          => config('laravel-permission.models.permission'), // foreign key model
                         'pivot'          => true, // on create&update, do you need to add/delete pivot table entries?]
                         'number_columns' => 3, //can be 1,2,3,4,6
                     ],
@@ -111,49 +117,40 @@ class UserCrudController extends CrudController
      */
     public function store(StoreRequest $request)
     {
-        $this->crud->hasAccessOrFail('create');
+        $this->handlePasswordInput($request);
 
-        // insert item in the db
-        if ($request->input('password')) {
-            $item = $this->crud->create(\Request::except(['redirect_after_save']));
-
-            // now bcrypt the password
-            $item->password = bcrypt($request->input('password'));
-            $item->save();
-        } else {
-            $item = $this->crud->create(\Request::except(['redirect_after_save', 'password']));
-        }
-
-        // show a success message
-        \Alert::success(trans('backpack::crud.insert_success'))->flash();
-
-        // save the redirect choice for next time
-        $this->setSaveAction();
-
-        return $this->performSaveAction($item->getKey());
+        return parent::storeCrud($request);
     }
 
+    /**
+     * Update the specified resource in the database.
+     *
+     * @param UpdateRequest $request - type injection used for validation using Requests
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function update(UpdateRequest $request)
     {
-        //encrypt password and set it to request
-        $this->crud->hasAccessOrFail('update');
+        $this->handlePasswordInput($request);
 
-        $dataToUpdate = \Request::except(['redirect_after_save', 'password']);
+        return parent::updateCrud($request);
+    }
 
-        //encrypt password
+    /**
+     * Handle password input fields.
+     *
+     * @param CrudRequest $request
+     */
+    protected function handlePasswordInput(CrudRequest $request)
+    {
+        // Remove fields not present on the user.
+        $request->request->remove('password_confirmation');
+
+        // Encrypt password if specified.
         if ($request->input('password')) {
-            $dataToUpdate['password'] = bcrypt($request->input('password'));
+            $request->request->set('password', bcrypt($request->input('password')));
+        } else {
+            $request->request->remove('password');
         }
-
-        // update the row in the db
-        $this->crud->update(\Request::get($this->crud->model->getKeyName()), $dataToUpdate);
-
-        // show a success message
-        \Alert::success(trans('backpack::crud.update_success'))->flash();
-
-        // save the redirect choice for next time
-        $this->setSaveAction();
-
-        return $this->performSaveAction();
     }
 }

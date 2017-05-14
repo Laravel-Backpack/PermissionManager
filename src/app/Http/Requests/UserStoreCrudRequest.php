@@ -2,21 +2,10 @@
 
 namespace Backpack\PermissionManager\app\Http\Requests;
 
-use Illuminate\Foundation\Http\FormRequest;
+use Backpack\CRUD\app\Http\Requests\CrudRequest;
 
-class UserStoreCrudRequest extends FormRequest
+class UserStoreCrudRequest extends CrudRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     *
-     * @return bool
-     */
-    public function authorize()
-    {
-        // only allow updates if the user is logged in
-        return \Auth::check();
-    }
-
     /**
      * Get the validation rules that apply to the request.
      *
@@ -24,12 +13,10 @@ class UserStoreCrudRequest extends FormRequest
      */
     public function rules()
     {
-        $rules = [
+        return [
             'email'    => 'required|unique:users,email',
             'name'     => 'required',
             'password' => 'required|confirmed',
-            ];
-
-        return $rules;
+        ];
     }
 }
