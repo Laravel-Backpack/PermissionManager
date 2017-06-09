@@ -66,7 +66,9 @@ class PermissionManagerServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->setupRoutes($this->app->router);
+        if(!Config::get('backpack.base.skip_all_backpack_routes')){
+            $this->setupRoutes($this->app->router);            
+        }
 
         $this->app->register(PermissionServiceProvider::class);
     }
