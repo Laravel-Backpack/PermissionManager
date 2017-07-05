@@ -30,6 +30,7 @@ All Notable changes to `Backpack Settings` will be documented in this file
 ### Fixed
 - use local request in UserCrudController instead of Facade;
 - use the Users table name as defined in the laravel-permission config file;
+- correctly extending CrudController now;
 
 ## 2.1.16 - 2017-04-21
 
