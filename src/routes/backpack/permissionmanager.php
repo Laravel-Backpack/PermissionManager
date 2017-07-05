@@ -11,13 +11,13 @@
 */
 
 Route::group([
-			'namespace' => 'Backpack\PermissionManager\app\Http\Controllers',
-			'prefix' => config('backpack.base.route_prefix', 'admin'),
-			'middleware' => ['web', 'admin']
-	], function () {
+            'namespace'  => 'Backpack\PermissionManager\app\Http\Controllers',
+            'prefix'     => config('backpack.base.route_prefix', 'admin'),
+            'middleware' => ['web', 'admin'],
+    ], function () {
 
-	/// PermissionManager
+    /// PermissionManager
     CRUD::resource('permission', 'PermissionCrudController');
-    CRUD::resource('role', 'RoleCrudController');
-    CRUD::resource('user', 'UserCrudController');
-});
+        CRUD::resource('role', 'RoleCrudController');
+        CRUD::resource('user', 'UserCrudController');
+    });
