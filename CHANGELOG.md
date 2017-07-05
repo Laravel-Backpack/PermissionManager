@@ -20,6 +20,12 @@ All Notable changes to `Backpack Settings` will be documented in this file
 - Nothing
 
 
+## 2.1.17 - 2017-07-05
+
+### Added
+- Spanish translation (thanks to [Hugo Aguirre](https://github.com/bul-ikana) and [Cesar Bretana Glez](https://github.com/bretanac93));
+
+
 ## 2.1.16 - 2017-04-21
 
 ### Removed
