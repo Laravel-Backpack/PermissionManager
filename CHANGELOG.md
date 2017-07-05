@@ -24,7 +24,8 @@ All Notable changes to `Backpack Settings` will be documented in this file
 
 ### Added
 - Spanish translation (thanks to [Hugo Aguirre](https://github.com/bul-ikana) and [Cesar Bretana Glez](https://github.com/bretanac93));
-
+- Portugese translation (thanks to [Toni Almeida](https://github.com/promatik));
+- Dutch translation (thanks to [Jelmer Visser](https://github.com/jelmervisser));
 
 ## 2.1.16 - 2017-04-21
 
