@@ -27,6 +27,10 @@ All Notable changes to `Backpack Settings` will be documented in this file
 - Portugese translation (thanks to [Toni Almeida](https://github.com/promatik));
 - Dutch translation (thanks to [Jelmer Visser](https://github.com/jelmervisser));
 
+### Fixed
+- use local request in UserCrudController instead of Facade;
+- use the Users table name as defined in the laravel-permission config file;
+
 ## 2.1.16 - 2017-04-21
 
 ### Removed
