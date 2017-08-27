@@ -14,7 +14,7 @@ class UserStoreCrudRequest extends CrudRequest
     public function rules()
     {
         return [
-            'email'    => 'required|unique:'.config('laravel-permission.table_names.users', 'users').',email',
+            'email'    => 'required|unique:'.config('permission.table_names.users', 'users').',email',
             'name'     => 'required',
             'password' => 'required|confirmed',
         ];
