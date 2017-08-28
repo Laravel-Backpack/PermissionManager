@@ -45,7 +45,27 @@ $ php artisan vendor:publish --provider="Spatie\Permission\PermissionServiceProv
 $ php artisan migrate
 ```
 
-5) Use the following traits on your User model:
+5) Change the following lines inside the `config/permission.php` config file:
+
+On `line 16`, change:
+```php
+$ 'permission' => Spatie\Permission\Models\Permission::class,
+```
+to:
+```php
+$ 'permission' => Backpack\PermissionManager\app\Models\Permission::class,
+```
+
+On `line 27`, change:
+```php
+$ 'role' => Spatie\Permission\Models\Role::class,
+```
+to:
+```php
+$ 'role' => Backpack\PermissionManager\app\Models\Role::class,
+```
+
+6) Use the following traits on your User model:
 ```php
 <?php namespace App;
 
@@ -63,7 +83,7 @@ class User extends Authenticatable
      */
 ```
 
-6) [Optional] Add a menu item for it in resources/views/vendor/backpack/base/inc/sidebar.blade.php or menu.blade.php:
+7) [Optional] Add a menu item for it in resources/views/vendor/backpack/base/inc/sidebar.blade.php or menu.blade.php:
 
 ```html
 <!-- Users, Roles Permissions -->
@@ -77,7 +97,7 @@ class User extends Authenticatable
   </li>
 ```
 
-7) [Optional] Disallow create/update on your roles or permissions after you define them, using the config file in **config/backpack/permissionmanager.php**. Please note permissions and roles are referenced in code using their name. If you let your admins edit these strings and they do, your permission and role checks will stop working.
+8) [Optional] Disallow create/update on your roles or permissions after you define them, using the config file in **config/backpack/permissionmanager.php**. Please note permissions and roles are referenced in code using their name. If you let your admins edit these strings and they do, your permission and role checks will stop working.
 
 
 ## API Usage
