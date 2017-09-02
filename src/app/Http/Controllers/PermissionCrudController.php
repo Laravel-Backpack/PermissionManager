@@ -58,11 +58,15 @@ class PermissionCrudController extends CrudController
 
     public function store(StoreRequest $request)
     {
+        //otherwise, changes won't have effect
+        \Cache::forget('spatie.permission.cache');
         return parent::storeCrud();
     }
 
     public function update(UpdateRequest $request)
     {
+        //otherwise, changes won't have effect
+        \Cache::forget('spatie.permission.cache');
         return parent::updateCrud();
     }
 }
