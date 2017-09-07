@@ -6,6 +6,7 @@ use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Http\Requests\CrudRequest;
 use Backpack\PermissionManager\app\Http\Requests\UserStoreCrudRequest as StoreRequest;
 use Backpack\PermissionManager\app\Http\Requests\UserUpdateCrudRequest as UpdateRequest;
+use Backpack\PermissionManager\app\Models\Permission;
 
 class UserCrudController extends CrudController
 {
@@ -74,12 +75,12 @@ class UserCrudController extends CrudController
                 'type'  => 'password',
             ],
             [
-            // two interconnected entities
-            'label'             => trans('backpack::permissionmanager.user_role_permission'),
-            'field_unique_name' => 'user_role_permission',
-            'type'              => 'checklist_dependency',
-            'name'              => 'roles_and_permissions', // the methods that defines the relationship in your Model
-            'subfields'         => [
+                // two interconnected entities
+                'label'             => trans('backpack::permissionmanager.user_role_permission'),
+                'field_unique_name' => 'user_role_permission',
+                'type'              => 'permissions_with_roles',
+                'name'              => 'roles_and_permissions', // the methods that defines the relationship in your Model
+                'subfields'         => [
                     'primary' => [
                         'label'            => trans('backpack::permissionmanager.roles'),
                         'name'             => 'roles', // the method that defines the relationship in your Model
@@ -88,17 +89,16 @@ class UserCrudController extends CrudController
                         'attribute'        => 'name', // foreign key attribute that is shown to user
                         'model'            => config('laravel-permission.models.role'), // foreign key model
                         'pivot'            => true, // on create&update, do you need to add/delete pivot table entries?]
-                        'number_columns'   => 3, //can be 1,2,3,4,6
+                        'columns'          => true, // Number of columns (1,2,3,4,6) or "true" for all on same line or "false" for each on a single line
                     ],
                     'secondary' => [
                         'label'          => ucfirst(trans('backpack::permissionmanager.permission_singular')),
                         'name'           => 'permissions', // the method that defines the relationship in your Model
                         'entity'         => 'permissions', // the method that defines the relationship in your Model
                         'entity_primary' => 'roles', // the method that defines the relationship in your Model
-                        'attribute'      => 'name', // foreign key attribute that is shown to user
-                        'model'          => "Backpack\PermissionManager\app\Models\Permission", // foreign key model
+                        'attribute'      => function($permission) { return $permission->item(); }, // foreign key attribute that is shown to user (string or callback)
+                        'model'          => Permission::class, // foreign key model
                         'pivot'          => true, // on create&update, do you need to add/delete pivot table entries?]
-                        'number_columns' => 3, //can be 1,2,3,4,6
                     ],
                 ],
             ],

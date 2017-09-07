@@ -6,6 +6,7 @@ use Backpack\CRUD\app\Http\Controllers\CrudController;
 // VALIDATION
 use Backpack\PermissionManager\app\Http\Requests\RoleCrudRequest as StoreRequest;
 use Backpack\PermissionManager\app\Http\Requests\RoleCrudRequest as UpdateRequest;
+use Backpack\PermissionManager\app\Models\Permission;
 
 class RoleCrudController extends CrudController
 {
@@ -38,13 +39,14 @@ class RoleCrudController extends CrudController
             'label' => trans('backpack::permissionmanager.name'),
             'type'  => 'text',
         ]);
+
         $this->crud->addField([
-            'label'     => ucfirst(trans('backpack::permissionmanager.permission_plural')),
-            'type'      => 'checklist',
+            'label'     => '', // ucfirst(trans('backpack::permissionmanager.permission_plural'))
+            'type'      => 'permissions',
             'name'      => 'permissions',
             'entity'    => 'permissions',
             'attribute' => 'name',
-            'model'     => "Backpack\PermissionManager\app\Models\Permission",
+            'model'     => Permission::class,
             'pivot'     => true,
         ]);
 
