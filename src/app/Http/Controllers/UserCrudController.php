@@ -35,20 +35,21 @@ class UserCrudController extends CrudController
                 'type'  => 'email',
             ],
             [ // n-n relationship (with pivot table)
-               'label'     => trans('backpack::permissionmanager.roles'), // Table column heading
-               'type'      => 'select_multiple',
-               'name'      => 'roles', // the method that defines the relationship in your Model
-               'entity'    => 'roles', // the method that defines the relationship in your Model
-               'attribute' => 'name', // foreign key attribute that is shown to user
-               'model'     => config('laravel-permission.models.role'), // foreign key model
+                'label'     => trans('backpack::permissionmanager.roles'), // Table column heading
+                'type'      => 'select_multiple',
+                'name'      => 'roles', // the method that defines the relationship in your Model
+                'entity'    => 'roles', // the method that defines the relationship in your Model
+                'attribute' => 'name', // foreign key attribute that is shown to user
+                'model'     => config('laravel-permission.models.role'), // foreign key model
             ],
             [ // n-n relationship (with pivot table)
-               'label'     => trans('backpack::permissionmanager.extra_permissions'), // Table column heading
-               'type'      => 'select_multiple',
-               'name'      => 'permissions', // the method that defines the relationship in your Model
-               'entity'    => 'permissions', // the method that defines the relationship in your Model
-               'attribute' => 'name', // foreign key attribute that is shown to user
-               'model'     => config('laravel-permission.models.permission'), // foreign key model
+                'label'     => trans('backpack::permissionmanager.extra_permissions'), // Table column heading
+                'type'      => 'permissions',
+                'name'      => 'permissions', // the method that defines the relationship in your Model
+                'entity'    => 'permissions', // the method that defines the relationship in your Model
+                'attribute' => null, // foreign key attribute that is shown as the permission name (string, callback or null for default value)
+                'model'     => config('laravel-permission.models.permission'), // foreign key model
+                'inline'    => false, // true for all groups of permission on the same row or false for each on a row
             ],
         ]);
 
@@ -76,7 +77,7 @@ class UserCrudController extends CrudController
             ],
             [
                 // two interconnected entities
-                'label'             => trans('backpack::permissionmanager.user_role_permission'),
+                'label'             => false,
                 'field_unique_name' => 'user_role_permission',
                 'type'              => 'permissions_with_roles',
                 'name'              => 'roles_and_permissions', // the methods that defines the relationship in your Model
@@ -86,7 +87,7 @@ class UserCrudController extends CrudController
                         'name'             => 'roles', // the method that defines the relationship in your Model
                         'entity'           => 'roles', // the method that defines the relationship in your Model
                         'entity_secondary' => 'permissions', // the method that defines the relationship in your Model
-                        'attribute'        => 'name', // foreign key attribute that is shown to user
+                        'attribute'        => null, // foreign key attribute that is shown to user (string, callback or null for default value)
                         'model'            => config('laravel-permission.models.role'), // foreign key model
                         'pivot'            => true, // on create&update, do you need to add/delete pivot table entries?]
                         'columns'          => true, // Number of columns (1,2,3,4,6) or "true" for all on same line or "false" for each on a single line
@@ -96,7 +97,7 @@ class UserCrudController extends CrudController
                         'name'           => 'permissions', // the method that defines the relationship in your Model
                         'entity'         => 'permissions', // the method that defines the relationship in your Model
                         'entity_primary' => 'roles', // the method that defines the relationship in your Model
-                        'attribute'      => function($permission) { return $permission->item(); }, // foreign key attribute that is shown to user (string or callback)
+                        'attribute'      => null, // foreign key attribute that is shown to user (string or callback)
                         'model'          => Permission::class, // foreign key model
                         'pivot'          => true, // on create&update, do you need to add/delete pivot table entries?]
                     ],
