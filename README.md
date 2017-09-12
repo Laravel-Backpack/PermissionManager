@@ -28,7 +28,7 @@ An admin interface to easily add/edit/remove users, roles and permissions, using
 $ composer require backpack/permissionmanager
 ```
 
-2) Add the service provider to your config/app.php file:
+2) For Laravel <5.5, add the service provider to your config/app.php file:
 ```php
 Backpack\PermissionManager\PermissionManagerServiceProvider::class,
 ```
