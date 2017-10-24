@@ -14,7 +14,7 @@ class Permission extends OriginalPermission
     /**
      * Gets the permission prefix (eg. admin.page)
      *
-     * @return null
+     * @return null|string
      */
     public function prefix()
     {
