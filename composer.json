@@ -17,7 +17,7 @@
         "users roles admin"
     ],
     "homepage": "https://github.com/laravel-backpack/permissionmanager",
-    "license": "MIT",
+    "license": "proprietary",
     "authors": [
         {
             "name": "Marius Constantin",
