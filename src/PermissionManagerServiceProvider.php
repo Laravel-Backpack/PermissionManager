@@ -30,19 +30,12 @@ class PermissionManagerServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        // use the vendor configuration file as fallback
-        $this->mergeConfigFrom(
-            __DIR__.'/config/laravel-permission.php', 'laravel-permission'
-        );
         $this->mergeConfigFrom(
             __DIR__.'/config/backpack/permissionmanager.php', 'backpack.permissionmanager'
         );
 
         // publish config file
         $this->publishes([__DIR__.'/config' => config_path()], 'config');
-
-        // publish migrations
-        $this->publishes([__DIR__.'/database/migrations' => database_path('migrations')], 'migrations');
 
         // publish translation files
         $this->publishes([__DIR__.'/resources/lang' => resource_path('lang/vendor/backpack')], 'lang');

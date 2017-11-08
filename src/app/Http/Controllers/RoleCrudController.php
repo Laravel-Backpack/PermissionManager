@@ -11,7 +11,7 @@ class RoleCrudController extends CrudController
 {
     public function setup()
     {
-        $this->crud->setModel(config('laravel-permission.models.role'));
+        $this->crud->setModel(config('permission.models.role'));
         $this->crud->setEntityNameStrings(trans('backpack::permissionmanager.role'), trans('backpack::permissionmanager.roles'));
         $this->crud->setRoute(config('backpack.base.route_prefix').'/role');
 
