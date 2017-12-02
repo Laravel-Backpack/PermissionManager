@@ -20,6 +20,12 @@ All Notable changes to `Backpack Settings` will be documented in this file
 - Nothing
 
 
+## [2.1.22] - 2017-12-02
+
+## Added
+- removed PHP 5.6 from travis.yml
+
+
 ## [2.1.21] - 2017-12-02
 
 ## Added
