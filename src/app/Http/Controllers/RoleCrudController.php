@@ -6,9 +6,12 @@ use Backpack\CRUD\app\Http\Controllers\CrudController;
 // VALIDATION
 use Backpack\PermissionManager\app\Http\Requests\RoleCrudRequest as StoreRequest;
 use Backpack\PermissionManager\app\Http\Requests\RoleCrudRequest as UpdateRequest;
+use Spatie\Permission\Traits\RefreshesPermissionCache;
 
 class RoleCrudController extends CrudController
 {
+    use RefreshesPermissionCache;
+    
     public function setup()
     {
         $this->crud->setModel(config('laravel-permission.models.role'));
@@ -61,11 +64,15 @@ class RoleCrudController extends CrudController
 
     public function store(StoreRequest $request)
     {
+        //clears cache key 'spatie.permission.cache' to make changes take effect immediately
+        $this->forgetCachedPermissions(); 
         return parent::storeCrud();
     }
 
     public function update(UpdateRequest $request)
     {
+        //clears cache key 'spatie.permission.cache' to make changes take effect immediately
+        $this->forgetCachedPermissions(); 
         return parent::updateCrud();
     }
 }
