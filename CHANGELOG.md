@@ -20,6 +20,12 @@ All Notable changes to `Backpack Settings` will be documented in this file
 - Nothing
 
 
+## [2.1.20] - 2017-12-02
+
+## Added
+- package auto-discovery;
+
+
 ## [2.1.19] - 2017-08-11
 
 ## Added
