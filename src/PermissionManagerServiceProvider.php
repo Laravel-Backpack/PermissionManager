@@ -30,6 +30,9 @@ class PermissionManagerServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        // define the routes for the application
+        $this->setupRoutes($this->app->router);
+
         // use the vendor configuration file as fallback
         $this->mergeConfigFrom(
             __DIR__.'/config/laravel-permission.php', 'laravel-permission'
@@ -75,8 +78,6 @@ class PermissionManagerServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->setupRoutes($this->app->router);
-
         $this->app->register(PermissionServiceProvider::class);
     }
 }
