@@ -63,6 +63,7 @@ class RoleCrudController extends CrudController
     {
         //otherwise, changes won't have effect
         \Cache::forget('spatie.permission.cache');
+
         return parent::storeCrud();
     }
 
@@ -70,6 +71,7 @@ class RoleCrudController extends CrudController
     {
         //otherwise, changes won't have effect
         \Cache::forget('spatie.permission.cache');
+
         return parent::updateCrud();
     }
 }
