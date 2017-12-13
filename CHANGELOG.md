@@ -20,6 +20,12 @@ All Notable changes to `Backpack Settings` will be documented in this file
 - Nothing
 
 
+## [2.1.24] - 2017-12-13
+
+## Fixed
+- Clear cache key spatie.permission.cache, otherwise, changes won't have effect - merged #114;
+
+
 ## [2.1.23] - 2017-12-13
 
 ## Fixed
