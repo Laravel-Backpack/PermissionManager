@@ -6,6 +6,7 @@ use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Http\Requests\CrudRequest;
 use Backpack\PermissionManager\app\Http\Requests\UserStoreCrudRequest as StoreRequest;
 use Backpack\PermissionManager\app\Http\Requests\UserUpdateCrudRequest as UpdateRequest;
+use Spatie\Permission\PermissionRegistrar;
 
 class UserCrudController extends CrudController
 {
@@ -116,7 +117,9 @@ class UserCrudController extends CrudController
     {
         $this->handlePasswordInput($request);
 
-        return parent::storeCrud($request);
+        $response=parent::storeCrud($request);
+        app(PermissionRegistrar::class)->forgetCachedPermissions();
+        return $response;
     }
 
     /**
@@ -130,7 +133,9 @@ class UserCrudController extends CrudController
     {
         $this->handlePasswordInput($request);
 
-        return parent::updateCrud($request);
+        $response=parent::updateCrud($request);
+        app(PermissionRegistrar::class)->forgetCachedPermissions();
+        return $response;
     }
 
     /**

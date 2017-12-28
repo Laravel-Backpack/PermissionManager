@@ -3,9 +3,9 @@
 namespace Backpack\PermissionManager\app\Http\Controllers;
 
 use Backpack\CRUD\app\Http\Controllers\CrudController;
-// VALIDATION
 use Backpack\PermissionManager\app\Http\Requests\PermissionCrudRequest as StoreRequest;
 use Backpack\PermissionManager\app\Http\Requests\PermissionCrudRequest as UpdateRequest;
+use Spatie\Permission\PermissionRegistrar;
 
 class PermissionCrudController extends CrudController
 {
@@ -58,11 +58,15 @@ class PermissionCrudController extends CrudController
 
     public function store(StoreRequest $request)
     {
-        return parent::storeCrud();
+        $response=parent::storeCrud();
+        app(PermissionRegistrar::class)->forgetCachedPermissions();
+        return $response;
     }
 
     public function update(UpdateRequest $request)
     {
-        return parent::updateCrud();
+        $response=parent::updateCrud();
+        app(PermissionRegistrar::class)->forgetCachedPermissions();
+        return $response;
     }
 }
