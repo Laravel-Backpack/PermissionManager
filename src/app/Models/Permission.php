@@ -9,5 +9,5 @@ class Permission extends OriginalPermission
 {
     use CrudTrait;
 
-    protected $fillable = ['name', 'updated_at', 'created_at'];
+    protected $fillable = ['name', 'guard_name', 'updated_at', 'created_at'];
 }
