@@ -20,6 +20,12 @@ All Notable changes to `Backpack Settings` will be documented in this file
 - Nothing
 
 
+## [2.1.25] - 2018-03-13
+
+## Fixed
+- #148 using custom Permission and Role models for fields and columns, as defined in the ```laravel-permission.php``` config file;
+
+
 ## [2.1.24] - 2017-12-13
 
 ## Fixed
