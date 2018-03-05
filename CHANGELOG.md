@@ -20,6 +20,14 @@ All Notable changes to `Backpack Settings` will be documented in this file
 - Nothing
 
 
+## [2.1.26] - 2018-03-13
+
+## Added
+- German translation;
+- Latvian translation;
+- French translation;
+
+
 ## [2.1.25] - 2018-03-13
 
 ## Fixed
