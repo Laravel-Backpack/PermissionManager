@@ -16,7 +16,7 @@ return [
     'roles_have_permission' => 'Rollen mit dieser Berechtigung',
     'permission_singular'   => 'Berechtigung',
     'permission_plural'     => 'Berechtigungen',
-    'user_singular'         => 'Nuter',
+    'user_singular'         => 'Nutzer',
     'user_plural'           => 'Nutzer',
     'email'                 => 'E-Mail',
     'extra_permissions'     => 'Zusätzliche Berechtigungen',
