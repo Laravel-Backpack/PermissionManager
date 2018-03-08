@@ -26,7 +26,7 @@ class PermissionCrudController extends CrudController
             'name'      => 'roles',
             'entity'    => 'roles',
             'attribute' => 'name',
-            'model'     => "Backpack\PermissionManager\app\Models\Role",
+            'model'     => config('laravel-permission.models.role'),
             'pivot'     => true,
         ]);
 
@@ -41,7 +41,7 @@ class PermissionCrudController extends CrudController
             'name'      => 'roles',
             'entity'    => 'roles',
             'attribute' => 'name',
-            'model'     => "Backpack\PermissionManager\app\Models\Role",
+            'model'     => config('laravel-permission.models.role'),
             'pivot'     => true,
         ]);
 
