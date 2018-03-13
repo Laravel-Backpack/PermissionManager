@@ -11,7 +11,10 @@ class PermissionCrudController extends CrudController
 {
     public function setup()
     {
-        $this->crud->setModel(config('laravel-permission.models.permission'));
+        $role_model = config('laravel-permission.models.role');
+        $permission_model = config('laravel-permission.models.permission');
+
+        $this->crud->setModel($permission_model);
         $this->crud->setEntityNameStrings(trans('backpack::permissionmanager.permission_singular'), trans('backpack::permissionmanager.permission_plural'));
         $this->crud->setRoute(config('backpack.base.route_prefix').'/permission');
 
@@ -26,7 +29,7 @@ class PermissionCrudController extends CrudController
             'name'      => 'roles',
             'entity'    => 'roles',
             'attribute' => 'name',
-            'model'     => config('laravel-permission.models.role'),
+            'model'     => $role_model,
             'pivot'     => true,
         ]);
 
@@ -41,7 +44,7 @@ class PermissionCrudController extends CrudController
             'name'      => 'roles',
             'entity'    => 'roles',
             'attribute' => 'name',
-            'model'     => config('laravel-permission.models.role'),
+            'model'     => $role_model,
             'pivot'     => true,
         ]);
 

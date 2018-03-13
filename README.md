@@ -35,8 +35,8 @@ Backpack\PermissionManager\PermissionManagerServiceProvider::class,
 
 3) Publish the config file & run the migrations
 ```bash
-$ php artisan vendor:publish --provider="Backpack\PermissionManager\PermissionManagerServiceProvider" #publish config files and migrations
-$ php artisan migrate #create the role and permission tables
+php artisan vendor:publish --provider="Backpack\PermissionManager\PermissionManagerServiceProvider" #publish config files and migrations
+php artisan migrate #create the role and permission tables
 ```
 
 4) Use the following traits on your User model:
