@@ -11,7 +11,10 @@ class RoleCrudController extends CrudController
 {
     public function setup()
     {
-        $this->crud->setModel(config('laravel-permission.models.role'));
+        $role_model = config('laravel-permission.models.role');
+        $permission_model = config('laravel-permission.models.permission');
+
+        $this->crud->setModel($role_model);
         $this->crud->setEntityNameStrings(trans('backpack::permissionmanager.role'), trans('backpack::permissionmanager.roles'));
         $this->crud->setRoute(config('backpack.base.route_prefix').'/role');
 
@@ -28,7 +31,7 @@ class RoleCrudController extends CrudController
                 'name'      => 'permissions', // the method that defines the relationship in your Model
                 'entity'    => 'permissions', // the method that defines the relationship in your Model
                 'attribute' => 'name', // foreign key attribute that is shown to user
-                'model'     => "Backpack\PermissionManager\app\Models\Permission", // foreign key model
+                'model'     => $permission_model, // foreign key model
                 'pivot'     => true, // on create&update, do you need to add/delete pivot table entries?
             ],
         ]);
@@ -44,7 +47,7 @@ class RoleCrudController extends CrudController
             'name'      => 'permissions',
             'entity'    => 'permissions',
             'attribute' => 'name',
-            'model'     => "Backpack\PermissionManager\app\Models\Permission",
+            'model'     => $permission_model,
             'pivot'     => true,
         ]);
 
