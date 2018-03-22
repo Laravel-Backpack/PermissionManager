@@ -57,7 +57,7 @@ class User extends Authenticatable
      */
 ```
 
-5) [Optional] Add a menu item for it in resources/views/vendor/backpack/base/inc/sidebar.blade.php or menu.blade.php:
+5) [Optional] Add a menu item for it in resources/views/vendor/backpack/base/inc/sidebar_content.blade.php or menu.blade.php:
 
 ```html
 <!-- Users, Roles Permissions -->
