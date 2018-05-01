@@ -28,18 +28,13 @@ An admin interface to easily add/edit/remove users, roles and permissions, using
 $ composer require backpack/permissionmanager
 ```
 
-2) For Laravel <5.5, add the service provider to your config/app.php file:
-```php
-Backpack\PermissionManager\PermissionManagerServiceProvider::class,
-```
-
-3) Publish the config file & run the migrations
+2) Publish the config file & run the migrations
 ```bash
 php artisan vendor:publish --provider="Backpack\PermissionManager\PermissionManagerServiceProvider" #publish config files and migrations
 php artisan migrate #create the role and permission tables
 ```
 
-4) Use the following traits on your User model:
+3) Use the following traits on your User model:
 ```php
 <?php namespace App;
 
@@ -57,7 +52,7 @@ class User extends Authenticatable
      */
 ```
 
-5) [Optional] Add a menu item for it in resources/views/vendor/backpack/base/inc/sidebar_content.blade.php or menu.blade.php:
+4) [Optional] Add a menu item for it in resources/views/vendor/backpack/base/inc/sidebar_content.blade.php or menu.blade.php:
 
 ```html
 <!-- Users, Roles Permissions -->
@@ -71,7 +66,7 @@ class User extends Authenticatable
   </li>
 ```
 
-6) [Optional] Disallow create/update on your roles or permissions after you define them, using the config file in **config/backpack/permissionmanager.php**. Please note permissions and roles are referenced in code using their name. If you let your admins edit these strings and they do, your permission and role checks will stop working.
+5) [Optional] Disallow create/update on your roles or permissions after you define them, using the config file in **config/backpack/permissionmanager.php**. Please note permissions and roles are referenced in code using their name. If you let your admins edit these strings and they do, your permission and role checks will stop working.
 
 
 ## API Usage
