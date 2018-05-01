@@ -19,6 +19,17 @@ All Notable changes to `Backpack Settings` will be documented in this file
 ### Security
 - Nothing
 
+## [2.1.27] - 2018-05-02
+
+### Added
+- support for Backpack\CRUD 3.4;
+
+### Fixed
+- routes are now using the ```backpack_middleware()``` instead of hardcoded ```admin```; merges #151;
+
+### Removed
+- support for Backpack\CRUD 3.3 (since we're using the new middleware);
+
 
 ## [2.1.26] - 2018-03-13
 

@@ -34,7 +34,7 @@
     ],
     "require": {
         "spatie/laravel-permission": "^1.4",
-        "backpack/crud": "^3.3.0"
+        "backpack/crud": "^3.4.0"
     },
     "require-dev": {
         "phpunit/phpunit" : "4.*",
