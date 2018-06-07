@@ -8,14 +8,6 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | User Fully-Qualified Class Name
-    |--------------------------------------------------------------------------
-    |
-    */
-    'user_model' => 'App\User',
-
-    /*
-    |--------------------------------------------------------------------------
     | Disallow the user interface for creating/updating permissions or roles.
     |--------------------------------------------------------------------------
     | Roles and permissions are used in code by their name
