@@ -9,5 +9,5 @@ class Role extends OriginalRole
 {
     use CrudTrait;
 
-    protected $fillable = ['name', 'updated_at', 'created_at'];
+    protected $fillable = ['name', 'guard_name', 'updated_at', 'created_at'];
 }
