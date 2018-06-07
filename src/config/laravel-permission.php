@@ -2,15 +2,15 @@
 
 return [
 
-	/*
-	|--------------------------------------------------------------------------
-	| Authorization Models
-	|--------------------------------------------------------------------------
-	*/
+    /*
+    |--------------------------------------------------------------------------
+    | Authorization Models
+    |--------------------------------------------------------------------------
+    */
 
-	'models' => [
+    'models' => [
 
-		/*
+        /*
         |--------------------------------------------------------------------------
         | Permission Model
         |--------------------------------------------------------------------------
@@ -22,11 +22,11 @@ return [
         | The model you want to use as a Permission model needs to implement the
         | `Spatie\Permission\Contracts\Permission` contract.
         |
-		 */
+         */
 
-		'permission' => Backpack\PermissionManager\app\Models\Permission::class,
+        'permission' => Backpack\PermissionManager\app\Models\Permission::class,
 
-		/*
+        /*
         |--------------------------------------------------------------------------
         | Role Model
         |--------------------------------------------------------------------------
@@ -38,21 +38,21 @@ return [
         | The model you want to use as a Role model needs to implement the
         | `Spatie\Permission\Contracts\Role` contract.
         |
-		 */
+         */
 
-		'role' => Backpack\PermissionManager\app\Models\Role::class,
+        'role' => Backpack\PermissionManager\app\Models\Role::class,
 
-	],
+    ],
 
-	/*
-	|--------------------------------------------------------------------------
-	| Authorization Tables
-	|--------------------------------------------------------------------------
-	*/
+    /*
+    |--------------------------------------------------------------------------
+    | Authorization Tables
+    |--------------------------------------------------------------------------
+    */
 
-	'table_names' => [
+    'table_names' => [
 
-		/*
+        /*
         |--------------------------------------------------------------------------
         | Users Table
         |--------------------------------------------------------------------------
@@ -60,10 +60,10 @@ return [
         | The table that your application uses for users. This table's model will
         | be using the "HasRoles" and "HasPermissions" traits.
         |
-		 */
-		'users' => 'users',
+         */
+        'users' => 'users',
 
-		/*
+        /*
         |--------------------------------------------------------------------------
         | Roles Table
         |--------------------------------------------------------------------------
@@ -72,11 +72,11 @@ return [
         | table should be used to retrieve your roles. We have chosen a basic
         | default value but you may easily change it to any table you like.
         |
-		 */
+         */
 
-		'roles' => 'roles',
+        'roles' => 'roles',
 
-		/*
+        /*
         |--------------------------------------------------------------------------
         | Permissions Table
         |--------------------------------------------------------------------------
@@ -85,11 +85,11 @@ return [
         | table should be used to retrieve your permissions. We have chosen a basic
         | default value but you may easily change it to any table you like.
         |
-		 */
+         */
 
-		'permissions' => 'permissions',
+        'permissions' => 'permissions',
 
-		/*
+        /*
         |--------------------------------------------------------------------------
         | User Permissions Table
         |--------------------------------------------------------------------------
@@ -98,41 +98,41 @@ return [
         | table should be used to retrieve your models permissions. We have chosen a
         | basic default value but you may easily change it to any table you like.
         |
-		 */
+         */
 
-		'model_has_permissions' => 'model_has_permissions',
+        'model_has_permissions' => 'model_has_permissions',
 
-		/*
-		|--------------------------------------------------------------------------
-		| User Roles Table
-		|--------------------------------------------------------------------------
-		|
-		| When using the "HasRoles" trait from this package, we need to know which
-		| table should be used to retrieve your model roles. We have chosen a
-		| basic default value but you may easily change it to any table you like.
-		|
-		*/
+        /*
+        |--------------------------------------------------------------------------
+        | User Roles Table
+        |--------------------------------------------------------------------------
+        |
+        | When using the "HasRoles" trait from this package, we need to know which
+        | table should be used to retrieve your model roles. We have chosen a
+        | basic default value but you may easily change it to any table you like.
+        |
+        */
 
-		'model_has_roles' => 'model_has_roles',
+        'model_has_roles' => 'model_has_roles',
 
-		/*
-		|--------------------------------------------------------------------------
-		| Role Permissions Table
-		|--------------------------------------------------------------------------
-		|
-		| When using the "HasRoles" trait from this package, we need to know which
-		| table should be used to retrieve your roles permissions. We have chosen a
-		| basic default value but you may easily change it to any table you like.
-		|
-		*/
+        /*
+        |--------------------------------------------------------------------------
+        | Role Permissions Table
+        |--------------------------------------------------------------------------
+        |
+        | When using the "HasRoles" trait from this package, we need to know which
+        | table should be used to retrieve your roles permissions. We have chosen a
+        | basic default value but you may easily change it to any table you like.
+        |
+        */
 
-		'role_has_permissions' => 'role_has_permissions',
-	],
+        'role_has_permissions' => 'role_has_permissions',
+    ],
 
-	/*
-	 * By default all permissions will be cached for 24 hours unless a permission or
-	 * role is updated. Then the cache will be flushed immediately.
-	 */
+    /*
+     * By default all permissions will be cached for 24 hours unless a permission or
+     * role is updated. Then the cache will be flushed immediately.
+     */
 
-	'cache_expiration_time' => 60 * 24,
+    'cache_expiration_time' => 60 * 24,
 ];
