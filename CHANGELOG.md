@@ -21,7 +21,7 @@ All Notable changes to `Backpack Settings` will be documented in this file
 
 
 
-## [2.12.0] - 2018-06-07
+## [3.12.0] - 2018-06-07
 
 ### Added
 - support for ```spatie/laravel-permission``` v2.12;
@@ -34,7 +34,7 @@ All Notable changes to `Backpack Settings` will be documented in this file
 - there is no upgrade guide from spatie v1 to spatie v2; and after spending a lot of time on this, I understand why; it would have been way to difficult to create migrations for such an upgrade; especially for big projects, that might have other foreign keys to/from the old tables;
 - as such, we didn't provide an upgrade guide either; people who use v1 will continue to use v1; people who start now will be using v2;
 - if we do go through the upgrade ourselves at one point, we might provide an upgrade guide; if anybody, ever, creates an upgrade guide, please link to it on the README;
-- since spatie/laravel-permission pushes breaking changes like crazy, and this package is pretty simple and does not need regular updates, I've decided to track spatie/laravel-permission's version; starting now; this new version will be 2.12 because it uses spatie/laravel-permission v2.12;
+- since spatie/laravel-permission pushes breaking changes like crazy, and this package is pretty simple and does not need regular updates, I've decided to track spatie/laravel-permission's version; starting now; this new version will be 3.12 because it uses spatie/laravel-permission v2.12;
 
 ---------------------
 
