@@ -20,6 +20,11 @@ All Notable changes to `Backpack Settings` will be documented in this file
 - Nothing
 
 
+## [3.12.1] - 2018-06-19
+
+### Added
+- #159 - Italian translation, thanks to [Roberto Butti](https://github.com/roberto-butti);
+
 
 ## [3.12.0] - 2018-06-07
 
