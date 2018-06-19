@@ -54,7 +54,24 @@ class User extends Authenticatable
      */
 ```
 
-4) [Optional] Add a menu item for it in ```resources/views/vendor/backpack/base/inc/sidebar_content.blade.php``` or ```menu.blade.php```:
+4) Change your ```config/auth.php``` to use ```Backpack\Base\app\Models\BackpackUser::class```:
+
+```diff
+    'providers' => [
+        'users' => [
+            'driver' => 'eloquent',
+-            'model' => App\User::class,
++            'model' => Backpack\Base\app\Models\BackpackUser::class,
+        ],
+
+        // 'users' => [
+        //     'driver' => 'database',
+        //     'table' => 'users',
+        // ],
+    ],
+```
+
+5) [Optional] Add a menu item for it in ```resources/views/vendor/backpack/base/inc/sidebar_content.blade.php``` or ```menu.blade.php```:
 
 ```html
 <!-- Users, Roles Permissions -->
@@ -68,7 +85,7 @@ class User extends Authenticatable
   </li>
 ```
 
-5) [Optional] Disallow create/update on your roles or permissions after you define them, using the config file in **config/backpack/permissionmanager.php**. Please note permissions and roles are referenced in code using their name. If you let your admins edit these strings and they do, your permission and role checks will stop working.
+6) [Optional] Disallow create/update on your roles or permissions after you define them, using the config file in **config/backpack/permissionmanager.php**. Please note permissions and roles are referenced in code using their name. If you let your admins edit these strings and they do, your permission and role checks will stop working.
 
 
 ## API Usage
