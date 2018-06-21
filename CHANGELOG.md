@@ -19,6 +19,10 @@ All Notable changes to `Backpack Settings` will be documented in this file
 ### Security
 - Nothing
 
+## [3.12.2] - 2018-06-21
+
+### Added
+- #160 - use custom Backpack guard as per Backpack\Base 0.9.x;
 
 ## [3.12.1] - 2018-06-19
 
