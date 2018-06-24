@@ -137,7 +137,7 @@ class UserCrudController extends CrudController
      *
      * @param CrudRequest $request
      */
-    protected function handlePasswordInput(CrudRequest $request)
+    protected function handlePasswordInput(UpdateRequest $request)
     {
         // Remove fields not present on the user.
         $request->request->remove('password_confirmation');
