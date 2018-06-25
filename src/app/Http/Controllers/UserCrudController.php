@@ -105,11 +105,11 @@ class UserCrudController extends CrudController
     /**
      * Store a newly created resource in the database.
      *
-     * @param Request $request - type injection used for validation using Requests
+     * @param StoreRequest $request - type injection used for validation using Requests
      *
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(Request $request)
+    public function store(StoreRequest $request)
     {
         $this->handlePasswordInput($request);
 
@@ -119,11 +119,11 @@ class UserCrudController extends CrudController
     /**
      * Update the specified resource in the database.
      *
-     * @param Request $request - type injection used for validation using Requests
+     * @param UpdateRequest $request - type injection used for validation using Requests
      *
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(Request $request)
+    public function update(UpdateRequest $request)
     {
         $this->handlePasswordInput($request);
 
