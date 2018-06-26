@@ -19,6 +19,14 @@ All Notable changes to `Backpack Settings` will be documented in this file
 ### Security
 - Nothing
 
+
+
+## [3.12.3] - 2018-06-26
+
+### Fixed
+- #162 - use Request for changing password instead of deprecated CrudRequest;
+
+
 ## [3.12.2] - 2018-06-21
 
 ### Added
