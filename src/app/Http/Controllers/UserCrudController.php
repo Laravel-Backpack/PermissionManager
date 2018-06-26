@@ -3,9 +3,9 @@
 namespace Backpack\PermissionManager\app\Http\Controllers;
 
 use Backpack\CRUD\app\Http\Controllers\CrudController;
-use Backpack\CRUD\app\Http\Requests\CrudRequest;
 use Backpack\PermissionManager\app\Http\Requests\UserStoreCrudRequest as StoreRequest;
 use Backpack\PermissionManager\app\Http\Requests\UserUpdateCrudRequest as UpdateRequest;
+use Illuminate\Http\Request;
 
 class UserCrudController extends CrudController
 {
@@ -135,9 +135,9 @@ class UserCrudController extends CrudController
     /**
      * Handle password input fields.
      *
-     * @param CrudRequest $request
+     * @param Request $request
      */
-    protected function handlePasswordInput(CrudRequest $request)
+    protected function handlePasswordInput(Request $request)
     {
         // Remove fields not present on the user.
         $request->request->remove('password_confirmation');
