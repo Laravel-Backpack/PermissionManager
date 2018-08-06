@@ -7,7 +7,7 @@ use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\PermissionManager\app\Http\Requests\RoleCrudRequest as StoreRequest;
 use Backpack\PermissionManager\app\Http\Requests\RoleCrudRequest as UpdateRequest;
 
-class RoleCrudController extends CrudController
+class PermissionCrudController extends CrudController
 {
     public function setup()
     {
@@ -32,7 +32,7 @@ class RoleCrudController extends CrudController
             [
                 'name'  => 'guard_name',
                 'label' => trans('backpack::permissionmanager.guard_type'),
-                'type' => 'text',
+                'type'  => 'text',
             ],
             [
                 // n-n relationship (with pivot table)
@@ -53,9 +53,9 @@ class RoleCrudController extends CrudController
         ]);
 
         $this->crud->addField([
-            'name'  => 'guard_name',
-            'label' => trans('backpack::permissionmanager.guard_type'),
-            'type' => 'select_from_array',
+            'name'    => 'guard_name',
+            'label'   => trans('backpack::permissionmanager.guard_type'),
+            'type'    => 'select_from_array',
             'options' => $this->getGuardTypes(),
         ]);
         $this->crud->addField([
@@ -101,14 +101,15 @@ class RoleCrudController extends CrudController
      *
      * @return array
      **/
-    private function getGuardTypes() {
-      $guards = config('auth.guards');
+    private function getGuardTypes()
+    {
+        $guards = config('auth.guards');
 
-      $returnable = [];
-      foreach($guards as $key => $details) {
-        $returnable[$key] = $key;
-      }
+        $returnable = [];
+        foreach ($guards as $key => $details) {
+            $returnable[$key] = $key;
+        }
 
-      return $returnable;
+        return $returnable;
     }
 }
