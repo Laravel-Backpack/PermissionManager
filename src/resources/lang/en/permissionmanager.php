@@ -25,5 +25,6 @@ return [
     'user_role_permission'  => 'User Role Permissions',
     'user'                  => 'User',
     'users'                 => 'Users',
+    'guard_type'            => 'Guard Type'
 
 ];
