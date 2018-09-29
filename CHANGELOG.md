@@ -20,6 +20,11 @@ All Notable changes to `Backpack Settings` will be documented in this file
 - Nothing
 
 
+## [3.12.5] - 2018-09-29
+
+### Added
+- #171 - French Canadian translation;
+
 
 ## [3.12.4] - 2018-06-26
 
