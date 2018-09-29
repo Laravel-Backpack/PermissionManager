@@ -210,6 +210,8 @@ If you need to modify how this works in a project:
 - create controllers/models that extend the ones in the package, and use those in your new routes file;
 - modify anything you'd like in the new controllers/models;
 
+When creating your own controllers, seeders, make sure you use the ```BackpackUser``` model, instead of the ```User``` model in your app. The easiest would be to use ```config('backpack.base.user_model_fqn')``` which pulls in the User model fully qualified namespace, as defined in your ```config/backpack/base.php```. You might need to instantiate it using ```$model = config('backpack.base.user_model_fqn'); $model = new $model;``` in order to do things like ```$model->where(...)```.
+
 ## Contributing
 
 Please see [CONTRIBUTING](CONTRIBUTING.md) for details.
