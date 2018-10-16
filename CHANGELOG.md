@@ -20,6 +20,12 @@ All Notable changes to `Backpack Settings` will be documented in this file
 - Nothing
 
 
+## [3.12.6] - 2018-10-16
+
+### Fixed
+- validation for unique email when updating a user;
+
+
 ## [3.12.5] - 2018-09-29
 
 ### Added
