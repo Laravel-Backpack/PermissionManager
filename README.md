@@ -54,24 +54,7 @@ class User extends Authenticatable
      */
 ```
 
-4) Change your ```config/auth.php``` to use ```Backpack\Base\app\Models\BackpackUser::class```:
-
-```diff
-    'providers' => [
-        'users' => [
-            'driver' => 'eloquent',
--            'model' => App\User::class,
-+            'model' => Backpack\Base\app\Models\BackpackUser::class,
-        ],
-
-        // 'users' => [
-        //     'driver' => 'database',
-        //     'table' => 'users',
-        // ],
-    ],
-```
-
-5) [Optional] Add a menu item for it in ```resources/views/vendor/backpack/base/inc/sidebar_content.blade.php``` or ```menu.blade.php```:
+4) [Optional] Add a menu item for it in ```resources/views/vendor/backpack/base/inc/sidebar_content.blade.php``` or ```menu.blade.php```:
 
 ```html
 <!-- Users, Roles Permissions -->
@@ -84,6 +67,24 @@ class User extends Authenticatable
     </ul>
   </li>
 ```
+
+5) [Optional] If you want to use the ```@can``` handler inside Backpack routes, you can add a middleware to all your Backpack routes by adding this to your ```config/backpack/base.php``` file:
+```diff
+    // The classes for the middleware to check if the visitor is an admin
+    // Can be a single class or an array of clases
+    'middleware_class' => [
+        App\Http\Middleware\CheckIfAdmin::class,
+        \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
++       Backpack\Base\app\Http\Middleware\UseBackpackAuthGuardInsteadOfDefaultAuthGuard::class,
+    ],
+```
+
+Why? spatie/laravel-permission uses the ```Auth``` facade for determining permissions with ```@can```. The ```Auth``` facade uses the default guard defined in ```config/auth.php```, NOT our backpack guard. 
+
+Please note:
+- this will make ```auth()``` return the exact same thing as ```backpack_auth()``` on Backpack routes;
+- you only need this if you want to use ```@can```; you can just as well use ```@if(backpack_user()->can('read'))```, which does the exact same thing, but works 100% of the time;
+
 
 6) [Optional] Disallow create/update on your roles or permissions after you define them, using the config file in **config/backpack/permissionmanager.php**. Please note permissions and roles are referenced in code using their name. If you let your admins edit these strings and they do, your permission and role checks will stop working.
 
