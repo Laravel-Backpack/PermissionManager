@@ -26,20 +26,26 @@ This package is just a user interface for [spatie/laravel-permission](https://gi
 
 ## Install
 
-0) Properly install [spatie/laravel-permission](https://github.com/spatie/laravel-permission#installation). Run its migrations. Publish its config files.
-
 1) In your terminal:
 
 ``` bash
 composer require backpack/permissionmanager
 ```
 
-2) Publish the config file & run the migrations
+2) Finish all installation steps for [spatie/laravel-permission](https://github.com/spatie/laravel-permission#installation), which as been pulled as a dependency. Run its migrations. Publish its config files. Most likely it's:
+```bash
+php artisan vendor:publish --provider="Spatie\Permission\PermissionServiceProvider" --tag="migrations"
+php artisan migrate
+php artisan vendor:publish --provider="Spatie\Permission\PermissionServiceProvider" --tag="config"
+// then First, add the Spatie\Permission\Traits\HasRoles trait to your User model(s)
+```
+
+3) Publish the config file & run the migrations
 ```bash
 php artisan vendor:publish --provider="Backpack\PermissionManager\PermissionManagerServiceProvider"
 ```
 
-3) The package assumes it's ok to use ```App\Models\BackpackUser``` to administer Users. Use a different one if you'd like by changing the user model in the ```config/backpack/permissionmanager.php``` file. Any model you're using, make sure it's using the ```CrudTrait``` and ```HasRoles``` traits:
+4) The package assumes it's ok to use ```App\Models\BackpackUser``` to administer Users. Use a different one if you'd like by changing the user model in the ```config/backpack/permissionmanager.php``` file. Any model you're using, make sure it's using the ```CrudTrait``` and ```HasRoles``` traits:
 ```php
 <?php namespace App;
 
@@ -57,7 +63,7 @@ class User extends Authenticatable
      */
 ```
 
-4) [Optional] Add a menu item for it in ```resources/views/vendor/backpack/base/inc/sidebar_content.blade.php``` or ```menu.blade.php```:
+5) [Optional] Add a menu item for it in ```resources/views/vendor/backpack/base/inc/sidebar_content.blade.php``` or ```menu.blade.php```:
 
 ```html
 <!-- Users, Roles Permissions -->
@@ -71,7 +77,7 @@ class User extends Authenticatable
   </li>
 ```
 
-5) [Optional] If you want to use the ```@can``` handler inside Backpack routes, you can add a middleware to all your Backpack routes by adding this to your ```config/backpack/base.php``` file:
+6) [Optional] If you want to use the ```@can``` handler inside Backpack routes, you can add a middleware to all your Backpack routes by adding this to your ```config/backpack/base.php``` file:
 ```diff
     // The classes for the middleware to check if the visitor is an admin
     // Can be a single class or an array of clases
@@ -89,12 +95,13 @@ Please note:
 - you only need this if you want to use ```@can```; you can just as well use ```@if(backpack_user()->can('read'))```, which does the exact same thing, but works 100% of the time;
 
 
-6) [Optional] Disallow create/update on your roles or permissions after you define them, using the config file in **config/backpack/permissionmanager.php**. Please note permissions and roles are referenced in code using their name. If you let your admins edit these strings and they do, your permission and role checks will stop working.
+7) [Optional] Disallow create/update on your roles or permissions after you define them, using the config file in **config/backpack/permissionmanager.php**. Please note permissions and roles are referenced in code using their name. If you let your admins edit these strings and they do, your permission and role checks will stop working.
 
 
 ## API Usage
 
 Because the package requires [spatie/laravel-permission](https://github.com/spatie/laravel-permission), the API will be the same. Please refer to their README file for a complete API. Here's a summary though:
+
 
 ### Using permissions
 
@@ -188,6 +195,13 @@ This package also adds Blade directives to verify whether the currently logged i
 You can use Laravels native @can directive to check if a user has a certain permission.
 
 
+## Upgrade from 3.x to 4.x
+
+To upgrade from PermissionManager 3.x to 4.x:
+- upgrade to spatie/laravel-permission 2.28.2+ - do take note that the DB has changed, and they don't provide a track of the changes;
+- require ```backpack/permissionmanager``` version ```4.0.*``` in your ```composer.json``` file;
+- delete your old ```config/backpack/permissionmanager.php``` file;
+- follow the installation steps above;
 
 ## Change log
 
