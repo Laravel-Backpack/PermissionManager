@@ -19,6 +19,53 @@ All Notable changes to `Backpack Settings` will be documented in this file
 ### Security
 - Nothing
 
+
+## [3.12.6] - 2018-10-16
+
+### Fixed
+- validation for unique email when updating a user;
+
+
+## [3.12.5] - 2018-09-29
+
+### Added
+- #171 - French Canadian translation;
+
+
+## [3.12.4] - 2018-06-26
+
+### Fixed
+- #162 - use Request for changing password instead of deprecated CrudRequest;
+
+
+## [3.12.2] - 2018-06-21
+
+### Added
+- #160 - use custom Backpack guard as per Backpack\Base 0.9.x;
+
+## [3.12.1] - 2018-06-19
+
+### Added
+- #159 - Italian translation, thanks to [Roberto Butti](https://github.com/roberto-butti);
+
+
+## [3.12.0] - 2018-06-07
+
+### Added
+- support for ```spatie/laravel-permission``` v2.12;
+
+### Removed
+- support for ```spatie/laravel-permission``` v2.12;
+
+### Notes
+- the db structure has changed; because that's what spatie did between v1.4 and v2.12;
+- there is no upgrade guide from spatie v1 to spatie v2; and after spending a lot of time on this, I understand why; it would have been way to difficult to create migrations for such an upgrade; especially for big projects, that might have other foreign keys to/from the old tables;
+- as such, we didn't provide an upgrade guide either; people who use v1 will continue to use v1; people who start now will be using v2;
+- if we do go through the upgrade ourselves at one point, we might provide an upgrade guide; if anybody, ever, creates an upgrade guide, please link to it on the README;
+- since spatie/laravel-permission pushes breaking changes like crazy, and this package is pretty simple and does not need regular updates, I've decided to track spatie/laravel-permission's version; starting now; this new version will be 3.12 because it uses spatie/laravel-permission v2.12;
+
+---------------------
+
 ## [2.1.27] - 2018-05-02
 
 ### Added

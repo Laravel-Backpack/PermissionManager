@@ -12,6 +12,8 @@ An admin interface to easily add/edit/remove users, roles and permissions, using
 - a user can have multiple roles;
 - a user can have extra permissions, in addition to the permissions on the roles he has;
 
+This package is just a user interface for [spatie/laravel-permission](https://github.com/spatie/laravel-permission). It will install it, and let you use its API in code. Please refer to their README for more information on how to use in code.
+
 ![Edit a user in Backpack/PermissionManager](https://backpackforlaravel.com/uploads/screenshots/permissions_users_edit.png)
 
 
@@ -25,7 +27,7 @@ An admin interface to easily add/edit/remove users, roles and permissions, using
 1) In your terminal:
 
 ``` bash
-$ composer require backpack/permissionmanager
+composer require backpack/permissionmanager
 ```
 
 2) Publish the config file & run the migrations
@@ -52,26 +54,43 @@ class User extends Authenticatable
      */
 ```
 
-4) [Optional] Add a menu item for it in resources/views/vendor/backpack/base/inc/sidebar_content.blade.php or menu.blade.php:
+4) Change your ```config/auth.php``` to use ```Backpack\Base\app\Models\BackpackUser::class```:
+
+```diff
+    'providers' => [
+        'users' => [
+            'driver' => 'eloquent',
+-            'model' => App\User::class,
++            'model' => Backpack\Base\app\Models\BackpackUser::class,
+        ],
+
+        // 'users' => [
+        //     'driver' => 'database',
+        //     'table' => 'users',
+        // ],
+    ],
+```
+
+5) [Optional] Add a menu item for it in ```resources/views/vendor/backpack/base/inc/sidebar_content.blade.php``` or ```menu.blade.php```:
 
 ```html
 <!-- Users, Roles Permissions -->
   <li class="treeview">
     <a href="#"><i class="fa fa-group"></i> <span>Users, Roles, Permissions</span> <i class="fa fa-angle-left pull-right"></i></a>
     <ul class="treeview-menu">
-      <li><a href="{{ url(config('backpack.base.route_prefix', 'admin') . '/user') }}"><i class="fa fa-user"></i> <span>Users</span></a></li>
-      <li><a href="{{ url(config('backpack.base.route_prefix', 'admin') . '/role') }}"><i class="fa fa-group"></i> <span>Roles</span></a></li>
-      <li><a href="{{ url(config('backpack.base.route_prefix', 'admin') . '/permission') }}"><i class="fa fa-key"></i> <span>Permissions</span></a></li>
+      <li><a href="{{ backpack_url('user') }}"><i class="fa fa-user"></i> <span>Users</span></a></li>
+      <li><a href="{{ backpack_url('role') }}"><i class="fa fa-group"></i> <span>Roles</span></a></li>
+      <li><a href="{{ backpack_url('permission') }}"><i class="fa fa-key"></i> <span>Permissions</span></a></li>
     </ul>
   </li>
 ```
 
-5) [Optional] Disallow create/update on your roles or permissions after you define them, using the config file in **config/backpack/permissionmanager.php**. Please note permissions and roles are referenced in code using their name. If you let your admins edit these strings and they do, your permission and role checks will stop working.
+6) [Optional] Disallow create/update on your roles or permissions after you define them, using the config file in **config/backpack/permissionmanager.php**. Please note permissions and roles are referenced in code using their name. If you let your admins edit these strings and they do, your permission and role checks will stop working.
 
 
 ## API Usage
 
-Because the package requires [spatie/laravel-permission](https://github.com/spatie/laravel-permission), the API will be the same: 
+Because the package requires [spatie/laravel-permission](https://github.com/spatie/laravel-permission), the API will be the same. Please refer to their README file for a complete API. Here's a summary though:
 
 ### Using permissions
 
@@ -170,6 +189,9 @@ You can use Laravels native @can directive to check if a user has a certain perm
 
 Please see [CHANGELOG](CHANGELOG.md) for more information what has changed recently.
 
+## Upgrade guide
+
+On June 7th 2018 we've upgraded from using ```spatie/laravel-permission``` 1.4 to 2.12. The changes in our package have been minor. But in their package they have been massive - including a different database schema. They have provided no upgrade guide for going from 1.x to 2.x. We have not developed such a guide either. If/when we do, we'll link it here. Our 2 cents: use the 1.x version if it works for you, and you don't need any new features. The hassle of changing all you database structure is not worth it.
 
 ## Screenshots
 
@@ -187,6 +209,8 @@ If you need to modify how this works in a project:
 - create a ```routes/backpack/permissionmanager.php``` file; the package will see that, and load _your_ routes file, instead of the one in the package; 
 - create controllers/models that extend the ones in the package, and use those in your new routes file;
 - modify anything you'd like in the new controllers/models;
+
+When creating your own controllers, seeders, make sure you use the ```BackpackUser``` model, instead of the ```User``` model in your app. The easiest would be to use ```config('backpack.base.user_model_fqn')``` which pulls in the User model fully qualified namespace, as defined in your ```config/backpack/base.php```. You might need to instantiate it using ```$model = config('backpack.base.user_model_fqn'); $model = new $model;``` in order to do things like ```$model->where(...)```.
 
 ## Contributing
 

@@ -3,9 +3,9 @@
 namespace Backpack\PermissionManager\app\Http\Controllers;
 
 use Backpack\CRUD\app\Http\Controllers\CrudController;
-use Backpack\CRUD\app\Http\Requests\CrudRequest;
 use Backpack\PermissionManager\app\Http\Requests\UserStoreCrudRequest as StoreRequest;
 use Backpack\PermissionManager\app\Http\Requests\UserUpdateCrudRequest as UpdateRequest;
+use Illuminate\Http\Request;
 
 class UserCrudController extends CrudController
 {
@@ -16,10 +16,9 @@ class UserCrudController extends CrudController
         | BASIC CRUD INFORMATION
         |--------------------------------------------------------------------------
         */
-        $this->crud->setModel(config('backpack.permissionmanager.user_model'));
+        $this->crud->setModel(config('backpack.base.user_model_fqn'));
         $this->crud->setEntityNameStrings(trans('backpack::permissionmanager.user'), trans('backpack::permissionmanager.users'));
         $this->crud->setRoute(config('backpack.base.route_prefix').'/user');
-        $this->crud->enableAjaxTable();
 
         // Columns.
         $this->crud->setColumns([
@@ -39,7 +38,7 @@ class UserCrudController extends CrudController
                'name'      => 'roles', // the method that defines the relationship in your Model
                'entity'    => 'roles', // the method that defines the relationship in your Model
                'attribute' => 'name', // foreign key attribute that is shown to user
-               'model'     => config('laravel-permission.models.role'), // foreign key model
+               'model'     => config('permission.models.role'), // foreign key model
             ],
             [ // n-n relationship (with pivot table)
                'label'     => trans('backpack::permissionmanager.extra_permissions'), // Table column heading
@@ -47,7 +46,7 @@ class UserCrudController extends CrudController
                'name'      => 'permissions', // the method that defines the relationship in your Model
                'entity'    => 'permissions', // the method that defines the relationship in your Model
                'attribute' => 'name', // foreign key attribute that is shown to user
-               'model'     => config('laravel-permission.models.permission'), // foreign key model
+               'model'     => config('permission.models.permission'), // foreign key model
             ],
         ]);
 
@@ -86,7 +85,7 @@ class UserCrudController extends CrudController
                         'entity'           => 'roles', // the method that defines the relationship in your Model
                         'entity_secondary' => 'permissions', // the method that defines the relationship in your Model
                         'attribute'        => 'name', // foreign key attribute that is shown to user
-                        'model'            => config('laravel-permission.models.role'), // foreign key model
+                        'model'            => config('permission.models.role'), // foreign key model
                         'pivot'            => true, // on create&update, do you need to add/delete pivot table entries?]
                         'number_columns'   => 3, //can be 1,2,3,4,6
                     ],
@@ -96,7 +95,7 @@ class UserCrudController extends CrudController
                         'entity'         => 'permissions', // the method that defines the relationship in your Model
                         'entity_primary' => 'roles', // the method that defines the relationship in your Model
                         'attribute'      => 'name', // foreign key attribute that is shown to user
-                        'model'          => config('laravel-permission.models.permission'), // foreign key model
+                        'model'          => config('permission.models.permission'), // foreign key model
                         'pivot'          => true, // on create&update, do you need to add/delete pivot table entries?]
                         'number_columns' => 3, //can be 1,2,3,4,6
                     ],
@@ -136,9 +135,9 @@ class UserCrudController extends CrudController
     /**
      * Handle password input fields.
      *
-     * @param CrudRequest $request
+     * @param Request $request
      */
-    protected function handlePasswordInput(CrudRequest $request)
+    protected function handlePasswordInput(Request $request)
     {
         // Remove fields not present on the user.
         $request->request->remove('password_confirmation');
