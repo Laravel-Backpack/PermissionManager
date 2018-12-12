@@ -207,10 +207,6 @@ To upgrade from PermissionManager 3.x to 4.x:
 
 Please see [CHANGELOG](CHANGELOG.md) for more information what has changed recently.
 
-## Upgrade guide
-
-On June 7th 2018 we've upgraded from using ```spatie/laravel-permission``` 1.4 to 2.12. The changes in our package have been minor. But in their package they have been massive - including a different database schema. They have provided no upgrade guide for going from 1.x to 2.x. We have not developed such a guide either. If/when we do, we'll link it here. Our 2 cents: use the 1.x version if it works for you, and you don't need any new features. The hassle of changing all you database structure is not worth it.
-
 ## Screenshots
 
 ![Roles table view in Backpack/PermissionManager](https://backpackforlaravel.com/uploads/screenshots/permissions_roles.png)
