@@ -20,6 +20,17 @@ All Notable changes to `Backpack Settings` will be documented in this file
 - Nothing
 
 
+## [4.0.0] - 2018-12-12
+
+### Added
+- support for spatie/laravel-permission version 2.28.1;
+- ability to specify guards when creating/updating roles and permissions; config option to turn that on and off (default: false);
+
+### Removed
+- config file for spatie/laravel-permission; models being used in CRUDs are now defined in ```config/backpack/permissionmanager.php```;
+- migrations, since they are provided by spatie/laravel-permission;
+
+
 ## [3.12.6] - 2018-10-16
 
 ### Fixed

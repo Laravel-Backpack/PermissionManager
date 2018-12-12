@@ -16,9 +16,9 @@ class UserCrudController extends CrudController
         | BASIC CRUD INFORMATION
         |--------------------------------------------------------------------------
         */
-        $this->crud->setModel(config('backpack.base.user_model_fqn'));
+        $this->crud->setModel(config('backpack.permissionmanager.models.user'));
         $this->crud->setEntityNameStrings(trans('backpack::permissionmanager.user'), trans('backpack::permissionmanager.users'));
-        $this->crud->setRoute(config('backpack.base.route_prefix').'/user');
+        $this->crud->setRoute(backpack_url('user'));
 
         // Columns.
         $this->crud->setColumns([
