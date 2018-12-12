@@ -1,6 +1,6 @@
 # Changelog
 
-All Notable changes to `Backpack Settings` will be documented in this file
+All Notable changes to `Backpack PermissionManager` will be documented in this file
 
 ## NEXT - YYYY-MM-DD
 
