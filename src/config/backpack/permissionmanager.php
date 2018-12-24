@@ -45,4 +45,22 @@ return [
     */
     'multiple_guards' => false,
 
+    /*
+    |--------------------------------------------------------------------------
+    | Validation rules for requests
+    |--------------------------------------------------------------------------
+    |
+    */
+
+    'validation' => [
+        'role' => [
+            'store' => [
+                'name' => 'required|string|max:255|unique:roles',
+            ],
+            'update' => [
+                'name' => 'required|string|max:255',
+            ],
+        ],
+    ],
+
 ];
