@@ -7,7 +7,7 @@ return [
     |--------------------------------------------------------------------------
     |
     | The following language lines are used for Laravel Backpack - Permission Manager
-    | Author: Lúdio Oliveira <ludio.ao@gmail.com>
+    | Author: Azarić Stefan <azaricstefan@yahoo.com>
     |
     */
     'name'                  => 'Ime',
@@ -18,10 +18,10 @@ return [
     'permission_plural'     => 'Dozvole',
     'user_singular'         => 'Korisnik',
     'user_plural'           => 'Korisnici',
-    'email'                 => 'Email',
+    'email'                 => 'E-pošta',
     'extra_permissions'     => 'Dodatne dozvole',
-    'password'              => 'Šifra',
-    'password_confirmation' => 'Potvrdna šifra',
+    'password'              => 'Lozinka',
+    'password_confirmation' => 'Potvrda lozinke',
     'user_role_permission'  => 'Korisnik uloga Dozvole',
     'user'                  => 'Korisnik',
     'users'                 => 'Korisnici',
