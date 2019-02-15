@@ -213,6 +213,80 @@ Please see [CHANGELOG](CHANGELOG.md) for more information what has changed recen
 
 ![Roles table view in Backpack/PermissionManager](https://backpackforlaravel.com/uploads/screenshots/permissions_roles.png)
 
+## Override existing configurations
+
+You can use this addon to make various Laravel configurations adjustable through the settings GUI, including Backpack settings themself.
+For example, you can override the Backpack ```show_powered_by``` or the ```skin``` setting in `/config/Backpack/base.php`.
+
+1. Create the setting entry in your settings database. You can add the settings manually, or via [Laravel seeders](https://laravel.com/docs/seeding). The values inserted into the database should be look similar to below:
+
+   For Backpack `show_powered_by` setting:
+
+   | Field | Value |
+   | --- | --- |
+   | key | show_powered_by |
+   | name | Showed Powered By |
+   | description | Whether to show the powered by Backpack on the bottom right corner or not. |
+   | value | 1 |
+   | field | {"name":"value","label":"Value","type":"checkbox"} |
+   | active | 1 |
+
+   For Backpack `Skin` setting:
+
+   | Field | Value |
+   | --- | --- |
+   | key | skin |
+   | name | Skin |
+   | description | Backpack admin panel skin settings. |
+   | value | skin-purple |
+   | field | {"name":"value","label":"Value","type":"select2_from_array","options":{"skin-black":"Black","skin-blue":"Blue",   "skin-purple":"Purple","skin-red":"Red","skin-yellow":"Yellow","skin-green":"Green","skin-blue-light":"Blue light",   "skin-black-light":"Black light","skin-purple-light":"Purple light","skin-green-light":"Green light","skin-red-light":"Red light",   "skin-yellow-light":"Yellow light"},"allows_null":false,"default":"skin-purple"} |
+   | active | 1 |
+
+2. Open up the ```app/Providers/AppServiceProvider``` file, and add the below lines:
+
+   ```diff
+   <?php
+   
+   namespace App\Providers;
+   
+   use Illuminate\Support\ServiceProvider;
+   
+   class AppServiceProvider extends ServiceProvider
+   {
+       /**
+        * Bootstrap any application services.
+        *
+        * @return void
+        */
+       public function boot()
+       {
+   +       $this->overrideConfigValues();
+       }
+   
+       /**
+        * Register any application services.
+        *
+        * @return void
+        */
+       public function register()
+       {
+           //
+       }
+   
+   +   protected function overrideConfigValues()
+   +   {
+   +       $config = [];
+   +       if (config('settings.skin'))
+   +           $config['backpack.base.skin'] = config('settings.skin');
+   +       if (config('settings.show_powered_by'))
+   +           $config['backpack.base.show_powered_by'] = config('settings.show_powered_by') == '1';
+   +       config($config);
+   +   }
+   }
+   ```
+
+3. Now you can change the settings through the settings GUI, and it'd have an effect on the application.
+
 ## Overwriting functionality
 
 If you need to modify how this works in a project: 
