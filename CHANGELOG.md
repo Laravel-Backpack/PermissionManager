@@ -20,6 +20,13 @@ All Notable changes to `Backpack PermissionManager` will be documented in this f
 - Nothing
 
 
+## [4.0.1] - 2019-02-27
+
+### Added
+- support for the ```upgrade``` branch for Backpack\CRUD, so it can be installed temporarily with Laravel 5.8;
+- requirement for latest version of spatie/laravel-permission, 2.34;
+
+
 ## [4.0.0] - 2018-12-12
 
 ### Added
