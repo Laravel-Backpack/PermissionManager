@@ -4,8 +4,8 @@ namespace Backpack\PermissionManager\app\Http\Controllers;
 
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 // VALIDATION
-use Backpack\PermissionManager\app\Http\Requests\PermissionCrudRequest as StoreRequest;
-use Backpack\PermissionManager\app\Http\Requests\PermissionCrudRequest as UpdateRequest;
+use Backpack\PermissionManager\app\Http\Requests\PermissionStoreCrudRequest as StoreRequest;
+use Backpack\PermissionManager\app\Http\Requests\PermissionUpdateCrudRequest as UpdateRequest;
 
 class PermissionCrudController extends CrudController
 {

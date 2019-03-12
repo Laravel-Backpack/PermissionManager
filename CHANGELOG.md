@@ -20,6 +20,12 @@ All Notable changes to `Backpack PermissionManager` will be documented in this f
 - Nothing
 
 
+## [4.0.2] - 2019-03-12
+
+### Added
+- proper validation messages when trying to add a role or permission that exists;
+
+
 ## [4.0.1] - 2019-02-27
 
 ### Added

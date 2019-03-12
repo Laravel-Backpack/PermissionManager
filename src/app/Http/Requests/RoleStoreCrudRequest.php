@@ -24,7 +24,9 @@ class RoleStoreCrudRequest extends FormRequest
      */
     public function rules()
     {
-        $rules = config('backpack.permissionmanager.validation.role.store');
+        $rules = [
+            'name' => 'required|string|max:255|unique:'.config('permission.table_names.roles', 'roles').',name',
+        ];
 
         return $rules;
     }
