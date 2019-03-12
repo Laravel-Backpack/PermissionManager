@@ -20,6 +20,12 @@ All Notable changes to `Backpack PermissionManager` will be documented in this f
 - Nothing
 
 
+## [4.0.3] - 2019-03-12
+
+### Added
+- merged #185 - added Serbian language;
+
+
 ## [4.0.2] - 2019-03-12
 
 ### Added
