@@ -20,6 +20,13 @@ All Notable changes to `Backpack PermissionManager` will be documented in this f
 - Nothing
 
 
+## [4.0.4] - 2019-03-12
+
+### Fixed
+- can be installed with point versions of spatie/laravel-permission;
+
+
+
 ## [4.0.3] - 2019-03-12
 
 ### Added
