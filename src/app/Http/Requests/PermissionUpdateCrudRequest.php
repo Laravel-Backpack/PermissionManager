@@ -4,7 +4,7 @@ namespace Backpack\PermissionManager\app\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class RoleCrudRequest extends FormRequest
+class PermissionUpdateCrudRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,7 +25,7 @@ class RoleCrudRequest extends FormRequest
     public function rules()
     {
         $rules = [
-            'name' => 'required',
+            'name' => 'required|string|max:255',
             ];
 
         return $rules;
