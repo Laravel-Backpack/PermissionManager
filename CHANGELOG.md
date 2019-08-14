@@ -24,6 +24,8 @@ All Notable changes to `Backpack PermissionManager` will be documented in this f
 
 ### Fixed
 - UserUpdateCrudRequest had a theoretical vulnerability by not validating the ID before using it in the rule; it's now double-checked beforehand;
+- Fixes #126 - array to string conversion;
+- Fixes #196 - allows uses of other encryption mechanisms beside bcrypt;
 
 
 ## [4.0.4] - 2019-03-12
