@@ -6,6 +6,7 @@ use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\PermissionManager\app\Http\Requests\UserStoreCrudRequest as StoreRequest;
 use Backpack\PermissionManager\app\Http\Requests\UserUpdateCrudRequest as UpdateRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class UserCrudController extends CrudController
 {
@@ -114,6 +115,9 @@ class UserCrudController extends CrudController
     public function store(StoreRequest $request)
     {
         $this->handlePasswordInput($request);
+        
+        $request->request->remove('roles_show');
+        $request->request->remove('permissions_show');
 
         return parent::storeCrud($request);
     }
@@ -128,6 +132,9 @@ class UserCrudController extends CrudController
     public function update(UpdateRequest $request)
     {
         $this->handlePasswordInput($request);
+        
+        $request->request->remove('roles_show');
+        $request->request->remove('permissions_show');
 
         return parent::updateCrud($request);
     }
@@ -144,7 +151,7 @@ class UserCrudController extends CrudController
 
         // Encrypt password if specified.
         if ($request->input('password')) {
-            $request->request->set('password', bcrypt($request->input('password')));
+            $request->request->set('password', Hash::make($request->input('password')));
         } else {
             $request->request->remove('password');
         }
