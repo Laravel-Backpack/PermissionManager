@@ -20,6 +20,12 @@ All Notable changes to `Backpack PermissionManager` will be documented in this f
 - Nothing
 
 
+## [4.0.5] - 2019-08-14
+
+### Fixed
+- UserUpdateCrudRequest had a theoretical vulnerability by not validating the ID before using it in the rule; it's now double-checked beforehand;
+
+
 ## [4.0.4] - 2019-03-12
 
 ### Fixed
