@@ -25,7 +25,7 @@ class UserUpdateCrudRequest extends FormRequest
     public function rules()
     {
         $userModel = config('backpack.permissionmanager.models.user');
-        $user = new $userModel;
+        $user = new $userModel();
 
         if (!$user->find($this->get('id'))) {
             abort(400, 'Could not find that entry in the database.');
