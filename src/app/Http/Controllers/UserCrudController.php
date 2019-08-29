@@ -121,7 +121,7 @@ class UserCrudController extends CrudController
     public function store(StoreRequest $request)
     {
         $this->handlePasswordInput($request);
-        
+
         $request->request->remove('roles_show');
         $request->request->remove('permissions_show');
 
@@ -138,7 +138,7 @@ class UserCrudController extends CrudController
     public function update(UpdateRequest $request)
     {
         $this->handlePasswordInput($request);
-        
+
         $request->request->remove('roles_show');
         $request->request->remove('permissions_show');
 
