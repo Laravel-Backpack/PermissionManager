@@ -9,6 +9,12 @@ use Backpack\PermissionManager\app\Http\Requests\PermissionUpdateCrudRequest as 
 
 class PermissionCrudController extends CrudController
 {
+    use \Backpack\CRUD\app\Http\Controllers\Operations\ListOperation;
+    use \Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation;
+    use \Backpack\CRUD\app\Http\Controllers\Operations\UpdateOperation;
+    use \Backpack\CRUD\app\Http\Controllers\Operations\DeleteOperation;
+    use \Backpack\CRUD\app\Http\Controllers\Operations\SaveActions;
+
     public function setup()
     {
         $role_model = config('backpack.permissionmanager.models.role');
@@ -63,7 +69,7 @@ class PermissionCrudController extends CrudController
         //otherwise, changes won't have effect
         \Cache::forget('spatie.permission.cache');
 
-        return parent::storeCrud();
+        return $this->storeEntry($request);
     }
 
     public function update(UpdateRequest $request)
@@ -71,7 +77,7 @@ class PermissionCrudController extends CrudController
         //otherwise, changes won't have effect
         \Cache::forget('spatie.permission.cache');
 
-        return parent::updateCrud();
+        return $this->updateEntry($request);
     }
 
     /*

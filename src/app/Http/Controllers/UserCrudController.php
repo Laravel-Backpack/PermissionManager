@@ -10,6 +10,12 @@ use Illuminate\Support\Facades\Hash;
 
 class UserCrudController extends CrudController
 {
+    use \Backpack\CRUD\app\Http\Controllers\Operations\ListOperation;
+    use \Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation;
+    use \Backpack\CRUD\app\Http\Controllers\Operations\UpdateOperation;
+    use \Backpack\CRUD\app\Http\Controllers\Operations\DeleteOperation;
+    use \Backpack\CRUD\app\Http\Controllers\Operations\SaveActions;
+
     public function setup()
     {
         /*
@@ -119,7 +125,7 @@ class UserCrudController extends CrudController
         $request->request->remove('roles_show');
         $request->request->remove('permissions_show');
 
-        return parent::storeCrud($request);
+        return $this->storeEntry($request);
     }
 
     /**
@@ -136,7 +142,7 @@ class UserCrudController extends CrudController
         $request->request->remove('roles_show');
         $request->request->remove('permissions_show');
 
-        return parent::updateCrud($request);
+        return $this->updateEntry($request);
     }
 
     /**
