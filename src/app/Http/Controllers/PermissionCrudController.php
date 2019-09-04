@@ -4,8 +4,6 @@ namespace Backpack\PermissionManager\app\Http\Controllers;
 
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 // VALIDATION
-use Backpack\PermissionManager\app\Http\Requests\PermissionStoreCrudRequest as StoreRequest;
-use Backpack\PermissionManager\app\Http\Requests\PermissionUpdateCrudRequest as UpdateRequest;
 
 class PermissionCrudController extends CrudController
 {
@@ -34,7 +32,7 @@ class PermissionCrudController extends CrudController
             $this->crud->denyAccess('delete');
         }
 
-        $this->crud->operation('list', function() {
+        $this->crud->operation('list', function () {
             $this->crud->addColumn([
                 'name'  => 'name',
                 'label' => trans('backpack::permissionmanager.name'),
@@ -50,7 +48,7 @@ class PermissionCrudController extends CrudController
             }
         });
 
-        $this->crud->operation(['create', 'update'], function() {
+        $this->crud->operation(['create', 'update'], function () {
             $this->crud->addField([
                 'name'  => 'name',
                 'label' => trans('backpack::permissionmanager.name'),

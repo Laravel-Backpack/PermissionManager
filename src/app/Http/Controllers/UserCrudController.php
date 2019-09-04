@@ -5,7 +5,6 @@ namespace Backpack\PermissionManager\app\Http\Controllers;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\PermissionManager\app\Http\Requests\UserStoreCrudRequest as StoreRequest;
 use Backpack\PermissionManager\app\Http\Requests\UserUpdateCrudRequest as UpdateRequest;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
 class UserCrudController extends CrudController
