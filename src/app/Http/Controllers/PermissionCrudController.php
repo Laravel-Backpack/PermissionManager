@@ -3,6 +3,7 @@
 namespace Backpack\PermissionManager\app\Http\Controllers;
 
 use Backpack\CRUD\app\Http\Controllers\CrudController;
+
 // VALIDATION
 
 class PermissionCrudController extends CrudController

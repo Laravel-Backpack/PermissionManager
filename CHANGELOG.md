@@ -20,6 +20,12 @@ All Notable changes to `Backpack PermissionManager` will be documented in this f
 - Nothing
 
 
+## [4.0.6] - 2019-09-04
+
+### Added
+- upgraded to spatie/laravel-permission version 3.x, that provides support for Laravel 6;
+
+
 ## [4.0.5] - 2019-08-14
 
 ### Fixed
