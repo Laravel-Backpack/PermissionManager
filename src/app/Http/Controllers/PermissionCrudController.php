@@ -4,11 +4,14 @@ namespace Backpack\PermissionManager\app\Http\Controllers;
 
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 // VALIDATION
-use Backpack\PermissionManager\app\Http\Requests\PermissionStoreCrudRequest as StoreRequest;
-use Backpack\PermissionManager\app\Http\Requests\PermissionUpdateCrudRequest as UpdateRequest;
 
 class PermissionCrudController extends CrudController
 {
+    use \Backpack\CRUD\app\Http\Controllers\Operations\ListOperation;
+    use \Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation;
+    use \Backpack\CRUD\app\Http\Controllers\Operations\UpdateOperation;
+    use \Backpack\CRUD\app\Http\Controllers\Operations\DeleteOperation;
+
     public function setup()
     {
         $role_model = config('backpack.permissionmanager.models.role');
@@ -18,35 +21,7 @@ class PermissionCrudController extends CrudController
         $this->crud->setEntityNameStrings(trans('backpack::permissionmanager.permission_singular'), trans('backpack::permissionmanager.permission_plural'));
         $this->crud->setRoute(backpack_url('permission'));
 
-        $this->crud->addColumn([
-            'name'  => 'name',
-            'label' => trans('backpack::permissionmanager.name'),
-            'type'  => 'text',
-        ]);
-
-        if (config('backpack.permissionmanager.multiple_guards')) {
-            $this->crud->addColumn([
-                'name'  => 'guard_name',
-                'label' => trans('backpack::permissionmanager.guard_type'),
-                'type'  => 'text',
-            ]);
-        }
-
-        $this->crud->addField([
-            'name'  => 'name',
-            'label' => trans('backpack::permissionmanager.name'),
-            'type'  => 'text',
-        ]);
-
-        if (config('backpack.permissionmanager.multiple_guards')) {
-            $this->crud->addField([
-                'name'    => 'guard_name',
-                'label'   => trans('backpack::permissionmanager.guard_type'),
-                'type'    => 'select_from_array',
-                'options' => $this->getGuardTypes(),
-            ]);
-        }
-
+        // deny access according to configuration file
         if (config('backpack.permissionmanager.allow_permission_create') == false) {
             $this->crud->denyAccess('create');
         }
@@ -56,22 +31,42 @@ class PermissionCrudController extends CrudController
         if (config('backpack.permissionmanager.allow_permission_delete') == false) {
             $this->crud->denyAccess('delete');
         }
-    }
 
-    public function store(StoreRequest $request)
-    {
-        //otherwise, changes won't have effect
-        \Cache::forget('spatie.permission.cache');
+        $this->crud->operation('list', function () {
+            $this->crud->addColumn([
+                'name'  => 'name',
+                'label' => trans('backpack::permissionmanager.name'),
+                'type'  => 'text',
+            ]);
 
-        return parent::storeCrud();
-    }
+            if (config('backpack.permissionmanager.multiple_guards')) {
+                $this->crud->addColumn([
+                    'name'  => 'guard_name',
+                    'label' => trans('backpack::permissionmanager.guard_type'),
+                    'type'  => 'text',
+                ]);
+            }
+        });
 
-    public function update(UpdateRequest $request)
-    {
-        //otherwise, changes won't have effect
-        \Cache::forget('spatie.permission.cache');
+        $this->crud->operation(['create', 'update'], function () {
+            $this->crud->addField([
+                'name'  => 'name',
+                'label' => trans('backpack::permissionmanager.name'),
+                'type'  => 'text',
+            ]);
 
-        return parent::updateCrud();
+            if (config('backpack.permissionmanager.multiple_guards')) {
+                $this->crud->addField([
+                    'name'    => 'guard_name',
+                    'label'   => trans('backpack::permissionmanager.guard_type'),
+                    'type'    => 'select_from_array',
+                    'options' => $this->getGuardTypes(),
+                ]);
+            }
+
+            //otherwise, changes won't have effect
+            \Cache::forget('spatie.permission.cache');
+        });
     }
 
     /*
