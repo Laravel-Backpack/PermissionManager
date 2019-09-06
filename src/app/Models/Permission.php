@@ -2,7 +2,7 @@
 
 namespace Backpack\PermissionManager\app\Models;
 
-use Backpack\CRUD\CrudTrait;
+use Backpack\CRUD\app\Models\Traits\CrudTrait;
 use Spatie\Permission\Models\Permission as OriginalPermission;
 
 class Permission extends OriginalPermission

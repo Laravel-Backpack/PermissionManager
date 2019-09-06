@@ -51,7 +51,7 @@ php artisan vendor:publish --provider="Backpack\PermissionManager\PermissionMana
 ```php
 <?php namespace App;
 
-use Backpack\CRUD\CrudTrait; // <------------------------------- this one
+use Backpack\CRUD\app\Models\Traits\CrudTrait; // <------------------------------- this one
 use Spatie\Permission\Traits\HasRoles;// <---------------------- and this one
 use Illuminate\Foundation\Auth\User as Authenticatable; 
 
