@@ -51,7 +51,7 @@ php artisan vendor:publish --provider="Backpack\PermissionManager\PermissionMana
 ```php
 <?php namespace App;
 
-use Backpack\CRUD\CrudTrait; // <------------------------------- this one
+use Backpack\CRUD\app\Models\Traits\CrudTrait; // <------------------------------- this one
 use Spatie\Permission\Traits\HasRoles;// <---------------------- and this one
 use Illuminate\Foundation\Auth\User as Authenticatable; 
 
@@ -68,15 +68,15 @@ class User extends Authenticatable
 5) [Optional] Add a menu item for it in ```resources/views/vendor/backpack/base/inc/sidebar_content.blade.php``` or ```menu.blade.php```:
 
 ```html
-<!-- Users, Roles Permissions -->
-  <li class="treeview">
-    <a href="#"><i class="fa fa-group"></i> <span>Users, Roles, Permissions</span> <i class="fa fa-angle-left pull-right"></i></a>
-    <ul class="treeview-menu">
-      <li><a href="{{ backpack_url('user') }}"><i class="fa fa-user"></i> <span>Users</span></a></li>
-      <li><a href="{{ backpack_url('role') }}"><i class="fa fa-group"></i> <span>Roles</span></a></li>
-      <li><a href="{{ backpack_url('permission') }}"><i class="fa fa-key"></i> <span>Permissions</span></a></li>
-    </ul>
-  </li>
+<!-- Users, Roles, Permissions -->
+<li class="nav-item nav-dropdown">
+	<a class="nav-link nav-dropdown-toggle" href="#"><i class="nav-icon fa fa-group"></i> Authentication</a>
+	<ul class="nav-dropdown-items">
+	  <li class="nav-item"><a class="nav-link" href="{{ backpack_url('user') }}"><i class="nav-icon fa fa-user"></i> <span>Users</span></a></li>
+	  <li class="nav-item"><a class="nav-link" href="{{ backpack_url('role') }}"><i class="nav-icon fa fa-group"></i> <span>Roles</span></a></li>
+	  <li class="nav-item"><a class="nav-link" href="{{ backpack_url('permission') }}"><i class="nav-icon fa fa-key"></i> <span>Permissions</span></a></li>
+	</ul>
+</li>
 ```
 
 6) [Optional] If you want to use the ```@can``` handler inside Backpack routes, you can add a middleware to all your Backpack routes by adding this to your ```config/backpack/base.php``` file:

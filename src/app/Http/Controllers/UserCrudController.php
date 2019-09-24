@@ -5,23 +5,24 @@ namespace Backpack\PermissionManager\app\Http\Controllers;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\PermissionManager\app\Http\Requests\UserStoreCrudRequest as StoreRequest;
 use Backpack\PermissionManager\app\Http\Requests\UserUpdateCrudRequest as UpdateRequest;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
 class UserCrudController extends CrudController
 {
+    use \Backpack\CRUD\app\Http\Controllers\Operations\ListOperation;
+    use \Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation { store as traitStore; }
+    use \Backpack\CRUD\app\Http\Controllers\Operations\UpdateOperation { update as traitUpdate; }
+    use \Backpack\CRUD\app\Http\Controllers\Operations\DeleteOperation;
+
     public function setup()
     {
-        /*
-        |--------------------------------------------------------------------------
-        | BASIC CRUD INFORMATION
-        |--------------------------------------------------------------------------
-        */
         $this->crud->setModel(config('backpack.permissionmanager.models.user'));
         $this->crud->setEntityNameStrings(trans('backpack::permissionmanager.user'), trans('backpack::permissionmanager.users'));
         $this->crud->setRoute(backpack_url('user'));
+    }
 
-        // Columns.
+    public function setupListOperation()
+    {
         $this->crud->setColumns([
             [
                 'name'  => 'name',
@@ -50,8 +51,70 @@ class UserCrudController extends CrudController
                'model'     => config('permission.models.permission'), // foreign key model
             ],
         ]);
+    }
 
-        // Fields
+    public function setupCreateOperation()
+    {
+        $this->addUserFields();
+        $this->crud->setValidation(StoreRequest::class);
+    }
+
+    public function setupUpdateOperation()
+    {
+        $this->addUserFields();
+        $this->crud->setValidation(UpdateRequest::class);
+    }
+
+    /**
+     * Store a newly created resource in the database.
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function store()
+    {
+        $this->crud->request = $this->crud->validateRequest();
+        $this->crud->request = $this->handlePasswordInput($this->crud->request);
+        $this->crud->unsetValidation(); // validation has already been run
+
+        return $this->traitStore();
+    }
+
+    /**
+     * Update the specified resource in the database.
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function update()
+    {
+        $this->crud->request = $this->crud->validateRequest();
+        $this->crud->request = $this->handlePasswordInput($this->crud->request);
+        $this->crud->unsetValidation(); // validation has already been run
+
+        return $this->traitUpdate();
+    }
+
+    /**
+     * Handle password input fields.
+     */
+    protected function handlePasswordInput($request)
+    {
+        // Remove fields not present on the user.
+        $request->request->remove('password_confirmation');
+        $request->request->remove('roles_show');
+        $request->request->remove('permissions_show');
+
+        // Encrypt password if specified.
+        if ($request->input('password')) {
+            $request->request->set('password', Hash::make($request->input('password')));
+        } else {
+            $request->request->remove('password');
+        }
+
+        return $request;
+    }
+
+    protected function addUserFields()
+    {
         $this->crud->addFields([
             [
                 'name'  => 'name',
@@ -78,7 +141,7 @@ class UserCrudController extends CrudController
             'label'             => trans('backpack::permissionmanager.user_role_permission'),
             'field_unique_name' => 'user_role_permission',
             'type'              => 'checklist_dependency',
-            'name'              => 'roles_and_permissions', // the methods that defines the relationship in your Model
+            'name'              => ['roles', 'permissions'],
             'subfields'         => [
                     'primary' => [
                         'label'            => trans('backpack::permissionmanager.roles'),
@@ -103,57 +166,5 @@ class UserCrudController extends CrudController
                 ],
             ],
         ]);
-    }
-
-    /**
-     * Store a newly created resource in the database.
-     *
-     * @param StoreRequest $request - type injection used for validation using Requests
-     *
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function store(StoreRequest $request)
-    {
-        $this->handlePasswordInput($request);
-
-        $request->request->remove('roles_show');
-        $request->request->remove('permissions_show');
-
-        return parent::storeCrud($request);
-    }
-
-    /**
-     * Update the specified resource in the database.
-     *
-     * @param UpdateRequest $request - type injection used for validation using Requests
-     *
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function update(UpdateRequest $request)
-    {
-        $this->handlePasswordInput($request);
-
-        $request->request->remove('roles_show');
-        $request->request->remove('permissions_show');
-
-        return parent::updateCrud($request);
-    }
-
-    /**
-     * Handle password input fields.
-     *
-     * @param Request $request
-     */
-    protected function handlePasswordInput(Request $request)
-    {
-        // Remove fields not present on the user.
-        $request->request->remove('password_confirmation');
-
-        // Encrypt password if specified.
-        if ($request->input('password')) {
-            $request->request->set('password', Hash::make($request->input('password')));
-        } else {
-            $request->request->remove('password');
-        }
     }
 }

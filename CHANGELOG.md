@@ -2,22 +2,17 @@
 
 All Notable changes to `Backpack PermissionManager` will be documented in this file
 
-## NEXT - YYYY-MM-DD
+
+## [5.0.0] - 2019-09-24
 
 ### Added
-- Nothing
-
-### Deprecated
-- Nothing
-
-### Fixed
-- Nothing
+- support for Backpack v4;
 
 ### Removed
-- Nothing
+- support for Backpack v3;
 
-### Security
-- Nothing
+
+-----
 
 
 ## [4.0.6] - 2019-09-04
