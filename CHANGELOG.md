@@ -3,6 +3,12 @@
 All Notable changes to `Backpack PermissionManager` will be documented in this file
 
 
+## [5.0.1] - 2019-10-04
+
+### Fixed
+- User update operation works when route prefix is set to empty string;
+
+
 ## [5.0.0] - 2019-09-24
 
 ### Added
