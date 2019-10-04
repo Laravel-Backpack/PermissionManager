@@ -26,7 +26,7 @@ class UserUpdateCrudRequest extends FormRequest
     {
         $userModel = config('backpack.permissionmanager.models.user');
         $userModel = new $userModel();
-        $routeSegmentWithId = empty(config('backpack.base.route_prefix'))?'2':'3';
+        $routeSegmentWithId = empty(config('backpack.base.route_prefix')) ? '2' : '3';
 
         $userId = $this->get('id') ?? \Request::instance()->segment($routeSegmentWithId);
 
