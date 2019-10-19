@@ -2,6 +2,11 @@
 
 All Notable changes to `Backpack PermissionManager` will be documented in this file
 
+## [5.0.2] - 2019-10-19
+
+### Added
+- Arabic translation;
+
 
 ## [5.0.1] - 2019-10-04
 
