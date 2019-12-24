@@ -62,7 +62,7 @@ class RoleCrudController extends CrudController
         ]);
     }
 
-    public function setupCreateOperation() 
+    public function setupCreateOperation()
     {
         $this->addFields();
         $this->crud->setValidation(StoreRequest::class);
@@ -71,17 +71,16 @@ class RoleCrudController extends CrudController
         \Cache::forget('spatie.permission.cache');
     }
 
-    public function setupUpdateOperation() 
+    public function setupUpdateOperation()
     {
         $this->addFields();
         $this->crud->setValidation(UpdateRequest::class);
-        
+
         //otherwise, changes won't have effect
         \Cache::forget('spatie.permission.cache');
-
     }
 
-    private function addFields() 
+    private function addFields()
     {
         $this->crud->addField([
             'name'  => 'name',

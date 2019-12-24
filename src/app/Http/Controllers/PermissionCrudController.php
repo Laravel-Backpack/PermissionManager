@@ -66,7 +66,7 @@ class PermissionCrudController extends CrudController
     {
         $this->addFields();
         $this->crud->setValidation(UpdateRequest::class);
-        
+
         //otherwise, changes won't have effect
         \Cache::forget('spatie.permission.cache');
     }
