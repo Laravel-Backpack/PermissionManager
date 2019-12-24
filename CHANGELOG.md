@@ -2,19 +2,31 @@
 
 All Notable changes to `Backpack PermissionManager` will be documented in this file
 
-## [5.0.2] - 2019-10-19
+
+
+## 5.0.3 - 2019-12-24
+
+### Added
+- Added filters to the Users CRUD: Role and Extra Permission
+
+### Fixed
+- Refactored Roles and Permissions CRUDs to use methods for setting up operations, instead of on() closures;
+- Added validation and required asterisks to Create and Update operations on Roles and Permissions CRUDs;
+
+
+## 5.0.2 - 2019-10-19
 
 ### Added
 - Arabic translation;
 
 
-## [5.0.1] - 2019-10-04
+## 5.0.1 - 2019-10-04
 
 ### Fixed
 - User update operation works when route prefix is set to empty string;
 
 
-## [5.0.0] - 2019-09-24
+## 5.0.0 - 2019-09-24
 
 ### Added
 - support for Backpack v4;
