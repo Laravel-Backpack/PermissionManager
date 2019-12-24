@@ -3,6 +3,8 @@
 namespace Backpack\PermissionManager\app\Http\Controllers;
 
 use Backpack\CRUD\app\Http\Controllers\CrudController;
+use Backpack\PermissionManager\app\Http\Requests\PermissionStoreCrudRequest as StoreRequest;
+use Backpack\PermissionManager\app\Http\Requests\PermissionUpdateCrudRequest as UpdateRequest;
 
 // VALIDATION
 
@@ -15,8 +17,8 @@ class PermissionCrudController extends CrudController
 
     public function setup()
     {
-        $role_model = config('backpack.permissionmanager.models.role');
-        $permission_model = config('backpack.permissionmanager.models.permission');
+        $this->role_model = $role_model = config('backpack.permissionmanager.models.role');
+        $this->permission_model = $permission_model = config('backpack.permissionmanager.models.permission');
 
         $this->crud->setModel($permission_model);
         $this->crud->setEntityNameStrings(trans('backpack::permissionmanager.permission_singular'), trans('backpack::permissionmanager.permission_plural'));
@@ -32,42 +34,59 @@ class PermissionCrudController extends CrudController
         if (config('backpack.permissionmanager.allow_permission_delete') == false) {
             $this->crud->denyAccess('delete');
         }
+    }
 
-        $this->crud->operation('list', function () {
+    public function setupListOperation()
+    {
+        $this->crud->addColumn([
+            'name'  => 'name',
+            'label' => trans('backpack::permissionmanager.name'),
+            'type'  => 'text',
+        ]);
+
+        if (config('backpack.permissionmanager.multiple_guards')) {
             $this->crud->addColumn([
-                'name'  => 'name',
-                'label' => trans('backpack::permissionmanager.name'),
+                'name'  => 'guard_name',
+                'label' => trans('backpack::permissionmanager.guard_type'),
                 'type'  => 'text',
             ]);
+        }
+    }
 
-            if (config('backpack.permissionmanager.multiple_guards')) {
-                $this->crud->addColumn([
-                    'name'  => 'guard_name',
-                    'label' => trans('backpack::permissionmanager.guard_type'),
-                    'type'  => 'text',
-                ]);
-            }
-        });
+    public function setupCreateOperation()
+    {
+        $this->addFields();
+        $this->crud->setValidation(StoreRequest::class);
 
-        $this->crud->operation(['create', 'update'], function () {
+        //otherwise, changes won't have effect
+        \Cache::forget('spatie.permission.cache');
+    }
+
+    public function setupUpdateOperation()
+    {
+        $this->addFields();
+        $this->crud->setValidation(UpdateRequest::class);
+        
+        //otherwise, changes won't have effect
+        \Cache::forget('spatie.permission.cache');
+    }
+
+    private function addFields()
+    {
+        $this->crud->addField([
+            'name'  => 'name',
+            'label' => trans('backpack::permissionmanager.name'),
+            'type'  => 'text',
+        ]);
+
+        if (config('backpack.permissionmanager.multiple_guards')) {
             $this->crud->addField([
-                'name'  => 'name',
-                'label' => trans('backpack::permissionmanager.name'),
-                'type'  => 'text',
+                'name'    => 'guard_name',
+                'label'   => trans('backpack::permissionmanager.guard_type'),
+                'type'    => 'select_from_array',
+                'options' => $this->getGuardTypes(),
             ]);
-
-            if (config('backpack.permissionmanager.multiple_guards')) {
-                $this->crud->addField([
-                    'name'    => 'guard_name',
-                    'label'   => trans('backpack::permissionmanager.guard_type'),
-                    'type'    => 'select_from_array',
-                    'options' => $this->getGuardTypes(),
-                ]);
-            }
-
-            //otherwise, changes won't have effect
-            \Cache::forget('spatie.permission.cache');
-        });
+        }
     }
 
     /*

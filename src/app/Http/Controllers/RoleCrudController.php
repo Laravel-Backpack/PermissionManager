@@ -3,6 +3,8 @@
 namespace Backpack\PermissionManager\app\Http\Controllers;
 
 use Backpack\CRUD\app\Http\Controllers\CrudController;
+use Backpack\PermissionManager\app\Http\Requests\RoleStoreCrudRequest as StoreRequest;
+use Backpack\PermissionManager\app\Http\Requests\RoleUpdateCrudRequest as UpdateRequest;
 
 // VALIDATION
 
@@ -15,8 +17,8 @@ class RoleCrudController extends CrudController
 
     public function setup()
     {
-        $role_model = config('backpack.permissionmanager.models.role');
-        $permission_model = config('backpack.permissionmanager.models.permission');
+        $this->role_model = $role_model = config('backpack.permissionmanager.models.role');
+        $this->permission_model = $permission_model = config('backpack.permissionmanager.models.permission');
 
         $this->crud->setModel($role_model);
         $this->crud->setEntityNameStrings(trans('backpack::permissionmanager.role'), trans('backpack::permissionmanager.roles'));
@@ -32,61 +34,79 @@ class RoleCrudController extends CrudController
         if (config('backpack.permissionmanager.allow_role_delete') == false) {
             $this->crud->denyAccess('delete');
         }
+    }
 
-        $this->crud->operation('list', function () use ($permission_model) {
+    public function setupListOperation()
+    {
+        $this->crud->addColumn([
+            'name'  => 'name',
+            'label' => trans('backpack::permissionmanager.name'),
+            'type'  => 'text',
+        ]);
+        if (config('backpack.permissionmanager.multiple_guards')) {
             $this->crud->addColumn([
-                'name'  => 'name',
-                'label' => trans('backpack::permissionmanager.name'),
+                'name'  => 'guard_name',
+                'label' => trans('backpack::permissionmanager.guard_type'),
                 'type'  => 'text',
             ]);
-            if (config('backpack.permissionmanager.multiple_guards')) {
-                $this->crud->addColumn([
-                    'name'  => 'guard_name',
-                    'label' => trans('backpack::permissionmanager.guard_type'),
-                    'type'  => 'text',
-                ]);
-            }
-            $this->crud->addColumn([
-                // n-n relationship (with pivot table)
-                'label'     => ucfirst(trans('backpack::permissionmanager.permission_plural')),
-                'type'      => 'select_multiple',
-                'name'      => 'permissions', // the method that defines the relationship in your Model
-                'entity'    => 'permissions', // the method that defines the relationship in your Model
-                'attribute' => 'name', // foreign key attribute that is shown to user
-                'model'     => $permission_model, // foreign key model
-                'pivot'     => true, // on create&update, do you need to add/delete pivot table entries?
-            ]);
-        });
+        }
+        $this->crud->addColumn([
+            // n-n relationship (with pivot table)
+            'label'     => ucfirst(trans('backpack::permissionmanager.permission_plural')),
+            'type'      => 'select_multiple',
+            'name'      => 'permissions', // the method that defines the relationship in your Model
+            'entity'    => 'permissions', // the method that defines the relationship in your Model
+            'attribute' => 'name', // foreign key attribute that is shown to user
+            'model'     => $this->permission_model, // foreign key model
+            'pivot'     => true, // on create&update, do you need to add/delete pivot table entries?
+        ]);
+    }
 
-        $this->crud->operation(['create', 'update'], function () use ($permission_model) {
+    public function setupCreateOperation() 
+    {
+        $this->addFields();
+        $this->crud->setValidation(StoreRequest::class);
+
+        //otherwise, changes won't have effect
+        \Cache::forget('spatie.permission.cache');
+    }
+
+    public function setupUpdateOperation() 
+    {
+        $this->addFields();
+        $this->crud->setValidation(UpdateRequest::class);
+        
+        //otherwise, changes won't have effect
+        \Cache::forget('spatie.permission.cache');
+
+    }
+
+    private function addFields() 
+    {
+        $this->crud->addField([
+            'name'  => 'name',
+            'label' => trans('backpack::permissionmanager.name'),
+            'type'  => 'text',
+        ]);
+
+        if (config('backpack.permissionmanager.multiple_guards')) {
             $this->crud->addField([
-                'name'  => 'name',
-                'label' => trans('backpack::permissionmanager.name'),
-                'type'  => 'text',
+                'name'    => 'guard_name',
+                'label'   => trans('backpack::permissionmanager.guard_type'),
+                'type'    => 'select_from_array',
+                'options' => $this->getGuardTypes(),
             ]);
+        }
 
-            if (config('backpack.permissionmanager.multiple_guards')) {
-                $this->crud->addField([
-                    'name'    => 'guard_name',
-                    'label'   => trans('backpack::permissionmanager.guard_type'),
-                    'type'    => 'select_from_array',
-                    'options' => $this->getGuardTypes(),
-                ]);
-            }
-
-            $this->crud->addField([
-                'label'     => ucfirst(trans('backpack::permissionmanager.permission_plural')),
-                'type'      => 'checklist',
-                'name'      => 'permissions',
-                'entity'    => 'permissions',
-                'attribute' => 'name',
-                'model'     => $permission_model,
-                'pivot'     => true,
-            ]);
-
-            //otherwise, changes won't have effect
-            \Cache::forget('spatie.permission.cache');
-        });
+        $this->crud->addField([
+            'label'     => ucfirst(trans('backpack::permissionmanager.permission_plural')),
+            'type'      => 'checklist',
+            'name'      => 'permissions',
+            'entity'    => 'permissions',
+            'attribute' => 'name',
+            'model'     => $this->permission_model,
+            'pivot'     => true,
+        ]);
     }
 
     /*
