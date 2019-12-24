@@ -56,26 +56,26 @@ class UserCrudController extends CrudController
         $this->crud->addFilter([
           'name' => 'role',
           'type' => 'dropdown',
-          'label'=> 'Role'
-        ], 
-        config('permission.models.role')::all()->pluck('name', 'id')->toArray(), 
-        function($value) { // if the filter is active
-          $this->crud->addClause('whereHas', 'roles', function ($query) use ($value) {
-            $query->where('role_id', '=', $value);
-          });
+          'label'=> 'Role',
+        ],
+        config('permission.models.role')::all()->pluck('name', 'id')->toArray(),
+        function ($value) { // if the filter is active
+            $this->crud->addClause('whereHas', 'roles', function ($query) use ($value) {
+                $query->where('role_id', '=', $value);
+            });
         });
 
         // Extra Permission Filter
         $this->crud->addFilter([
           'name'  => 'permissions',
           'type'  => 'select2',
-          'label' => 'Extra Permission'
-        ], 
-        config('permission.models.permission')::all()->pluck('name', 'id')->toArray(), 
+          'label' => 'Extra Permission',
+        ],
+        config('permission.models.permission')::all()->pluck('name', 'id')->toArray(),
         function ($value) { // if the filter is active
-          $this->crud->addClause('whereHas', 'permissions', function ($query) use ($value) {
-            $query->where('permission_id', '=', $value);
-          });
+            $this->crud->addClause('whereHas', 'permissions', function ($query) use ($value) {
+                $query->where('permission_id', '=', $value);
+            });
         });
     }
 
