@@ -56,7 +56,7 @@ class UserCrudController extends CrudController
         $this->crud->addFilter([
           'name' => 'role',
           'type' => 'dropdown',
-          'label'=> 'Role',
+          'label'=> trans('backpack::permissionmanager.role'),
         ],
         config('permission.models.role')::all()->pluck('name', 'id')->toArray(),
         function ($value) { // if the filter is active
@@ -69,7 +69,7 @@ class UserCrudController extends CrudController
         $this->crud->addFilter([
           'name'  => 'permissions',
           'type'  => 'select2',
-          'label' => 'Extra Permission',
+          'label' => trans('backpack::permissionmanager.extra_permissions'),
         ],
         config('permission.models.permission')::all()->pluck('name', 'id')->toArray(),
         function ($value) { // if the filter is active
