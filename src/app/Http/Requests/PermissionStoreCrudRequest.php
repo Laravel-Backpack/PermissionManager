@@ -26,7 +26,7 @@ class PermissionStoreCrudRequest extends FormRequest
     {
         $rules = [
             'name' => 'required|string|max:255|unique:'.config('permission.table_names.permissions', 'permissions').',name',
-            ];
+        ];
 
         return $rules;
     }
