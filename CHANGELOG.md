@@ -3,6 +3,12 @@
 All Notable changes to `Backpack PermissionManager` will be documented in this file
 
 
+## 5.0.5 - 2020-01-14
+
+### Fixed
+- packagist merge issue;
+
+
 ## 5.0.4 - 2020-01-14
 
 ### Added
