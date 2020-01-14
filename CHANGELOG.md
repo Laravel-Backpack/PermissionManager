@@ -3,6 +3,11 @@
 All Notable changes to `Backpack PermissionManager` will be documented in this file
 
 
+## 5.0.4 - 2020-01-14
+
+### Added
+- merged #218 - added Indonesian language file;
+
 
 ## 5.0.3 - 2019-12-24
 
