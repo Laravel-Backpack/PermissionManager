@@ -26,7 +26,7 @@ class PermissionUpdateCrudRequest extends FormRequest
     {
         $rules = [
             'name' => 'required|string|max:255',
-            ];
+        ];
 
         return $rules;
     }
