@@ -3,6 +3,12 @@
 All Notable changes to `Backpack PermissionManager` will be documented in this file
 
 
+## 5.0.6 - 2020-01-15
+
+### Fixed
+- merged #216 - translated labels for filters in UserCrudController;
+
+
 ## 5.0.5 - 2020-01-14
 
 ### Fixed
