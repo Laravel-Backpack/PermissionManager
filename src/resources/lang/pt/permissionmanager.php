@@ -24,5 +24,6 @@ return [
     'user_role_permission'  => 'Cargo e permissões do utilizador',
     'user'                  => 'Utilizador',
     'users'                 => 'Utilizadores',
+    'guard_type'            => 'Tipo de guarda',
 
 ];
