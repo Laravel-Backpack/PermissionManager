@@ -1,2 +1,7 @@
 .idea/
 vendor/
+node_modules/
+.DS_Store
+.composer.lock
+composer.lock
+.phpunit.result.cache

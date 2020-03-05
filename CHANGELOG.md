@@ -3,6 +3,12 @@
 All Notable changes to `Backpack PermissionManager` will be documented in this file
 
 
+## 5.0.7 - 2020-03-05
+
+### Fixed
+- upgraded PHPUnit to 9/7;
+
+
 ## 5.0.6 - 2020-01-15
 
 ### Fixed
