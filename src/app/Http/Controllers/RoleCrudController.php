@@ -43,6 +43,17 @@ class RoleCrudController extends CrudController
             'label' => trans('backpack::permissionmanager.name'),
             'type'  => 'text',
         ]);
+        $this->crud->addColumn([   // select_multiple: n-n relationship (with pivot table)
+            'label'     => trans('backpack::permissionmanager.users'), // Table column heading
+            'type'      => 'relationship_count',
+            'name'      => 'users', // the method that defines the relationship in your Model
+            'wrapper'   => [
+                'href' => function ($crud, $column, $entry, $related_key) {
+                    return backpack_url('user?role='.$entry->getKey());
+                },
+            ],
+            'suffix'    => ' users',
+        ]);
         if (config('backpack.permissionmanager.multiple_guards')) {
             $this->crud->addColumn([
                 'name'  => 'guard_name',

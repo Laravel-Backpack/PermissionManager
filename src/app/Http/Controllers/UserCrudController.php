@@ -16,8 +16,7 @@ class UserCrudController extends CrudController
 
     public function setup()
     {
-        $this->crud->setModel(config('backpack.permissionmanager.models.user'));
-        $this->crud->setEntityNameStrings(trans('backpack::permissionmanager.user'), trans('backpack::permissionmanager.users'));
+        $this->crud->setModel(config('backpack.permissionmanager.models.user'));        $this->crud->setEntityNameStrings(trans('backpack::permissionmanager.user'), trans('backpack::permissionmanager.users'));
         $this->crud->setRoute(backpack_url('user'));
     }
 
@@ -61,10 +60,10 @@ class UserCrudController extends CrudController
             ],
             config('permission.models.role')::all()->pluck('name', 'id')->toArray(),
             function ($value) { // if the filter is active
-            $this->crud->addClause('whereHas', 'roles', function ($query) use ($value) {
-                $query->where('role_id', '=', $value);
-            });
-        }
+                $this->crud->addClause('whereHas', 'roles', function ($query) use ($value) {
+                    $query->where('role_id', '=', $value);
+                });
+            }
         );
 
         // Extra Permission Filter
@@ -76,10 +75,10 @@ class UserCrudController extends CrudController
             ],
             config('permission.models.permission')::all()->pluck('name', 'id')->toArray(),
             function ($value) { // if the filter is active
-            $this->crud->addClause('whereHas', 'permissions', function ($query) use ($value) {
-                $query->where('permission_id', '=', $value);
-            });
-        }
+                $this->crud->addClause('whereHas', 'permissions', function ($query) use ($value) {
+                    $query->where('permission_id', '=', $value);
+                });
+            }
         );
     }
 
@@ -102,8 +101,8 @@ class UserCrudController extends CrudController
      */
     public function store()
     {
-        $this->crud->request = $this->crud->validateRequest();
-        $this->crud->request = $this->handlePasswordInput($this->crud->request);
+        $this->crud->setRequest($this->crud->validateRequest());
+        $this->crud->setRequest($this->handlePasswordInput($this->crud->getRequest()));
         $this->crud->unsetValidation(); // validation has already been run
 
         return $this->traitStore();
@@ -116,8 +115,8 @@ class UserCrudController extends CrudController
      */
     public function update()
     {
-        $this->crud->request = $this->crud->validateRequest();
-        $this->crud->request = $this->handlePasswordInput($this->crud->request);
+        $this->crud->setRequest($this->crud->validateRequest());
+        $this->crud->setRequest($this->handlePasswordInput($this->crud->getRequest()));
         $this->crud->unsetValidation(); // validation has already been run
 
         return $this->traitUpdate();
