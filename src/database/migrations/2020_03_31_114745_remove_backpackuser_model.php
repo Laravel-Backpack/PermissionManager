@@ -18,8 +18,12 @@ class RemoveBackpackuserModel extends Migration
         $model_has_permissions = config('permission.table_names.model_has_permissions');
 
         // replace the BackpackUser model with User
-        $this->replaceModels($model_has_roles);
-        $this->replaceModels($model_has_permissions);
+        if (\Illuminate\Support\Facades\Schema::hasTable($model_has_roles)) {
+            $this->replaceModels($model_has_roles);
+        }
+        if (\Illuminate\Support\Facades\Schema::hasTable($model_has_permissions)) {
+            $this->replaceModels($model_has_permissions);
+        }
     }
 
     public function replaceModels($table_name)
