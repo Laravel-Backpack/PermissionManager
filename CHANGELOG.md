@@ -2,6 +2,14 @@
 
 All Notable changes to `Backpack PermissionManager` will be documented in this file
 
+----------
+IMPORTANT
+----------
+
+Since version 6.0.0, we no longer use this file to track changes. Please see our Releases tab on Github:
+https://github.com/Laravel-Backpack/PermissionManager/releases
+
+----------
 
 ## 5.0.7 - 2020-03-05
 
