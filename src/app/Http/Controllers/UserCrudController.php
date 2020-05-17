@@ -52,10 +52,10 @@ class UserCrudController extends CrudController
             ],
         ]);
 
-        if(config('backpack.base.authentication_column') !== 'email') {
+        if (config('backpack.base.authentication_column') !== 'email') {
             $this->crud->addColumn([
-                'name' => config('backpack.base.authentication_column'),
-                'type' => 'text',
+                'name'  => config('backpack.base.authentication_column'),
+                'type'  => 'text',
                 'label' => config('backpack.base.authentication_column_name'),
             ])->afterColumn('name');
         }
@@ -205,10 +205,10 @@ class UserCrudController extends CrudController
             ],
         ]);
 
-        if(config('backpack.base.authentication_column') !== 'email') {
+        if (config('backpack.base.authentication_column') !== 'email') {
             $this->crud->addField([
-                'name' => config('backpack.base.authentication_column'),
-                'type' => 'text',
+                'name'  => config('backpack.base.authentication_column'),
+                'type'  => 'text',
                 'label' => config('backpack.base.authentication_column_name'),
             ])->afterField('name');
         }

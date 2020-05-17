@@ -40,7 +40,7 @@ class UserUpdateCrudRequest extends FormRequest
             'password' => 'confirmed',
         ];
 
-        if(config('backpack.base.authentication_column') !== 'email') {
+        if (config('backpack.base.authentication_column') !== 'email') {
             $returnable[config('backpack.base.authentication_column')] = 'required|unique:'.config('permission.table_names.users', 'users').','.config('backpack.base.authentication_column');
         }
 
