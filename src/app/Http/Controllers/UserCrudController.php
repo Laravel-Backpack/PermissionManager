@@ -52,6 +52,14 @@ class UserCrudController extends CrudController
             ],
         ]);
 
+        if(config('backpack.base.authentication_column') !== 'email') {
+            $this->crud->addColumn([
+                'name' => config('backpack.base.authentication_column'),
+                'type' => 'text',
+                'label' => config('backpack.base.authentication_column_name'),
+            ])->afterColumn('name');
+        }
+
         // Role Filter
         $this->crud->addFilter(
             [
@@ -196,5 +204,13 @@ class UserCrudController extends CrudController
                 ],
             ],
         ]);
+
+        if(config('backpack.base.authentication_column') !== 'email') {
+            $this->crud->addField([
+                'name' => config('backpack.base.authentication_column'),
+                'type' => 'text',
+                'label' => config('backpack.base.authentication_column_name'),
+            ])->afterField('name');
+        }
     }
 }

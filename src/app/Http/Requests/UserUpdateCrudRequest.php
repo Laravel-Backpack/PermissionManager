@@ -34,10 +34,16 @@ class UserUpdateCrudRequest extends FormRequest
             abort(400, 'Could not find that entry in the database.');
         }
 
-        return [
+        $returnable = [
             'email'    => 'required|unique:'.config('permission.table_names.users', 'users').',email,'.$userId,
             'name'     => 'required',
             'password' => 'confirmed',
         ];
+
+        if(config('backpack.base.authentication_column') !== 'email') {
+            $returnable[config('backpack.base.authentication_column')] = 'required|unique:'.config('permission.table_names.users', 'users').','.config('backpack.base.authentication_column');
+        }
+
+        return $returnable;
     }
 }
