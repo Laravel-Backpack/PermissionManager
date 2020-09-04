@@ -22,7 +22,7 @@ return [
     'extra_permissions'     => '額外權限',
     'password'              => '密碼',
     'password_confirmation' => '再次輸入新密碼',
-    'user_role_permission'  => '使用者角色權限',
+    'user_role_permission'  => '使用者角色與權限',
     'user'                  => '使用者',
     'users'                 => '使用者',
     'guard_type'            => 'Guard 類型',
