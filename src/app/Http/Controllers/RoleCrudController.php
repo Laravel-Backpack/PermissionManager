@@ -46,7 +46,7 @@ class RoleCrudController extends CrudController
             'label' => trans('backpack::permissionmanager.name'),
             'type'  => 'text',
         ]);
-        
+
         /**
          * Show a column with the number of users that have that particular role.
          *
@@ -54,7 +54,7 @@ class RoleCrudController extends CrudController
          * of users for a role, we did not use the `relationship_count` column,
          * but instead opted to append a fake `user_count` column to
          * the result, using Laravel's `withCount()` method.
-         * That way, no users are loaded. 
+         * That way, no users are loaded.
          */
         $this->crud->query->withCount('users');
         $this->crud->addColumn([
