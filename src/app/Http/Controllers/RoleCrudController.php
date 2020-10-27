@@ -38,15 +38,29 @@ class RoleCrudController extends CrudController
 
     public function setupListOperation()
     {
+        /**
+         * Show a column for the name of the role.
+         */
         $this->crud->addColumn([
             'name'  => 'name',
             'label' => trans('backpack::permissionmanager.name'),
             'type'  => 'text',
         ]);
-        $this->crud->addColumn([   // select_multiple: n-n relationship (with pivot table)
-            'label'     => trans('backpack::permissionmanager.users'), // Table column heading
-            'type'      => 'relationship_count',
-            'name'      => 'users', // the method that defines the relationship in your Model
+        
+        /**
+         * Show a column with the number of users that have that particular role.
+         *
+         * Note: To account for the fact that there can be thousands or millions
+         * of users for a role, we did not use the `relationship_count` column,
+         * but instead opted to append a fake `user_count` column to
+         * the result, using Laravel's `withCount()` method.
+         * That way, no users are loaded. 
+         */
+        $this->crud->query->withCount('users');
+        $this->crud->addColumn([
+            'label'     => trans('backpack::permissionmanager.users'),
+            'type'      => 'text',
+            'name'      => 'users_count',
             'wrapper'   => [
                 'href' => function ($crud, $column, $entry, $related_key) {
                     return backpack_url('user?role='.$entry->getKey());
@@ -54,6 +68,10 @@ class RoleCrudController extends CrudController
             ],
             'suffix'    => ' users',
         ]);
+
+        /**
+         * In case multiple guards are used, show a column for the guard.
+         */
         if (config('backpack.permissionmanager.multiple_guards')) {
             $this->crud->addColumn([
                 'name'  => 'guard_name',
@@ -61,6 +79,10 @@ class RoleCrudController extends CrudController
                 'type'  => 'text',
             ]);
         }
+
+        /**
+         * Show the exact permissions that role has.
+         */
         $this->crud->addColumn([
             // n-n relationship (with pivot table)
             'label'     => ucfirst(trans('backpack::permissionmanager.permission_plural')),
