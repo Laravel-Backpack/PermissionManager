@@ -24,15 +24,9 @@ class UserUpdateCrudRequest extends FormRequest
      */
     public function rules()
     {
-        $userModel = config('backpack.permissionmanager.models.user');
-        $userModel = new $userModel();
-        $routeSegmentWithId = empty(config('backpack.base.route_prefix')) ? '2' : '3';
-
-        $userId = $this->get('id') ?? \Request::instance()->segment($routeSegmentWithId);
-
-        if (!$userModel->find($userId)) {
-            abort(400, 'Could not find that entry in the database.');
-        }
+        $userId = $this->get('id') ?? \Arr::last(request()->segments(), function ($value) {
+            return is_numeric($value);
+        });
 
         return [
             'email'    => 'required|unique:'.config('permission.table_names.users', 'users').',email,'.$userId,
