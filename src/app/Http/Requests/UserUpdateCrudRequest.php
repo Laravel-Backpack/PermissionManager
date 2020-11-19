@@ -24,12 +24,10 @@ class UserUpdateCrudRequest extends FormRequest
      */
     public function rules()
     {
-        $userId = $this->get('id') ?? \Arr::last(request()->segments(), function ($value) {
-            return is_numeric($value);
-        });
+        $id = $this->get('id') ?? request()->route('id');
 
         return [
-            'email'    => 'required|unique:'.config('permission.table_names.users', 'users').',email,'.$userId,
+            'email'    => 'required|unique:'.config('permission.table_names.users', 'users').',email,'.$id,
             'name'     => 'required',
             'password' => 'confirmed',
         ];
