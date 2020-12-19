@@ -47,6 +47,9 @@ php artisan vendor:publish --provider="Spatie\Permission\PermissionServiceProvid
 php artisan vendor:publish --provider="Backpack\PermissionManager\PermissionManagerServiceProvider"
 ```
 
+3)[For Laravel 8]
+The User Model will need to change the ```App\User::class``` namespace to ```App\Models\User::class``` on ```config/backpack/permissionmanager.php```
+
 4) The package assumes it's ok to use ```App\Models\BackpackUser``` to administer Users. Use a different one if you'd like by changing the user model in the ```config/backpack/permissionmanager.php``` file. Any model you're using, make sure it's using the ```CrudTrait``` and ```HasRoles``` traits:
 ```php
 <?php namespace App;
