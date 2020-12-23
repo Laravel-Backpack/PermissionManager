@@ -12,7 +12,7 @@ return [
     */
 
     'models' => [
-        'user'       => config('backpack.base.user_model_fqn', \App\User::class),
+        'user'       => config('backpack.base.user_model_fqn', \App\Models\User::class),
         'permission' => Backpack\PermissionManager\app\Models\Permission::class,
         'role'       => Backpack\PermissionManager\app\Models\Role::class,
     ],
