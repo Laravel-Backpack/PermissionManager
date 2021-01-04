@@ -220,6 +220,8 @@ To upgrade from PermissionManager 3.x to 4.x:
 - delete your old ```config/backpack/permissionmanager.php``` file;
 - follow the installation steps above;
 
+If you are upgrading to a Laravel 8 instalation, please note that User Model may have moved from ```App\User::class``` to ```App\Models\User::class```, check if your config is compliant with that change ```config/backpack/permissionmanager.php```.
+
 ## Change log
 
 Please see [CHANGELOG](CHANGELOG.md) for more information what has changed recently.
