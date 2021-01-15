@@ -117,7 +117,7 @@ Please note:
 
 ## Customize UserCrudController
 
-If you would like to add more fields to the default user controller provided by this package can bind your new controller to overwrite the one provided in this package:
+If you would like to add more fields to the default user controller provided by this package, you can bind your own controller to overwrite the one provided in this package:
 
 ```php
 // in some ServiceProvider, AppServiceProvider for example
