@@ -115,6 +115,22 @@ Please note:
 7) [Optional] Disallow create/update on your roles or permissions after you define them, using the config file in **config/backpack/permissionmanager.php**. Please note permissions and roles are referenced in code using their name. If you let your admins edit these strings and they do, your permission and role checks will stop working.
 
 
+## Customize UserCrudController
+
+If you would like to add more fields to the default user controller provided by this package, you can bind your own controller to overwrite the one provided in this package:
+
+```php
+// in some ServiceProvider, AppServiceProvider for example
+
+$this->app->bind(
+    \Backpack\PermissionManager\app\Http\Controllers\UserCrudController::class, //this is package controller
+    \App\Http\Controllers\Admin\UserCrudController::class //this should be your own controller
+);
+
+// this tells Laravel that when UserCrudController is requested, your own UserCrudController should be served.
+```
+
+
 ## API Usage
 
 Because the package requires [spatie/laravel-permission](https://github.com/spatie/laravel-permission), the API will be the same. Please refer to their README file for a complete API. Here's a summary though:
