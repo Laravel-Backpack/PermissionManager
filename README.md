@@ -127,7 +127,7 @@ $this->app->bind(
         \App\Http\Controllers\Admin\MyCrudController::class //this should be your own controller
 );
 
-// this tells Laravel that when UserCrudController is requested, your own CrudController should be served.
+// this tells Laravel that when UserCrudController is requested, your own UserCrudController should be served.
 ```
 
 
