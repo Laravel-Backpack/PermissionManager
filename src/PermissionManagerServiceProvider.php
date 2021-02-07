@@ -50,7 +50,7 @@ class PermissionManagerServiceProvider extends ServiceProvider
         
         // publish route file
         $this->publishes([__DIR__.$this->routeFilePath => base_path($this->routeFilePath)], 'routes');
-}
+    }
 
     /**
      * Define the routes for the application.
