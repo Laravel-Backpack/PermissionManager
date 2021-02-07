@@ -49,7 +49,7 @@ class PermissionManagerServiceProvider extends ServiceProvider
         $this->publishes([__DIR__.'/database/migrations' => database_path('migrations')], 'migrations');
         
         // publish route file
-        $this->publishes([__DIR__.$this->routeFilePath => base_path().$this->routeFilePath], 'routes');
+        $this->publishes([__DIR__.$this->routeFilePath => base_path($this->routeFilePath)], 'routes');
 }
 
     /**
