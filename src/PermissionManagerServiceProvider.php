@@ -46,7 +46,7 @@ class PermissionManagerServiceProvider extends ServiceProvider
 
         // publish route file
         $this->publishes([__DIR__.$this->routeFilePath => base_path($this->routeFilePath)], 'routes');
-
+      
         // load migration from Backpack 4.0 to Backpack 4.1
         $this->loadMigrationsFrom(__DIR__.'/database/migrations');
     }
