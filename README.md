@@ -34,10 +34,12 @@ This package is just a user interface for [spatie/laravel-permission](https://gi
 composer require backpack/permissionmanager
 ```
 
-2) Finish all installation steps for [`spatie/laravel-permission`](https://spatie.be/docs/laravel-permission/v3/installation-laravel), which as been pulled as a dependency. Publish its migrations and config files. Most likely it's:
-```bash
-php artisan vendor:publish --provider="Spatie\Permission\PermissionServiceProvider"
-// then First, add the Spatie\Permission\Traits\HasRoles trait to your User model(s)
+2) Finish all installation steps for [spatie/laravel-permission](https://github.com/spatie/laravel-permission#installation), which as been pulled as a dependency. Run its migrations. Publish its config files. Most likely it's:
+```shell
+php artisan vendor:publish --provider="Spatie\Permission\PermissionServiceProvider" --tag="migrations"
+php artisan migrate
+php artisan vendor:publish --provider="Spatie\Permission\PermissionServiceProvider" --tag="config"
+// then, add the Spatie\Permission\Traits\HasRoles trait to your User model(s)
 ```
 
 3) Publish `backpack\permissionmanager` config file:
@@ -265,7 +267,7 @@ Please see [CONTRIBUTING](CONTRIBUTING.md) for details.
 
 ## Security
 
-If you discover any security related issues, please email hello@tabacitu.ro instead of using the issue tracker.
+If you discover any security related issues, please email tabacitu@backpackforlaravel.com instead of using the issue tracker.
 
 Please **[subscribe to the Backpack Newsletter](http://backpackforlaravel.com/newsletter)** so you can find out about any security updates, breaking changes or major features. We send an email every 1-2 months.
 
