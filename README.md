@@ -55,7 +55,7 @@ php artisan migrate
 
 5) The package assumes it's ok to use ```App\Models\BackpackUser``` to administer Users. Use a different one if you'd like by changing the user model in the ```config/backpack/permissionmanager.php``` file. Any model you're using, make sure it's using the ```CrudTrait``` and ```HasRoles``` traits:
 ```php
-<?php namespace App;
+<?php namespace App\Models;
 
 use Backpack\CRUD\app\Models\Traits\CrudTrait; // <------------------------------- this one
 use Spatie\Permission\Traits\HasRoles;// <---------------------- and this one
@@ -76,12 +76,12 @@ class User extends Authenticatable
 ```html
 <!-- Users, Roles, Permissions -->
 <li class="nav-item nav-dropdown">
-	<a class="nav-link nav-dropdown-toggle" href="#"><i class="nav-icon la la-users"></i> Authentication</a>
-	<ul class="nav-dropdown-items">
-	  <li class="nav-item"><a class="nav-link" href="{{ backpack_url('user') }}"><i class="nav-icon la la-user"></i> <span>Users</span></a></li>
-	  <li class="nav-item"><a class="nav-link" href="{{ backpack_url('role') }}"><i class="nav-icon la la-id-badge"></i> <span>Roles</span></a></li>
-	  <li class="nav-item"><a class="nav-link" href="{{ backpack_url('permission') }}"><i class="nav-icon la la-key"></i> <span>Permissions</span></a></li>
-	</ul>
+    <a class="nav-link nav-dropdown-toggle" href="#"><i class="nav-icon la la-users"></i> Authentication</a>
+    <ul class="nav-dropdown-items">
+        <li class="nav-item"><a class="nav-link" href="{{ backpack_url('user') }}"><i class="nav-icon la la-user"></i> <span>Users</span></a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ backpack_url('role') }}"><i class="nav-icon la la-id-badge"></i> <span>Roles</span></a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ backpack_url('permission') }}"><i class="nav-icon la la-key"></i> <span>Permissions</span></a></li>
+    </ul>
 </li>
 ```
 
