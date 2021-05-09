@@ -42,11 +42,11 @@ php artisan vendor:publish --provider="Spatie\Permission\PermissionServiceProvid
 // then, add the Spatie\Permission\Traits\HasRoles trait to your User model(s)
 ```
 
-3) Publish `backpack\permissionmanager` config file:
+3) Publish `backpack\permissionmanager` config file & the migrations:
 ```bash
-php artisan vendor:publish --provider="Backpack\PermissionManager\PermissionManagerServiceProvider" --tag="config"
+php artisan vendor:publish --provider="Backpack\PermissionManager\PermissionManagerServiceProvider" --tag="config" --tag="migrations"
 ```
-> Note: _We recommend you to publish only the config file, but you may also publish lang and routes._
+> Note: _We recommend you to publish only the config file and migrations, but you may also publish lang and routes._
 
 4) Run the migrations:
 ```bash
