@@ -7,7 +7,6 @@ return [
     |--------------------------------------------------------------------------
     |
     | The following language lines are used for Laravel Backpack - Permission Manager
-    | Author: Lúdio Oliveira <ludio.ao@gmail.com>
     |
     */
     'name'                  => '名前',
