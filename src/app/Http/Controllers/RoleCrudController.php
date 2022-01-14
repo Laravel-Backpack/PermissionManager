@@ -66,7 +66,7 @@ class RoleCrudController extends CrudController
                     return backpack_url('user?role='.$entry->getKey());
                 },
             ],
-            'suffix'    => ' ' . strtolower(trans('backpack::permissionmanager.users')),
+            'suffix'    => ' '.strtolower(trans('backpack::permissionmanager.users')),
         ]);
 
         /**
