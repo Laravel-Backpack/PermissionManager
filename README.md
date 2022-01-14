@@ -15,7 +15,7 @@ As opposed to some other packages:
 
 This package is just a user interface for [spatie/laravel-permission](https://github.com/spatie/laravel-permission). It will install it, and let you use its API in code. Please refer to their README for more information on how to use in code.
 
-![Edit a user in Backpack/PermissionManager](https://backpackforlaravel.com/uploads/screenshots/permissions_users_edit.png)
+![Edit a user in Backpack/PermissionManager](https://user-images.githubusercontent.com/1032474/149489620-a3e54d6e-db5f-4241-9afc-dc9451e54b64.gif)
 
 
 
@@ -246,10 +246,6 @@ If you are upgrading to a Laravel 8 instalation, please note that User Model may
 ## Change log
 
 Please see [CHANGELOG](CHANGELOG.md) for more information what has changed recently.
-
-## Screenshots
-
-![Roles table view in Backpack/PermissionManager](https://backpackforlaravel.com/uploads/screenshots/permissions_roles.png)
 
 ## Overwriting functionality
 
