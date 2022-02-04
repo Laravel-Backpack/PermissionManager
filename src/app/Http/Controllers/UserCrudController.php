@@ -52,35 +52,37 @@ class UserCrudController extends CrudController
             ],
         ]);
 
-        // Role Filter
-        $this->crud->addFilter(
-            [
-                'name'  => 'role',
-                'type'  => 'dropdown',
-                'label' => trans('backpack::permissionmanager.role'),
-            ],
-            config('permission.models.role')::all()->pluck('name', 'id')->toArray(),
-            function ($value) { // if the filter is active
-                $this->crud->addClause('whereHas', 'roles', function ($query) use ($value) {
-                    $query->where('role_id', '=', $value);
-                });
-            }
-        );
+        if (backpack_pro()) {
+            // Role Filter
+            $this->crud->addFilter(
+                [
+                    'name'  => 'role',
+                    'type'  => 'dropdown',
+                    'label' => trans('backpack::permissionmanager.role'),
+                ],
+                config('permission.models.role')::all()->pluck('name', 'id')->toArray(),
+                function ($value) { // if the filter is active
+                    $this->crud->addClause('whereHas', 'roles', function ($query) use ($value) {
+                        $query->where('role_id', '=', $value);
+                    });
+                }
+            );
 
-        // Extra Permission Filter
-        $this->crud->addFilter(
-            [
-                'name'  => 'permissions',
-                'type'  => 'select2',
-                'label' => trans('backpack::permissionmanager.extra_permissions'),
-            ],
-            config('permission.models.permission')::all()->pluck('name', 'id')->toArray(),
-            function ($value) { // if the filter is active
-                $this->crud->addClause('whereHas', 'permissions', function ($query) use ($value) {
-                    $query->where('permission_id', '=', $value);
-                });
-            }
-        );
+            // Extra Permission Filter
+            $this->crud->addFilter(
+                [
+                    'name'  => 'permissions',
+                    'type'  => 'select2',
+                    'label' => trans('backpack::permissionmanager.extra_permissions'),
+                ],
+                config('permission.models.permission')::all()->pluck('name', 'id')->toArray(),
+                function ($value) { // if the filter is active
+                    $this->crud->addClause('whereHas', 'permissions', function ($query) use ($value) {
+                        $query->where('permission_id', '=', $value);
+                    });
+                }
+            );
+        }
     }
 
     public function setupCreateOperation()
