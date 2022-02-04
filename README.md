@@ -52,7 +52,7 @@ php artisan vendor:publish --provider="Backpack\PermissionManager\PermissionMana
 php artisan migrate
 ```
 
-5) The package assumes it's ok to use ```App\Models\BackpackUser``` to administer Users. Use a different one if you'd like by changing the user model in the ```config/backpack/permissionmanager.php``` file. Any model you're using, make sure it's using the ```CrudTrait``` and ```HasRoles``` traits:
+5) The package assumes it's ok to use the default Backpack user model (most likely ```App\Models\User``` to administer Users. Use a different one if you'd like by changing the user model in the ```config/backpack/permissionmanager.php``` file. Any model you're using, make sure it's using the ```CrudTrait``` and ```HasRoles``` traits:
 ```php
 <?php namespace App\Models;
 
@@ -109,7 +109,7 @@ OR
     ],
 ```
 
-Why? spatie/laravel-permission uses the ```Auth``` facade for determining permissions with ```@can```. The ```Auth``` facade uses the default guard defined in ```config/auth.php```, NOT our backpack guard. 
+Why? `spatie/laravel-permission` uses the ```Auth``` facade for determining permissions with ```@can```. The ```Auth``` facade uses the default guard defined in ```config/auth.php```, NOT our backpack guard.
 
 Please note:
 - this will make ```auth()``` return the exact same thing as ```backpack_auth()``` on Backpack routes;

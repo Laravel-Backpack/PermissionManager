@@ -34,7 +34,7 @@
     "prefer-stable": true,
     "require": {
         "spatie/laravel-permission": "^5.0|^4.0|^3.0",
-        "backpack/crud": "^4.1.0"
+        "backpack/crud": "^5.0"
     },
     "require-dev": {
         "phpunit/phpunit" : "^9.0||^7.0",
