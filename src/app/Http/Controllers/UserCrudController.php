@@ -52,7 +52,7 @@ class UserCrudController extends CrudController
             ],
         ]);
 
-        if (backpack_pro()) {
+        if (backpack_pro() || !function_exists('backpack_pro')) {
             // Role Filter
             $this->crud->addFilter(
                 [
