@@ -85,7 +85,7 @@ class RoleCrudController extends CrudController
          */
         $this->crud->addColumn([
             // n-n relationship (with pivot table)
-            'label'     => ucfirst(trans('backpack::permissionmanager.permission_plural')),
+            'label'     => mb_ucfirst(trans('backpack::permissionmanager.permission_plural')),
             'type'      => 'select_multiple',
             'name'      => 'permissions', // the method that defines the relationship in your Model
             'entity'    => 'permissions', // the method that defines the relationship in your Model
@@ -131,7 +131,7 @@ class RoleCrudController extends CrudController
         }
 
         $this->crud->addField([
-            'label'     => ucfirst(trans('backpack::permissionmanager.permission_plural')),
+            'label'     => mb_ucfirst(trans('backpack::permissionmanager.permission_plural')),
             'type'      => 'checklist',
             'name'      => 'permissions',
             'entity'    => 'permissions',
