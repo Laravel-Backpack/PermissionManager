@@ -186,7 +186,7 @@ class UserCrudController extends CrudController
                         'number_columns'   => 3, //can be 1,2,3,4,6
                     ],
                     'secondary' => [
-                        'label'          => ucfirst(trans('backpack::permissionmanager.permission_singular')),
+                        'label'          => mb_ucfirst(trans('backpack::permissionmanager.permission_plural')),
                         'name'           => 'permissions', // the method that defines the relationship in your Model
                         'entity'         => 'permissions', // the method that defines the relationship in your Model
                         'entity_primary' => 'roles', // the method that defines the relationship in your Model
