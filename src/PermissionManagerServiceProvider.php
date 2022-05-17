@@ -48,7 +48,9 @@ class PermissionManagerServiceProvider extends ServiceProvider
         $this->publishes([__DIR__.$this->routeFilePath => base_path($this->routeFilePath)], 'routes');
 
         // publish migration from Backpack 4.0 to Backpack 4.1
-        $this->publishes([__DIR__.'/database/migrations' => database_path('migrations')], 'migrations');
+        $this->publishes([
+            __DIR__.'/database/migrations/2020_03_31_114745_remove_backpackuser_model.php' => database_path('migrations') . DIRECTORY_SEPARATOR . $this->generateNewMigrationFileName('2020_03_31_114745_remove_backpackuser_model.php')
+        ], 'migrations');
     }
 
     /**
@@ -79,5 +81,10 @@ class PermissionManagerServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->register(PermissionServiceProvider::class);
+    }
+
+    protected function generateNewMigrationFileName($oldName)
+    {
+        return preg_replace('/\d{4}_\d{2}_\d{2}_\d{6}/', date('Y_m_d_His'), $oldName);
     }
 }
