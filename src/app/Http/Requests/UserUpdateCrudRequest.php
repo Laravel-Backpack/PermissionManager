@@ -24,10 +24,13 @@ class UserUpdateCrudRequest extends FormRequest
      */
     public function rules()
     {
+        $userModel = config('backpack.permissionmanager.models.user');
+        $userModel = new $userModel();
+        
         $id = $this->get('id') ?? request()->route('id');
 
         return [
-            'email'    => 'required|unique:'.config('permission.table_names.users', 'users').',email,'.$id,
+            'email'    => 'required|unique:'.$userModel->getTable().',email,'.$id,
             'name'     => 'required',
             'password' => 'confirmed',
         ];
