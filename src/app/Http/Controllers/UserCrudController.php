@@ -23,7 +23,6 @@ class UserCrudController extends CrudController
 
     public function setupListOperation()
     {
-
         $this->crud->addColumns([
             [
                 'name'  => 'name',
