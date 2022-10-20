@@ -23,6 +23,8 @@ class UserCrudController extends CrudController
 
     public function setupListOperation()
     {
+        $this->crud->disableResponsiveTable();
+
         $this->crud->addColumns([
             [
                 'name'  => 'name',
@@ -34,7 +36,7 @@ class UserCrudController extends CrudController
                 'label' => trans('backpack::permissionmanager.email'),
                 'type'  => 'email',
             ],
-            [ // n-n relationship (with pivot table)
+            /*[ // n-n relationship (with pivot table)
                 'label'     => trans('backpack::permissionmanager.roles'), // Table column heading
                 'type'      => 'select_multiple',
                 'name'      => 'roles', // the method that defines the relationship in your Model
@@ -49,7 +51,7 @@ class UserCrudController extends CrudController
                 'entity'    => 'permissions', // the method that defines the relationship in your Model
                 'attribute' => 'name', // foreign key attribute that is shown to user
                 'model'     => config('permission.models.permission'), // foreign key model
-            ],
+            ],*/
             [
                 // two interconnected entities
                 'label'             => trans('backpack::permissionmanager.user_role_permission'),
