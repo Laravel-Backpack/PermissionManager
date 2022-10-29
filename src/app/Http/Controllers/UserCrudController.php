@@ -60,7 +60,7 @@ class UserCrudController extends CrudController
                 'name'              => 'roles_permissions',
                 'subfields'         => [
                     'primary' => [
-                        'label'           => '<strong>'.trans('backpack::permissionmanager.role').'</strong>',
+                        'label'            => '<strong>'.trans('backpack::permissionmanager.role').'</strong>',
                         'name'             => 'roles', // the method that defines the relationship in your Model
                         'entity'           => 'roles', // the method that defines the relationship in your Model
                         'entity_secondary' => 'permissions', // the method that defines the relationship in your Model
@@ -69,11 +69,11 @@ class UserCrudController extends CrudController
                     ],
                     'secondary' => [
                         'label'           => '<strong>'.mb_ucfirst(trans('backpack::permissionmanager.permission_singular')).'</strong>',
-                        'name'           => 'permissions', // the method that defines the relationship in your Model
-                        'entity'         => 'permissions', // the method that defines the relationship in your Model
-                        'entity_primary' => 'roles', // the method that defines the relationship in your Model
-                        'attribute'      => 'name', // foreign key attribute that is shown to user
-                        'model'          => config('permission.models.permission'), // foreign key model,
+                        'name'            => 'permissions', // the method that defines the relationship in your Model
+                        'entity'          => 'permissions', // the method that defines the relationship in your Model
+                        'entity_primary'  => 'roles', // the method that defines the relationship in your Model
+                        'attribute'       => 'name', // foreign key attribute that is shown to user
+                        'model'           => config('permission.models.permission'), // foreign key model,
                     ],
                 ],
             ],
