@@ -60,7 +60,7 @@ class UserCrudController extends CrudController
                 'name'              => 'roles_permissions',
                 'subfields'         => [
                     'primary' => [
-                        'label'            => trans('backpack::permissionmanager.roles'),
+                        'label'           => '<strong>'.trans('backpack::permissionmanager.role').'</strong>',
                         'name'             => 'roles', // the method that defines the relationship in your Model
                         'entity'           => 'roles', // the method that defines the relationship in your Model
                         'entity_secondary' => 'permissions', // the method that defines the relationship in your Model
@@ -68,7 +68,7 @@ class UserCrudController extends CrudController
                         'model'            => config('permission.models.role'), // foreign key model
                     ],
                     'secondary' => [
-                        'label'          => mb_ucfirst(trans('backpack::permissionmanager.permission_plural')),
+                        'label'           => '<strong>'.mb_ucfirst(trans('backpack::permissionmanager.permission_singular')).'</strong>',
                         'name'           => 'permissions', // the method that defines the relationship in your Model
                         'entity'         => 'permissions', // the method that defines the relationship in your Model
                         'entity_primary' => 'roles', // the method that defines the relationship in your Model
