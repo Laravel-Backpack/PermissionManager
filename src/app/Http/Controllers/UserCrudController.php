@@ -68,12 +68,12 @@ class UserCrudController extends CrudController
                         'model'            => config('permission.models.role'), // foreign key model
                     ],
                     'secondary' => [
-                        'label'           => '<strong>'.mb_ucfirst(trans('backpack::permissionmanager.permission_singular')).'</strong>',
-                        'name'            => 'permissions', // the method that defines the relationship in your Model
-                        'entity'          => 'permissions', // the method that defines the relationship in your Model
-                        'entity_primary'  => 'roles', // the method that defines the relationship in your Model
-                        'attribute'       => 'name', // foreign key attribute that is shown to user
-                        'model'           => config('permission.models.permission'), // foreign key model,
+                        'label'            => '<strong>'.mb_ucfirst(trans('backpack::permissionmanager.permission_singular')).'</strong>',
+                        'name'             => 'permissions', // the method that defines the relationship in your Model
+                        'entity'           => 'permissions', // the method that defines the relationship in your Model
+                        'entity_primary'   => 'roles', // the method that defines the relationship in your Model
+                        'attribute'        => 'name', // foreign key attribute that is shown to user
+                        'model'            => config('permission.models.permission'), // foreign key model,
                     ],
                 ],
             ],
