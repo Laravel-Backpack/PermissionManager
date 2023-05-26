@@ -62,9 +62,9 @@ class UserCrudController extends CrudController
                 ],
                 config('permission.models.role')::all()->pluck('name', 'id')->toArray(),
                 function ($value) { // if the filter is active
-                    $this->crud->addClause('whereHas', 'roles', function ($query) use ($value) {
-                        $query->where('role_id', '=', $value);
-                    });
+                $this->crud->addClause('whereHas', 'roles', function ($query) use ($value) {
+                    $query->where('role_id', '=', $value);
+                });
                 }
             );
 
@@ -77,9 +77,9 @@ class UserCrudController extends CrudController
                 ],
                 config('permission.models.permission')::all()->pluck('name', 'id')->toArray(),
                 function ($value) { // if the filter is active
-                    $this->crud->addClause('whereHas', 'permissions', function ($query) use ($value) {
-                        $query->where('permission_id', '=', $value);
-                    });
+                $this->crud->addClause('whereHas', 'permissions', function ($query) use ($value) {
+                    $query->where('permission_id', '=', $value);
+                });
                 }
             );
         }
@@ -173,7 +173,7 @@ class UserCrudController extends CrudController
                 'label'             => trans('backpack::permissionmanager.user_role_permission'),
                 'field_unique_name' => 'user_role_permission',
                 'type'              => 'checklist_dependency',
-                'name'              => ['roles', 'permissions'],
+                'name'              => 'roles,permissions',
                 'subfields'         => [
                     'primary' => [
                         'label'            => trans('backpack::permissionmanager.roles'),
