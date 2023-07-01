@@ -173,7 +173,7 @@ class UserCrudController extends CrudController
                 'label'             => trans('backpack::permissionmanager.user_role_permission'),
                 'field_unique_name' => 'user_role_permission',
                 'type'              => 'checklist_dependency',
-                'name'              => ['roles', 'permissions'],
+                'name'              => 'roles,permissions',
                 'subfields'         => [
                     'primary' => [
                         'label'            => trans('backpack::permissionmanager.roles'),
