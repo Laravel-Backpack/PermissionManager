@@ -70,18 +70,15 @@ class User extends Authenticatable
      */
 ```
 
-6) [Optional] Add a menu item for it in ```resources/views/vendor/backpack/base/inc/sidebar_content.blade.php``` or ```menu.blade.php```:
+6) [Optional] Add a menu item for it in ```resources/views/vendor/backpack/ui/inc/menu_items.blade.php```:
 
 ```html
-<!-- Users, Roles, Permissions -->
-<li class="nav-item nav-dropdown">
-  <a class="nav-link nav-dropdown-toggle" href="#"><i class="nav-icon la la-group"></i> Authentication</a>
-  <ul class="nav-dropdown-items">
-    <li class="nav-item"><a class="nav-link" href="{{ backpack_url('user') }}"><i class="nav-icon la la-user"></i> <span>Users</span></a></li>
-    <li class="nav-item"><a class="nav-link" href="{{ backpack_url('role') }}"><i class="nav-icon la la-group"></i> <span>Roles</span></a></li>
-    <li class="nav-item"><a class="nav-link" href="{{ backpack_url('permission') }}"><i class="nav-icon la la-key"></i> <span>Permissions</span></a></li>
-  </ul>
-</li>
+<x-backpack::menu-dropdown title="Add-ons" icon="la la-puzzle-piece">
+    <x-backpack::menu-dropdown-header title="Authentication" />
+    <x-backpack::menu-dropdown-item title="Users" icon="la la-user" :link="backpack_url('user')" />
+    <x-backpack::menu-dropdown-item title="Roles" icon="la la-group" :link="backpack_url('role')" />
+    <x-backpack::menu-dropdown-item title="Permissions" icon="la la-key" :link="backpack_url('permission')" />
+</x-backpack::menu-dropdown>
 ```
 
 7) [Optional] If you want to use the ```@can``` handler inside Backpack routes, you can:
