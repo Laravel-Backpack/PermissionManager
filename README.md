@@ -33,7 +33,7 @@ This package is just a user interface for [spatie/laravel-permission](https://gi
 composer require backpack/permissionmanager
 ```
 
-2) Finish all installation steps for [spatie/laravel-permission](https://github.com/spatie/laravel-permission#installation), which as been pulled as a dependency. Run its migrations. Publish its config files. Most likely it's:
+2) Finish all installation steps for [spatie/laravel-permission](https://github.com/spatie/laravel-permission#installation), which has been pulled as a dependency. Run its migrations. Publish its config files. Most likely it's:
 ```shell
 php artisan vendor:publish --provider="Spatie\Permission\PermissionServiceProvider" --tag="permission-migrations"
 php artisan migrate
@@ -98,7 +98,7 @@ OR
 (7.B.) Add a middleware to all your Backpack routes by adding this to your ```config/backpack/base.php``` file:
 ```diff
     // The classes for the middleware to check if the visitor is an admin
-    // Can be a single class or an array of clases
+    // Can be a single class or an array of classes
     'middleware_class' => [
         App\Http\Middleware\CheckIfAdmin::class,
         \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
@@ -180,7 +180,7 @@ You can also determine if a user has all of a given list of roles:
 ``` bash
 backpack_user()->hasAllRoles(Role::all());
 ```
-The assignRole, hasRole, hasAnyRole, hasAllRoles and removeRole-functions can accept a string, a Role-object or an \Illuminate\Support\Collection-object.
+The assignRole, hasRole, hasAnyRole, hasAllRoles and removeRole-functions can accept a string, an array, a Role-object or an \Illuminate\Support\Collection-object.
 
 A permission can be given to a role:
 ``` bash
@@ -227,7 +227,7 @@ This package also adds Blade directives to verify whether the currently logged i
 @endhasallroles
 ```
 
-You can use Laravels native @can directive to check if a user has a certain permission.
+You can use Laravel's native @can directive to check if a user has a certain permission.
 
 
 ## Upgrade from 3.x to 4.x
