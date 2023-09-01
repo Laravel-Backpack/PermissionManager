@@ -37,7 +37,7 @@
         "backpack/crud": "^6.0"
     },
     "require-dev": {
-        "phpunit/phpunit" : "^9.0||^7.0",
+        "phpunit/phpunit" : "^10.3.2",
         "scrutinizer/ocular": "~1.1"
     },
     "autoload": {
