@@ -52,35 +52,37 @@ class UserCrudController extends CrudController
             ],
         ]);
 
-        // Role Filter
-        $this->crud->addFilter(
-            [
-                'name'  => 'role',
-                'type'  => 'dropdown',
-                'label' => trans('backpack::permissionmanager.role'),
-            ],
-            config('permission.models.role')::all()->pluck('name', 'id')->toArray(),
-            function ($value) { // if the filter is active
-                $this->crud->addClause('whereHas', 'roles', function ($query) use ($value) {
-                    $query->where('role_id', '=', $value);
-                });
-            }
-        );
+        if (backpack_pro()) {
+            // Role Filter
+            $this->crud->addFilter(
+                [
+                    'name'  => 'role',
+                    'type'  => 'dropdown',
+                    'label' => trans('backpack::permissionmanager.role'),
+                ],
+                config('permission.models.role')::all()->pluck('name', 'id')->toArray(),
+                function ($value) { // if the filter is active
+                    $this->crud->addClause('whereHas', 'roles', function ($query) use ($value) {
+                        $query->where('role_id', '=', $value);
+                    });
+                }
+            );
 
-        // Extra Permission Filter
-        $this->crud->addFilter(
-            [
-                'name'  => 'permissions',
-                'type'  => 'select2',
-                'label' => trans('backpack::permissionmanager.extra_permissions'),
-            ],
-            config('permission.models.permission')::all()->pluck('name', 'id')->toArray(),
-            function ($value) { // if the filter is active
-                $this->crud->addClause('whereHas', 'permissions', function ($query) use ($value) {
-                    $query->where('permission_id', '=', $value);
-                });
-            }
-        );
+            // Extra Permission Filter
+            $this->crud->addFilter(
+                [
+                    'name'  => 'permissions',
+                    'type'  => 'select2',
+                    'label' => trans('backpack::permissionmanager.extra_permissions'),
+                ],
+                config('permission.models.permission')::all()->pluck('name', 'id')->toArray(),
+                function ($value) { // if the filter is active
+                    $this->crud->addClause('whereHas', 'permissions', function ($query) use ($value) {
+                        $query->where('permission_id', '=', $value);
+                    });
+                }
+            );
+        }
     }
 
     public function setupCreateOperation()
@@ -171,7 +173,7 @@ class UserCrudController extends CrudController
                 'label'             => trans('backpack::permissionmanager.user_role_permission'),
                 'field_unique_name' => 'user_role_permission',
                 'type'              => 'checklist_dependency',
-                'name'              => ['roles', 'permissions'],
+                'name'              => 'roles,permissions',
                 'subfields'         => [
                     'primary' => [
                         'label'            => trans('backpack::permissionmanager.roles'),
@@ -184,7 +186,7 @@ class UserCrudController extends CrudController
                         'number_columns'   => 3, //can be 1,2,3,4,6
                     ],
                     'secondary' => [
-                        'label'          => ucfirst(trans('backpack::permissionmanager.permission_singular')),
+                        'label'          => mb_ucfirst(trans('backpack::permissionmanager.permission_plural')),
                         'name'           => 'permissions', // the method that defines the relationship in your Model
                         'entity'         => 'permissions', // the method that defines the relationship in your Model
                         'entity_primary' => 'roles', // the method that defines the relationship in your Model
