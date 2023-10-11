@@ -7,7 +7,7 @@
 [![Style CI](https://styleci.io/repos/58740020/shield)](https://styleci.io/repos/58740020)
 [![Total Downloads][ico-downloads]][link-downloads]
 
-Admin interface for [spatie/laravel-permission](https://github.com/spatie/laravel-permission). It allows admins to easily add/edit/remove users, roles and permissions, using [Laravel Backpack](https://laravelbackpack.com). 
+Admin interface for [spatie/laravel-permission](https://github.com/spatie/laravel-permission). It allows admins to easily add/edit/remove users, roles and permissions, using [Laravel Backpack](https://laravelbackpack.com).
 
 As opposed to some other packages:
 - a user can have multiple roles;
@@ -58,7 +58,7 @@ php artisan migrate
 
 use Backpack\CRUD\app\Models\Traits\CrudTrait; // <------------------------------- this one
 use Spatie\Permission\Traits\HasRoles;// <---------------------- and this one
-use Illuminate\Foundation\Auth\User as Authenticatable; 
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
@@ -229,6 +229,163 @@ This package also adds Blade directives to verify whether the currently logged i
 
 You can use Laravel's native @can directive to check if a user has a certain permission.
 
+## Use permissions in CRUD controllers
+
+CRUD controllers have methods to [dynamically allow or deny access](https://backpackforlaravel.com/docs/6.x/crud-api#access) to operations. The ```$this->crud->allowAccess()``` and ```$this->crud->denyAccess()``` methods control both:
+- the form's navigation buttons display like Add, Edit, Delete and
+- the security access guards, returning a 403 forbidden error when no permission.
+
+In most cases, you should use `access` and `permission` separately. But if you want to link them together, so a "permission" gives "access", here is how you can do that too. Reminder: permissions can be assigned to a user either directly or through a role.
+
+1) Define a ```CrudPermissionTrait```
+``` php
+namespace App\Traits;
+
+use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
+
+/**
+ * CrudPermissionTrait: use Permissions to configure Backpack
+ */
+trait CrudPermissionTrait
+{
+    // the operations defined for CRUD controller
+    public array $operations = ['list', 'show', 'create', 'update', 'delete'];
+
+
+    /**
+     * set CRUD access using spatie Permissions defined for logged in user
+     *
+     * @return void
+     */
+    public function setAccessUsingPermissions()
+    {
+        // default
+        $this->crud->denyAccess($this->operations);
+
+        // get context
+        $table = CRUD::getModel()->getTable();
+        $user = request()->user();
+
+        // double check if no authenticated user
+        if (!$user) {
+            return; // allow nothing
+        }
+
+        // enable operations depending on permission
+        foreach ([
+            // permission level => [crud operations]
+            'see' => ['list', 'show'], // e.g. permission 'users.see' allows to display users
+            'edit' => ['list', 'show', 'create', 'update', 'delete'], // e.g. 'users.edit' permission allows all operations
+        ] as $level => $operations) {
+            if ($user->can("$table.$level")) {
+                $this->crud->allowAccess($operations);
+            }
+        }
+    }
+}
+```
+
+2) Use the above ```CrudPermissionTrait``` trait in any ````CrudController````, ```UserCrudController``` in this example.
+
+```php
+namespace App\Http\Controllers\Admin;
+
+use Backpack\PermissionManager\app\Http\Controllers\UserCrudController as BackpackUserCrudController;
+
+class UserCrudController extends BackpackUserCrudController
+{
+    use \App\Traits\CrudPermissionTrait;
+
+    public function setup()
+    {
+        parent::setup();
+        $this->setAccessUsingPermissions();
+    }
+}
+```
+
+Now make sure the route uses the right controller:
+
+(3.A) by binding the package controller to your controller as explained in [Customize UserCrudController](https://github.com/Laravel-Backpack/PermissionManager#customize-usercrudcontroller)
+
+```php
+$this->app->bind(
+    \Backpack\PermissionManager\app\Http\Controllers\UserCrudController::class, // package controller
+    \App\Http\Controllers\Admin\UserCrudController::class // the controller using CrudPermissionTrait
+);
+```
+
+OR
+
+(3.B) by defining the routes in your own ```routes/backpack/permissionmanager.php``` file as explained in [Overwriting fuctionality](https://github.com/Laravel-Backpack/PermissionManager#overwriting-functionality)
+```php
+Route::group([
+    'namespace'  => 'App\Http\Controllers\Admin', // the new namespace
+    'prefix'     => config('backpack.base.route_prefix', 'admin'),
+    'middleware' => ['web', backpack_middleware()],
+], function () {
+    // the adapted controllers
+    Route::crud('user', 'UserCrudController');
+    // Route::crud('role', 'RoleCrudController');
+});
+Route::group([
+    'namespace'  => '\Backpack\PermissionManager\app\Http\Controllers', // the original namespace
+    'prefix'     => config('backpack.base.route_prefix', 'admin'),
+    'middleware' => ['web', backpack_middleware()],
+], function () {
+    // to original controllers
+    // not modified yet in this example
+    Route::crud('permission', 'PermissionCrudController');
+    Route::crud('role', 'RoleCrudController');
+});
+```
+
+
+You may wish to use a ```PermissionSeeder``` to automatically populate the ```permission``` table with permissions corresponding to your code. Here is an example:
+
+```php
+namespace Database\Seeders;
+
+use App\Models\User;
+use Illuminate\Database\Seeder;
+use Backpack\PermissionManager\app\Models\Permission;
+use Backpack\PermissionManager\app\Models\Role;
+
+class PermissionSeeder extends Seeder
+{
+    /**
+     * Run the database Permission seed.
+
+     * Permissions are fixed in code and are seeded here.
+     * use 'php artisan db:seed --class=PermissionSeeder --force' in production
+     *
+     * @return void
+     */
+    public function run()
+    {
+        // create permission for each combination of table.level
+        collect([ // tables
+            'users',
+            'roles',
+        ])
+            ->crossJoin([ // levels
+                'see',
+                'edit',
+            ])
+            ->each(
+                fn (array $item) => Permission::firstOrCreate([
+                    'name' => implode('.', $item),
+                ])
+                    ->save()
+            )
+            //
+        ;
+        User::first()
+            ->givePermissionTo(['users.edit']);
+    }
+}
+```
+Use ```php artisan db:seed --class=PermissionSeeder --force``` in production
 
 ## Upgrade from 3.x to 4.x
 
@@ -246,8 +403,8 @@ Please see [CHANGELOG](CHANGELOG.md) for more information what has changed recen
 
 ## Overwriting functionality
 
-If you need to modify how this works in a project: 
-- create a ```routes/backpack/permissionmanager.php``` file; the package will see that, and load _your_ routes file, instead of the one in the package; 
+If you need to modify how this works in a project:
+- create a ```routes/backpack/permissionmanager.php``` file; the package will see that, and load _your_ routes file, instead of the one in the package;
 - create controllers/models that extend the ones in the package, and use those in your new routes file;
 - modify anything you'd like in the new controllers/models;
 
