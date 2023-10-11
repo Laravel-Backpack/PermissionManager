@@ -8,6 +8,7 @@ return [
     |
     | The following language lines are used for Laravel Backpack - Permission Manager
     | Author: Roberto Butti ( https://github.com/roberto-butti )
+    |         Mirko Tebaldi ( https://github.com/realtebo )
     | Language: Italian
     |
     */
@@ -26,5 +27,5 @@ return [
     'user_role_permission'  => 'Utenti Ruoli Permessi',
     'user'                  => 'Utente',
     'users'                 => 'Utenti',
-
+    'guard_type'            => 'Tipo Guard',
 ];
