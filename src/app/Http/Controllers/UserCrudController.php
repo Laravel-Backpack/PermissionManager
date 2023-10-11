@@ -13,6 +13,7 @@ class UserCrudController extends CrudController
     use \Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation { store as traitStore; }
     use \Backpack\CRUD\app\Http\Controllers\Operations\UpdateOperation { update as traitUpdate; }
     use \Backpack\CRUD\app\Http\Controllers\Operations\DeleteOperation;
+    use \Backpack\CRUD\app\Http\Controllers\Operations\ShowOperation;
 
     public function setup()
     {
@@ -23,8 +24,6 @@ class UserCrudController extends CrudController
 
     public function setupListOperation()
     {
-        $this->crud->disableResponsiveTable();
-
         $this->crud->addColumns([
             [
                 'name'  => 'name',
@@ -36,7 +35,7 @@ class UserCrudController extends CrudController
                 'label' => trans('backpack::permissionmanager.email'),
                 'type'  => 'email',
             ],
-            /*[ // n-n relationship (with pivot table)
+            [ // n-n relationship (with pivot table)
                 'label'     => trans('backpack::permissionmanager.roles'), // Table column heading
                 'type'      => 'select_multiple',
                 'name'      => 'roles', // the method that defines the relationship in your Model
@@ -51,33 +50,6 @@ class UserCrudController extends CrudController
                 'entity'    => 'permissions', // the method that defines the relationship in your Model
                 'attribute' => 'name', // foreign key attribute that is shown to user
                 'model'     => config('permission.models.permission'), // foreign key model
-            ],*/
-            [
-                // two interconnected entities
-                'label'             => trans('backpack::permissionmanager.user_role_permission'),
-                'field_unique_name' => 'user_role_permission',
-                'type'              => 'checklist_dependency',
-                'name'              => 'roles_permissions',
-                'subfields'         => [
-                    'primary' => [
-                        'label'            => trans('backpack::permissionmanager.role'),
-                        'prefix'           => trans('backpack::permissionmanager.role').':',
-                        'name'             => 'roles', // the method that defines the relationship in your Model
-                        'entity'           => 'roles', // the method that defines the relationship in your Model
-                        'entity_secondary' => 'permissions', // the method that defines the relationship in your Model
-                        'attribute'        => 'name', // foreign key attribute that is shown to user
-                        'model'            => config('permission.models.role'), // foreign key model
-                    ],
-                    'secondary' => [
-                        'label'            => mb_ucfirst(trans('backpack::permissionmanager.permission_singular')),
-                        'prefix'           => mb_ucfirst(trans('backpack::permissionmanager.permission_singular')),
-                        'name'             => 'permissions', // the method that defines the relationship in your Model
-                        'entity'           => 'permissions', // the method that defines the relationship in your Model
-                        'entity_primary'   => 'roles', // the method that defines the relationship in your Model
-                        'attribute'        => 'name', // foreign key attribute that is shown to user
-                        'model'            => config('permission.models.permission'), // foreign key model,
-                    ],
-                ],
             ],
         ]);
 
@@ -124,6 +96,40 @@ class UserCrudController extends CrudController
     {
         $this->addUserFields();
         $this->crud->setValidation(UpdateRequest::class);
+    }
+
+    public function setupShowOperation()
+    {
+        // automatically add the columns
+        $this->crud->column('name');
+        $this->crud->column('email');
+        $this->crud->column([
+            // two interconnected entities
+            'label'             => trans('backpack::permissionmanager.user_role_permission'),
+            'field_unique_name' => 'user_role_permission',
+            'type'              => 'checklist_dependency',
+            'name'              => 'roles_permissions',
+            'subfields'         => [
+                'primary' => [
+                    'label'            => trans('backpack::permissionmanager.role'),
+                    'name'             => 'roles', // the method that defines the relationship in your Model
+                    'entity'           => 'roles', // the method that defines the relationship in your Model
+                    'entity_secondary' => 'permissions', // the method that defines the relationship in your Model
+                    'attribute'        => 'name', // foreign key attribute that is shown to user
+                    'model'            => config('permission.models.role'), // foreign key model
+                ],
+                'secondary' => [
+                    'label'            => mb_ucfirst(trans('backpack::permissionmanager.permission_singular')),
+                    'name'             => 'permissions', // the method that defines the relationship in your Model
+                    'entity'           => 'permissions', // the method that defines the relationship in your Model
+                    'entity_primary'   => 'roles', // the method that defines the relationship in your Model
+                    'attribute'        => 'name', // foreign key attribute that is shown to user
+                    'model'            => config('permission.models.permission'), // foreign key model,
+                ],
+            ],
+        ]);
+        $this->crud->column('created_at');
+        $this->crud->column('updated_at');
     }
 
     /**
