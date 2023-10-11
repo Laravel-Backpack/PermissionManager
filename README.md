@@ -229,12 +229,11 @@ You can use Laravels native @can directive to check if a user has a certain perm
 
 ## Use permissions in CRUD controllers
 
-CRUD controllers have methods to [dynamically allow or deny access](https://backpackforlaravel.com/docs/4.1/crud-api#access) to operations. The ```$this->crud->allowAccess()``` and ```$this->crud->denyAccess()``` methods control both:
+CRUD controllers have methods to [dynamically allow or deny access](https://backpackforlaravel.com/docs/6.x/crud-api#access) to operations. The ```$this->crud->allowAccess()``` and ```$this->crud->denyAccess()``` methods control both:
 - the form's navigation buttons display like Add, Edit, Delete and
 - the security access guards, returning a 403 forbidden error when no permission.
 
-Here is a way to link the permissions to CRUD controller access.
-Reminder: permissions can be assigned to a user either directly or through a role.
+In most cases, you should use `access` and `permission` separately. But if you want to link them together, so a "permission" gives "access", here is how you can do that too. Reminder: permissions can be assigned to a user either directly or through a role.
 
 1) Define a ```CrudPermissionTrait```
 ``` php
