@@ -10,8 +10,8 @@ use Backpack\PermissionManager\app\Http\Requests\PermissionUpdateCrudRequest as 
 
 class PermissionCrudController extends CrudController
 {
-    protected $role_model;
-    protected $permission_model;
+    protected string $role_model;
+    protected string $permission_model;
 
     use \Backpack\CRUD\app\Http\Controllers\Operations\ListOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation;
