@@ -5,6 +5,7 @@ namespace Backpack\PermissionManager\app\Http\Controllers;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\PermissionManager\app\Http\Requests\RoleStoreCrudRequest as StoreRequest;
 use Backpack\PermissionManager\app\Http\Requests\RoleUpdateCrudRequest as UpdateRequest;
+use Spatie\Permission\PermissionRegistrar;
 
 // VALIDATION
 
@@ -104,7 +105,7 @@ class RoleCrudController extends CrudController
         $this->crud->setValidation(StoreRequest::class);
 
         //otherwise, changes won't have effect
-        \Cache::forget('spatie.permission.cache');
+        app()->make(PermissionRegistrar::class)->forgetCachedPermissions();
     }
 
     public function setupUpdateOperation()
@@ -113,7 +114,7 @@ class RoleCrudController extends CrudController
         $this->crud->setValidation(UpdateRequest::class);
 
         //otherwise, changes won't have effect
-        \Cache::forget('spatie.permission.cache');
+        app()->make(PermissionRegistrar::class)->forgetCachedPermissions();
     }
 
     private function addFields()
