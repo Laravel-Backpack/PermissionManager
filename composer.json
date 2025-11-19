@@ -33,8 +33,8 @@
     "minimum-stability": "dev",
     "prefer-stable": true,
     "require": {
-        "spatie/laravel-permission": "^6.4",
-        "backpack/crud": "^7.0.0-alpha"
+        "spatie/laravel-permission": "^6.4||^5.0||^4.0||^3.0",
+        "backpack/crud": "^6.0||^7.0"
     },
     "autoload": {
         "psr-4": {
