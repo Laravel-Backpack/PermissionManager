@@ -22,7 +22,7 @@ return [
     'extra_permissions'     => 'Các quyền bổ sung',
     'password'              => 'Mật khẩu',
     'password_confirmation' => 'Xác nhận Mật khẩu',
-    'user_role_permission'  => 'Người dùng, Vai trò, Các quyền',
+    'user_role_permission'  => 'Vai trò và quyền của người dùng',
     'user'                  => 'Người dùng',
     'users'                 => 'Các người dùng',
     'guard_type'            => 'Lớp bảo vệ',
